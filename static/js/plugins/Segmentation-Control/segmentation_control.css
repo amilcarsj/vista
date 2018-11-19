@@ -1,0 +1,32 @@
+.leaflet-segment-trajectory-control-custom-container{
+    background-color: white;
+    padding:5px;
+}
+.leaflet-segment-trajectory-control-custom > table > tr > td{
+    padding:2px;
+}
+.leaflet-segment-trajectory-control-custom table button{
+    border-radius: 50%;
+    border:1px solid black;
+    background-color: white;
+}
+
+#btn-close-play-container{
+    background-color: white;
+    border:none;
+    float:right;
+    padding-right:2px;
+    padding-left:2px;
+}
+.leaflet-custom-color{
+    background-color: white;
+    border:none;
+}
+.leaflet-control-button-custom {
+    background-color: white;
+    height: 28px;
+    width: 33px;
+    border-radius: 4px;
+    padding:0;
+    margin:0;
+}

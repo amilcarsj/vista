@@ -1,0 +1,47 @@
+<h2 class="text-center">Upload Trajectories</h2>
+<div class="row">
+    <div class="col-md-6">
+        <label class="font-weight-bold">Upload Trajectories (Please ensure all CSV files have the same column
+            structure)</label>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="trajectory-file" name="trajectory-files[]" multiple>
+            <label class="custom-file-label" for="trajectory-file">Choose file</label>
+
+        </div>
+        <label for="trajectory-file-list" class="font-weight-bold">Files to Upload</label>
+        <select id="trajectory-file-list" name="trajectory-file-list" class="form-control" multiple></select>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="font-weight-bold">Delimiter</label>
+            <select id="delimiter" name="delimiter" class="form-control">
+                <option value="," selected>Comma (,)</option>
+                <option value=";">Semi-colon (;)</option>
+                <option value="|">Pipe (|)</option>
+                <option value="\t">Tab (\t)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class=font-weight-bold>ID</label>
+            <select id="trajID" name="trajID" class="form-control trajddl"></select>
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold">Latitude</label>
+            <select id="trajLat" name="trajLat" class="form-control trajddl"></select>
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold">Longitude</label>
+            <select id="trajLon" name="trajLon" class="form-control trajddl"></select>
+        </div>
+        <div class="form-group">
+            <label class="font-weight-bold">Time</label>
+            <select id="trajTime" name="trajTime" class="form-control trajddl"></select>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="row justify-content-end">
+    <div class="col">
+        <button id="btn-next" class="btn btn-primary float-right">Next</button>
+    </div>
+</div>

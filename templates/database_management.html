@@ -1,0 +1,25 @@
+{% extends 'main_structure.html' %}
+{% load static %}
+{% block scripts %}
+    <script src="{% static 'js/database_management/trajectory_upload.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/database_management/semantic_upload.js' %}" type="text/javascript"></script>
+    <script src="{% static 'js/database_management/point_feature_generation.js' %}" type='text/javascript'></script>
+    <script src="{% static 'js/database_management/navigation.js' %}" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    <script src="{% static "js/map_visualization.js" %}"></script>
+{% endblock %}
+{% block content %}
+    <form enctype="multipart/form-data" id="db-management-form" method="post">
+        {% csrf_token %}
+        <div id="upload-trajectories">
+            {% include 'upload_trajectories.html' %}
+        </div>
+        <div id="upload-semantics" style="display: none;">
+            {% include 'upload_semantic_layers.html' %}
+        </div>
+        <div id="invite-users" style="display:none;">
+         {% include 'invite_users.html' %}
+        </div>
+    </form>
+{% endblock %}

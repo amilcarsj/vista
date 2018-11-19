@@ -1,0 +1,23 @@
+{% extends 'main_structure.html' %}
+{% load static %}
+{% block scripts %}
+
+{%  endblock %}
+{%  block content %}
+    <div id="database-selection">
+
+    </div>
+    <div id="trajectory-selection" style="display: none;">
+        {% include 'trajectory_table.html' %}
+    </div>
+    <div id="semantic-selection" style="display: none;">
+
+    </div>
+    <div id="feature-selection" style="display: none;">
+        {% include 'feature_selection.html' %}
+    </div>
+
+    <div id="invite-taggers" style="display: none;">
+        {% include 'invite_users.html' %}
+    </div>
+{% endblock %}

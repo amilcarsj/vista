@@ -1,0 +1,33 @@
+<h2 class="text-center">Upload Semantic Layer</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="font-weight-bold">Upload Semantic Layers</label>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="semantic-file" name="semantic-files" multiple>
+                <label class="custom-file-label" for="semantic-files">Choose file</label>
+
+            </div>
+            <label for="semantic-file-list" class="font-weight-bold">Files to Upload (geojson files only)</label>
+            <select id="semantic-file-list" name="semantic-file-list" class="form-control" multiple></select>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <table id="semantic-tables" class="table">
+            <tr>
+                <th>File Name</th>
+                <th>Layer Name</th>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col align-self-start">
+        <button id="btn-previous" class="btn btn-primary">Previous</button>
+    </div>
+    <div class="col align-self-end">
+        <button id="btn-next2" class="btn btn-primary float-right btn-next">Next</button>
+    </div>
+</div>

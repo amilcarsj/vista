@@ -1,0 +1,95 @@
+{% extends 'main_structure.html' %}
+{% load static %}
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{%  static 'style.css' %}"/>
+    <script src="{% static 'js/plugins/full-layer-control.js' %}"></script>
+    <script src="{% static 'js/plugins/play-trajectory-control.js' %}"></script>
+    <script src="{% static 'js/plugins/Leaflet.MultiOptionsPolyline.min.js' %}"></script>
+
+    <script src="{% static 'js/semantic_layer.js' %}"></script>
+    <script src="{% static 'js/trajectory_player.js' %}"></script>
+    <script src="{% static 'js/charts.js' %}"></script>
+    <script src="{% static "js/map_visualization.js" %}"></script>
+{% endblock %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="font-weight-bold">Select Database</label>
+                <select id="ddlDatabase" class="form-control">
+                    {% for db in databases %}
+                        <option value="{{ db.pk }}">{{ db.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+    <div class="row">
+        <table id="tblTrajectories" class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Total Points</th>
+                <th>Average Sampling Rate</th>
+                <th>Total Distance Travelled</th>
+                <th>View</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for t in trajectories %}
+                <tr>
+                    <td>{{ t.pk }}</td>
+                    <td>{{ t.total_points }}</td>
+                    <td>{{ t.average_sampling }}</td>
+                    <td>{{ t.total_distance_traveled }}</td>
+                    <td>
+                        <button value="{{ t.pk }}" class="btn btn-success btn-view">Select</button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-lg-7">
+            <div id="map" style="height: 500px; width: 100%">
+            </div>
+        </div>
+        <div class="col-lg-5" style="border:1px solid black;">
+            <p>ID: <span id="traj-id"></span></p>
+            <div id="charts">
+                <label class="font-weight-bold">Point Feature</label>
+
+                <select id="ddl-pf" class="form-control"></select>
+                  <div class="row">
+                    <div class="col-md-6">Mean: <span id="pf-mean"></span></div>
+                    <div class="col-md-6">Median: <span id="pf-median"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">Min: <span id="pf-min"></span></div>
+                    <div class="col-md-6">Max: <span id="pf-max"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">Std: <span id="pf-std"></span></div>
+                    <div class="col-md-6">10th Percentile: <span id="pf-10p"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">25th Percentile: <span id="pf-25p"></span></div>
+                    <div class="col-md-6">50th Percentile: <span id="pf-50p"></span></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">75th Percentile: <span id="pf-75p"></span></div>
+                    <div class="col-md-6">90th Percentile <span id="pf-90p"></span></div>
+                </div>
+                <canvas id="pf-chart" height="200px" width="200px"></canvas>
+            </div>
+        </div>
+    </div>
+{% endblock %}
