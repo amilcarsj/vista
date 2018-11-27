@@ -1,12 +1,12 @@
 {% extends 'main_structure.html' %}
 {% block content %}
-    <h4 class="text-center">Select Database</h4>
+    <h4 class="text-center">Select Session</h4>
 
     <div class="row justify-content-center">
         <div class="col-md-4">
             <form method="post" action="/management/select/database/">
                 {% csrf_token %}
-                <label for="database_select">Database Name</label>
+                <label for="database_select">Session Name</label>
                 <select name="database_select" class="form-control">
                     {% for db in databases %}
                         <option value="{{ db.pk }}">{{ db.name }}</option>
@@ -18,14 +18,14 @@
         </div>
     </div>
     <hr>
-    <h4 class="text-center">Create Database</h4>
+    <h4 class="text-center">Create Session</h4>
 
     <div class="row justify-content-center">
         <div class="col-md-4">
             <form method="post" action="/management/create/database/">
                 {% csrf_token %}
 
-                <label for="database_name">Database Name</label>
+                <label for="database_name">Session Name</label>
                 <input type="text" name="database_name" class="form-control">
                 <input type="submit" value="create" class="btn btn-primary float-right"/>
             </form>

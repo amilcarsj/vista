@@ -10,10 +10,10 @@ function loadMap() {
 
 
 $(function () {
-    loadMap("map")
+    loadMap("map");
     create_layers_control();
     create_play_control();
-    //loadChart("#pf-chart", []);
+    //loadLineChart("#pf-line_chart", []);
 
     $("#ddlDatabase").change(function () {
         console.log("New Database selected");
@@ -60,6 +60,7 @@ function btn_view_click(e) {
         $("#ddl-pf").append(select_options);
 
         trajectory = createTrajectory(data.trajectory.geometry.coordinates, data.current_pf.values);
+        addArrows(data.trajectory.geometry.coordinates);
         setStats(data.current_pf);
 
         trajectory.addTo(map);
@@ -80,16 +81,35 @@ function btn_view_click(e) {
                     }],
                 'labels': labels
             };
-        if (chart == null) {
-            console.log("New chart");
-            loadChart("#pf-chart", chart_data);
+        if (line_chart == null) {
+            console.log("New line_chart");
+            loadLineChart("#pf-line_chart", chart_data);
         }
         else {
-            console.log("Update chart");
-            chart.data.datasets = chart_data.datasets;
-            chart.data.labels = chart_data.labels;
-            chart.update();
+            console.log("Update line_chart");
+            line_chart.data.datasets = chart_data.datasets;
+            line_chart.data.labels = chart_data.labels;
+            line_chart.update();
         }
     });
 
+}
+
+function addArrows(line_lat_lon_seq){
+    var polyArrowStyle = L.polyline(line_lat_lon_seq, {});
+    var decorator = L.polylineDecorator(polyArrowStyle, {
+        patterns: [{
+            offset: '5%',
+            repeat: '5%',
+            symbol: L.Symbol.arrowHead({
+                pixelSize: 12,
+                polygon: false,
+                pathOptions: {
+                    stroke: true,
+                    color: '#000000',
+                    weight: 3
+                }
+            })
+        }]
+    });
 }

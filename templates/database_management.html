@@ -10,6 +10,8 @@
     <script src="{% static "js/map_visualization.js" %}"></script>
 {% endblock %}
 {% block content %}
+    <div class="container-fluid"><!--Add p-0 to class to remove the padding on the left and right-->
+
     <form enctype="multipart/form-data" id="db-management-form" method="post">
         {% csrf_token %}
         <div id="upload-trajectories">
@@ -22,4 +24,5 @@
          {% include 'invite_users.html' %}
         </div>
     </form>
+    </div>
 {% endblock %}

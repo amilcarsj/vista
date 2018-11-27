@@ -9,5 +9,6 @@ urlpatterns = [
     path('visualize/', views.visualize),
     path('get/trajectories/<str:db_id>/',views.get_trajectories),
     path('get/trajectory/<str:oid>/', views.get_trajectory),
-    path('get/point_feature/<str:oid>/',views.get_point_feature)
+    path('get/point_feature/<str:oid>/',views.get_point_feature),
+    path('get/xy/<str:x>/<str:y>/',views.get_xy)
 ]

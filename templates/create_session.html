@@ -4,6 +4,8 @@
 
 {%  endblock %}
 {%  block content %}
+    <div class="container-fluid"><!--Add p-0 to class to remove the padding on the left and right-->
+
     <div id="database-selection">
 
     </div>
@@ -19,5 +21,6 @@
 
     <div id="invite-taggers" style="display: none;">
         {% include 'invite_users.html' %}
+    </div>
     </div>
 {% endblock %}

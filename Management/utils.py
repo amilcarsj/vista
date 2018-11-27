@@ -25,7 +25,7 @@ def save_trajectory(file, tid, lat, lon, time, delimiter,db, pois_rois):
     traj = Trajectory()
     points = []
     for point in geometry:
-        points.append([point.x, point.y])
+        points.append([point.y, point.x])
     traj.total_points = len(geometry)
     traj.average_sampling = df['td'].mean()
     traj.total_distance_traveled = df['distance'].sum()

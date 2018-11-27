@@ -1,0 +1,20 @@
+{% extends 'main_structure.html' %}
+{% block content %}
+    <div class="container-fluid"><!--Add p-0 to class to remove the padding on the left and right-->
+
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <form method="post" action="/segmentation/database/">
+                {% csrf_token %}
+                <label class="font-weight-bold">Database</label>
+                <select class="form-control" name="database">
+                    {% for option in databases %}
+                        <option value="{{ option.0 }}">{{ option.1 }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-primary float-right">Select Database</button>
+            </form>
+        </div>
+    </div>
+    </div>
+{% endblock %}

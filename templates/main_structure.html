@@ -5,6 +5,7 @@
     <title>VISTA</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <script
             src="https://code.jquery.com/jquery-3.3.1.js"
             integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
@@ -28,22 +29,21 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/management/select/database/">Create / Update Database</a>
+                <a class="nav-link" href="/management/select/database/">Create / Update Session</a>
 
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/management/visualize/">Visualize Database</a>
+                <a class="nav-link" href="/management/visualize/">Visualize Session</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/management/visualize/">Start / Resume Session</a>
+                <a class="nav-link" href="/segmentation/database/">Start / Resume Session</a>
             </li>
 
         </ul>
     </div>
 </nav>
-<div class="container-fluid">
     {% block content %}
     {% endblock %}
-</div>
+
 </body>
 </html>

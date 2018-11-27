@@ -7,7 +7,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('/', include('Login.urls')),
-    path('management/', include('Management.urls'))
+    path('management/', include('Management.urls')),
+    path('segmentation/', include('Segmentation.urls'))
 ]
 
 if settings.DEBUG:

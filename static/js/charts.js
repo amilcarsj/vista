@@ -1,14 +1,16 @@
-chart = null;
+line_chart = null;
+scatter_chart = null;
 
-function loadChart(containerid, d) {
-    console.log(d);
-    chart = new Chart($(containerid), {
+function loadLineChart(containerid, d) {
+    console.log(containerid);
+    line_chart = new Chart($(containerid), {
         type: 'line',
         title: "Point Feature Chart",
         data: d,
         options: {
+
             legend: {
-                display: false
+                display: true
             },
             title: {
                 display: true,
@@ -16,6 +18,43 @@ function loadChart(containerid, d) {
             },
             elements: {
                 point: {radius: 0}
+            },
+            scales: {
+                xAxes: [{
+                    ticks: {
+                        display: false //this will remove only the label
+                    }
+                }]
+            },
+            animation: {
+                duration: 0, // general animation time
+            },
+            hover: {
+                animationDuration: 0, // duration of animations when hovering an item
+            },
+            responsiveAnimationDuration: 0, // animation duration after a resize
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+}
+
+function loadScatterPlot(containerid, d) {
+    console.log(containerid);
+    scatter_chart = new Chart($(containerid), {
+        type: 'scatter',
+        data: {
+            datasets: d,
+        },
+        options: {
+            //responsive: true,
+            //maintainAspectRatio: false,
+            legend: {
+                display: true
+            },
+            title: {
+                display: true,
+                text: 'Point Feature Comparison'
             },
             scales: {
                 xAxes: [{
@@ -31,6 +70,8 @@ function loadChart(containerid, d) {
                 animationDuration: 0, // duration of animations when hovering an item
             },
             responsiveAnimationDuration: 0, // animation duration after a resize
+            responsive: true,
+            maintainAspectRatio: true
         }
     });
 }
@@ -40,18 +81,28 @@ function update_point_feature(e) {
     console.log(oid);
     $.get("/management/get/point_feature/" + oid + "/", function (data) {
         console.log(data);
+        curr_pf = data.point_feature;
         var d = data.point_feature.values;
+        segmentation_control.line_chart_data = d;
         setStats(data.point_feature);
+        let new_traj = createTrajectory(trajectory._originalLatlngs, d);
 
         console.log(trajectory);
-        map.removeLayer(trajectory);
-        trajectory = createTrajectory(trajectory._originalLatlngs, d);
+        if (trajectory != null) {
+            let old_traj = trajectory;
+            trajectory = null;
+            map.removeLayer(old_traj);
+        }
         console.log(trajectory);
+        trajectory = new_traj;
         trajectory.addTo(map);
+        addArrows(trajectory._originalLatlngs);
         let labels = [];
+
         for (let i = 0; i < d.length; i++) {
             labels.push(i);
         }
+
         let chart_data =
             {
                 'datasets':
@@ -62,15 +113,24 @@ function update_point_feature(e) {
                     }],
                 'labels': labels
             };
-        if (chart == null) {
-            console.log("New chart");
-            loadChart("#pf-chart", chart_data);
+
+        if (line_chart == null) {
+            console.log("New line_chart");
+            loadLineChart("#pf-chart", chart_data);
         }
         else {
-            console.log("Update chart");
-            chart.data.datasets = chart_data.datasets;
-            chart.data.labels = chart_data.labels;
-            chart.update();
+            console.log("Update line_chart");
+            line_chart.data.datasets = chart_data.datasets;
+            line_chart.data.labels = chart_data.labels;
+            line_chart.update();
+        }
+        if (segmentation_control != 'undefined' && segmentation_control != null) {
+            if (segmentation_control.Point_Labels.length != 0) {
+                console.log("Generate graph");
+                segmentation_control.generateLineChart();
+                segmentation_control.generateSegmentation();
+
+            }
         }
 
     });
@@ -78,13 +138,27 @@ function update_point_feature(e) {
 
 $(function () {
     $("#ddl-pf").change(update_point_feature);
+    $("#btn-swap").click(function (e) {
+        let btn = $(e.target);
+        if (btn.val() == 'scatter') {
+            btn.val('line');
+            btn.html("Display Line Chart");
+            $("#line-graph").hide();
+            $("#scatter-graph").show();
+        }
+        else {
+            btn.html("Display Scatter Plot");
+            btn.val('scatter');
+            $("#line-graph").show();
+            $("#scatter-graph").hide();
+        }
+    });
 });
 
 function createTrajectory(line_lat_lon_seq, feature_values) {
     let trajectory_red_colors = [{'color': '#ffe5e5'}, {'color': '#ffcccc'}, {'color': '#ffb2b2'}, {'color': '#ff9999'}, {'color': '#ff7f7f'},
         {'color': '#ff6666'}, {'color': '#ff4c4c'}, {'color': '#ff3232'}, {'color': '#ff1919'}, {'color': '#FF0000'}];
     let count = -1;
-    console.log(feature_values);
 
     let i;
     let thresholds = [];
@@ -99,21 +173,29 @@ function createTrajectory(line_lat_lon_seq, feature_values) {
         thresholds.push(initial);
     }
     console.log(thresholds);
+    console.log(line_lat_lon_seq);
+    var options = {position: 'bottomright'};
+    let color_list = [];
+    for (let i = 0; i < trajectory_red_colors.length; i++) {
+        color_list.push(trajectory_red_colors[i].color);
+    }
+    if (typeof decorator_legend !== 'undefined') {
+        $('.leaflet-control-decorator-legend-custom').remove();
+    }
+    decorator_legend = new L.Control.DecoratorLegend(options).addTo(map);
+    console.log(feature_values);
+
+    decorator_legend.initializeComponents(color_list, thresholds);
     return L.multiOptionsPolyline(line_lat_lon_seq, {
         multiOptions: {
             optionIdxFn: function (latLng) {
                 count++;
-                //console.log(latLng);
-                let temp = latLng[0];
-                latLng[0] = latLng[1];
-                latLng[1] = temp;
                 for (i = 0; i < thresholds.length; ++i) {
                     if (feature_values[count] <= thresholds[i]) {
                         return i;
                     }
                 }
-
-                return thresholds.length-1;
+                return thresholds.length - 1;
             },
             options: trajectory_red_colors
         },
@@ -123,7 +205,8 @@ function createTrajectory(line_lat_lon_seq, feature_values) {
     });
 
 }
-function setStats(curr_pf){
+
+function setStats(curr_pf) {
     $("#pf-mean").html(curr_pf.mean);
     $("#pf-median").html(curr_pf.median);
     $("#pf-min").html(curr_pf.min);

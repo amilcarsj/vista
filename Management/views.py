@@ -9,6 +9,8 @@ from django.contrib.auth.models import User
 def update_database(request, _id=""):
     if _id == '':
         return render(request, 'select_database.html')
+    if request.method == 'GET':
+        return render(request, 'database_management.html')
     trajectory_files = request.FILES.getlist('trajectory-files[]')
     semantic_files = request.FILES.getlist('semantic-files')
     tid = request.POST.get('trajID',None)
@@ -17,14 +19,23 @@ def update_database(request, _id=""):
     time = request.POST.get('trajTime',None)
     delimiter = request.POST.get('delimiter', None)
 
-    taggers = request.POST.get('taggers', None)
-    labels = request.POST.get('labels', None)
+    taggers = request.POST.get('taggers', '').split(';')
+    labels = request.POST.get('labels', '').split(';')
+    for label in labels:
+        label = label.strip()
+        if label == '':
+            labels.remove(label)
+
+    for tagger in taggers:
+        tagger = tagger.strip()
+        if tagger == '':
+            taggers.remove(tagger)
 
     db = Database.objects.get(_id=_id)
     if taggers is not None:
-        db.taggers = list(User.objects.filter(email__in=taggers).values('id'))
-    if labels is not None:
-        db.labels = labels.split(';')
+        users = list(User.objects.filter(email__in=taggers))
+        for i in users:
+            db.taggers.add(i)
     db.save()
     pois_rois = []
     for file in semantic_files:
@@ -104,3 +115,9 @@ def get_point_feature(request, oid=""):
     pf_dict = model_to_dict(pf)
     pf_dict['trajectory'] = str(pf_dict['trajectory'])
     return JsonResponse({'point_feature': pf_dict})
+
+
+def get_xy(request,x="",y=""):
+    xvals = TrajectoryFeature.objects.get(_id=x).values
+    yvals = TrajectoryFeature.objects.get(_id=y).values
+    return JsonResponse({'xvals':xvals,'yvals':yvals})

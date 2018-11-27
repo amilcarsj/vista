@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4a89ee4b-0f2e-4856-8c71-d954f9e53985" name="Default" comment="" />
+    <list default="true" id="4a89ee4b-0f2e-4856-8c71-d954f9e53985" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/Segmentation/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/segmentation/segmentation_creation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/segmentation/segmentation_setup.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/pick_database.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Management/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Management/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Management/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Segmentation/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Segmentation/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Segmentation/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Segmentation/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VISTA/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/VISTA/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VISTA/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/VISTA/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/charts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/map_visualization.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/map_visualization.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/plugins/Segmentation-Control/map_marker_font_awesome.png" beforeDir="false" afterPath="$PROJECT_DIR$/media/map_marker_font_awesome.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/plugins/Segmentation-Control/segmentation_control.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/segmentation_control.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/plugins/Segmentation-Control/segmentation_control.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/plugins/Segmentation-Control/segmentation_control.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/plugins/decorator-legend.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/plugins/decorator-legend.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/create_session.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/create_session.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/database_management.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/database_management.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/invite_users.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/invite_users.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/main_structure.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_structure.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/segmentationPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/segmentation_page.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/select_database.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/select_database.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/select_trajectories.html" beforeDir="false" afterPath="$PROJECT_DIR$/Segmentation/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/upload_semantic_layers.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/upload_semantic_layers.html" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,109 +45,85 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="trajectory_table.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/trajectory_table.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="42" column="17" lean-forward="true" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="map_visualization.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/static/js/map_visualization.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="91" column="9" lean-forward="true" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="invite_users.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/invite_users.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="57" selection-start-line="8" selection-start-column="57" selection-end-line="8" selection-end-column="57" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Segmentation/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Management/views.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="85" column="71" selection-start-line="85" selection-start-column="56" selection-end-line="85" selection-end-column="71" />
-              <folding>
-                <element signature="e#0#45#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="semantic_layer.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/js/semantic_layer.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="e#68#74#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="main_structure.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/main_structure.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="21" column="58" selection-start-line="21" selection-start-column="58" selection-end-line="21" selection-end-column="58" />
+            <state relative-caret-position="670">
+              <caret line="44" selection-start-line="44" selection-end-line="44" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Management/models.py">
+      <file leaf-file-name="create_session.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/create_session.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="325">
-              <caret line="43" column="18" lean-forward="true" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
+            <state relative-caret-position="480">
+              <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="segmentation_page.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/segmentation_page.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="118">
+              <caret line="66" column="26" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="segmentation_control.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/static/js/plugins/Segmentation-Control/segmentation_control.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="541">
+              <caret line="321" column="8" selection-start-line="321" selection-start-column="8" selection-end-line="321" selection-end-column="8" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="n#style#0;n#svg#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="segmentationPage.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/segmentationPage.html">
+      <file leaf-file-name="database_management.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/database_management.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="34" column="58" selection-start-line="34" selection-start-column="58" selection-end-line="34" selection-end-column="58" />
+            <state relative-caret-position="340">
+              <caret line="26" column="10" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Segmentation/models.py">
+      <file leaf-file-name="segmentation_setup.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/js/segmentation/segmentation_setup.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="64" lean-forward="true" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
+            <state relative-caret-position="360">
+              <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="management_select.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/management_select.html">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="charts.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/static/js/charts.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="20">
+              <caret line="1" column="13" selection-start-line="1" selection-end-line="1" selection-end-column="13" />
               <folding>
-                <element signature="e#0#25#0" expanded="true" />
+                <element signature="n#!!block;n#setStats#0" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pick_database.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/pick_database.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="358">
+              <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -129,36 +133,55 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="Python Script" />
         <option value="HTML File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>delimitt</find>
-      <find>map</find>
-      <find>var</find>
-      <find>name</find>
-      <find>replaceAll</find>
-      <find>images</find>
-      <find>media</find>
-      <find>trigger</find>
+      <find>addEve</find>
+      <find>getPointsAfterLastMarker</find>
+      <find>change</find>
+      <find>line_chart</find>
+      <find>chart</find>
+      <find>loadLineChart</find>
+      <find>pf</find>
+      <find>pf-chart</find>
+      <find>button</find>
+      <find>addMar</find>
+      <find>sor</find>
+      <find>Segmentation_Points</find>
+      <find>Trajectory_Layer</find>
+      <find>genera</find>
+      <find>console.log</find>
+      <find>getColor</find>
+      <find>getCol</find>
+      <find>color</find>
+      <find>gene</find>
+      <find>generateGraph</find>
+      <find>findColor</find>
+      <find>segment</find>
+      <find>generateSegmen</find>
+      <find>generateSegmentation</find>
+      <find>gener</find>
+      <find>forEa</find>
+      <find>createTrajectory</find>
+      <find>curr_</find>
+      <find>generateScatterChart</find>
+      <find>generateLi</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\Jordan\Documents\pycharm-workspace\VISTA\static</dir>
     </dirStrings>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/SessionManagement/urls.py" />
-        <option value="$PROJECT_DIR$/Login/urls.py" />
-        <option value="$PROJECT_DIR$/static/trajectory_upload.js" />
-        <option value="$PROJECT_DIR$/static/semantic_upload.js" />
-        <option value="$PROJECT_DIR$/static/point_feature_generation.js" />
-        <option value="$PROJECT_DIR$/templates/upload_content.html" />
         <option value="$PROJECT_DIR$/templates/feature_selection.html" />
         <option value="$PROJECT_DIR$/SessionManagement/models.py" />
         <option value="$PROJECT_DIR$/SessionManagement/views.py" />
@@ -171,36 +194,45 @@
         <option value="$PROJECT_DIR$/Ajax/views.py" />
         <option value="$PROJECT_DIR$/static/js/database_management/trajectory_upload.js" />
         <option value="$PROJECT_DIR$/trajectory_library/TrajectoryFeatures.py" />
-        <option value="$PROJECT_DIR$/templates/select_database.html" />
         <option value="$PROJECT_DIR$/templates/upload_trajectories.html" />
         <option value="$PROJECT_DIR$/static/js/database_management/semantic_upload.js" />
-        <option value="$PROJECT_DIR$/templates/create_session.html" />
         <option value="$PROJECT_DIR$/static/charts.js" />
-        <option value="$PROJECT_DIR$/Management/urls.py" />
         <option value="$PROJECT_DIR$/static/map_controls.js" />
         <option value="$PROJECT_DIR$/static/js/map_controls.js" />
-        <option value="$PROJECT_DIR$/static/style.css" />
-        <option value="$PROJECT_DIR$/static/js/semantic_layer.js" />
         <option value="$PROJECT_DIR$/static/js/full-layer-control.js" />
         <option value="$PROJECT_DIR$/static/js/plugins/full-layer-control.js" />
-        <option value="$PROJECT_DIR$/Management/utils.py" />
-        <option value="$PROJECT_DIR$/static/js/charts.js" />
-        <option value="$PROJECT_DIR$/VISTA/settings.py" />
-        <option value="$PROJECT_DIR$/VISTA/urls.py" />
         <option value="$PROJECT_DIR$/templates/trajectory_table.html" />
         <option value="$PROJECT_DIR$/static/js/trajectory_player.js" />
         <option value="$PROJECT_DIR$/static/js/plugins/play-trajectory-control.js" />
         <option value="$PROJECT_DIR$/static/js/database_management/navigation.js" />
-        <option value="$PROJECT_DIR$/templates/upload_semantic_layers.html" />
-        <option value="$PROJECT_DIR$/templates/database_management.html" />
-        <option value="$PROJECT_DIR$/Segmentation/models.py" />
-        <option value="$PROJECT_DIR$/Segmentation/views.py" />
-        <option value="$PROJECT_DIR$/templates/main_structure.html" />
-        <option value="$PROJECT_DIR$/templates/segmentationPage.html" />
         <option value="$PROJECT_DIR$/Management/models.py" />
-        <option value="$PROJECT_DIR$/templates/invite_users.html" />
-        <option value="$PROJECT_DIR$/Management/views.py" />
+        <option value="$PROJECT_DIR$/static/js/segmentation/segmentation_control.js" />
+        <option value="$PROJECT_DIR$/templates/segmentationPage.html" />
+        <option value="$PROJECT_DIR$/Segmentation/utils.py" />
+        <option value="$PROJECT_DIR$/VISTA/urls.py" />
+        <option value="$PROJECT_DIR$/VISTA/settings.py" />
+        <option value="$PROJECT_DIR$/Segmentation/models.py" />
+        <option value="$PROJECT_DIR$/Segmentation/urls.py" />
+        <option value="$PROJECT_DIR$/Segmentation/views.py" />
+        <option value="$PROJECT_DIR$/static/js/semantic_layer.js" />
+        <option value="$PROJECT_DIR$/Management/urls.py" />
         <option value="$PROJECT_DIR$/static/js/map_visualization.js" />
+        <option value="$PROJECT_DIR$/templates/upload_semantic_layers.html" />
+        <option value="$PROJECT_DIR$/templates/select_database.html" />
+        <option value="$PROJECT_DIR$/templates/invite_users.html" />
+        <option value="$PROJECT_DIR$/static/style.css" />
+        <option value="$PROJECT_DIR$/Management/utils.py" />
+        <option value="$PROJECT_DIR$/Management/views.py" />
+        <option value="$PROJECT_DIR$/static/js/plugins/decorator-legend.js" />
+        <option value="$PROJECT_DIR$/static/js/segmentation/segmentation_creation.js" />
+        <option value="$PROJECT_DIR$/templates/main_structure.html" />
+        <option value="$PROJECT_DIR$/templates/create_session.html" />
+        <option value="$PROJECT_DIR$/templates/database_management.html" />
+        <option value="$PROJECT_DIR$/templates/pick_database.html" />
+        <option value="$PROJECT_DIR$/templates/segmentation_page.html" />
+        <option value="$PROJECT_DIR$/static/js/charts.js" />
+        <option value="$PROJECT_DIR$/static/js/segmentation/segmentation_setup.js" />
+        <option value="$PROJECT_DIR$/static/js/plugins/Segmentation-Control/segmentation_control.js" />
       </list>
     </option>
   </component>
@@ -214,11 +246,12 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1048" />
+    <option name="x" value="-1928" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -235,7 +268,7 @@
             <path>
               <item name="VISTA" type="b2602c69:ProjectViewProjectNode" />
               <item name="VISTA" type="462c0819:PsiDirectoryNode" />
-              <item name="Management" type="462c0819:PsiDirectoryNode" />
+              <item name="media" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="VISTA" type="b2602c69:ProjectViewProjectNode" />
@@ -252,6 +285,28 @@
               <item name="VISTA" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="VISTA" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VISTA" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="VISTA" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VISTA" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="plugins" type="462c0819:PsiDirectoryNode" />
+              <item name="Segmentation-Control" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="VISTA" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VISTA" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="segmentation" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="VISTA" type="b2602c69:ProjectViewProjectNode" />
@@ -274,18 +329,18 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA\static\js\plugins" />
+      <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA\static" />
+      <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA\static\js" />
+      <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA\static" />
       <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA\media" />
       <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA" />
       <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA\static\js\plugins" />
       <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA\static\js" />
-      <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA\static\js\session_creation" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA\static" />
-      <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA\static\js\plugins" />
-      <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA\static\js" />
-      <recent name="C:\Users\Jordan\Documents\pycharm-workspace\VISTA" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -398,57 +453,33 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info anchor="right" id="PlantUML" order="3" />
+      <window_info anchor="right" id="PlantUML" order="5" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49932885" weight="0.32905984" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.1885906" side_tool="true" weight="0.3048433" />
-      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Python Console" order="7" sideWeight="0.49932885" weight="0.32905984" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49597314" visible="true" weight="0.25071225" />
-      <window_info anchor="bottom" id="manage.py@Vista" order="8" sideWeight="0.4986577" weight="0.32905984" />
-      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49731544" weight="0.32763532" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15704697" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.1885906" side_tool="true" weight="0.3048433" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49932885" weight="0.32905984" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49597314" weight="0.5141612" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49731544" weight="0.32763532" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14285715" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8114094" weight="0.3048433" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.8114094" weight="0.30392158" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="manage.py@Vista" order="12" sideWeight="0.4986577" weight="0.32905984" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
     </layout>
-    <layout-to-restore>
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18322147" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="TODO" order="7" sideWeight="0.49932885" weight="0.32905984" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="3" sideWeight="0.4966443" visible="true" weight="0.32905984" />
-      <window_info anchor="right" id="PlantUML" order="5" />
-      <window_info anchor="bottom" id="manage.py@Vista" order="0" sideWeight="0.4986577" weight="0.32905984" />
-      <window_info anchor="bottom" id="Find" order="2" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49731544" weight="0.32905984" />
-      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5033557" side_tool="true" visible="true" weight="0.32905984" />
-      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" />
-      <window_info anchor="bottom" id="Message" order="1" />
-      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.81208056" weight="0.3988604" />
-      <window_info anchor="bottom" id="Python Console" order="13" sideWeight="0.49932885" weight="0.32905984" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -466,101 +497,14 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Management/views.py</url>
-          <line>84</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/VISTA/urls.py</url>
-          <line>1</line>
-          <option name="timeStamp" value="24" />
+          <line>36</line>
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="25" />
+      <option name="time" value="36" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/static/js/plugins/full-layer-control.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="114" selection-start-line="18" selection-start-column="114" selection-end-line="18" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/plugins/Leaflet.MultiOptionsPolyline.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VISTA/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2329">
-          <caret line="137" column="44" lean-forward="true" selection-start-line="137" selection-start-column="44" selection-end-line="137" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VISTA/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#1#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/plugins/play-trajectory-control.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="40" column="27" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/database_management/trajectory_upload.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="782">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Login/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="16" selection-start-column="16" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/pycharm.jar!/resources/html5-schema/html5/web-forms.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="90" column="22" selection-start-line="90" selection-start-column="22" selection-end-line="90" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/database_management/point_feature_generation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/feature_selection.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="48" selection-start-column="48" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/management_select.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="20" selection-start-column="20" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Ajax/views.py" />
     <entry file="file://$PROJECT_DIR$/trajectory_library/TrajectoryFeatures.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -618,13 +562,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/select_database.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="31" selection-start-line="11" selection-start-column="31" selection-end-line="11" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/upload_trajectories.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -636,13 +573,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="15" column="115" lean-forward="true" selection-start-line="15" selection-start-column="115" selection-end-line="15" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/create_session.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
         </state>
       </provider>
     </entry>
@@ -660,82 +590,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="123" selection-start-line="123" selection-end-line="123" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Management/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="11" column="63" selection-start-line="11" selection-start-column="63" selection-end-line="11" selection-end-column="63" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/plugins/semantic-layers.js" />
-    <entry file="file://$PROJECT_DIR$/static/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="78" column="1" selection-start-line="78" selection-start-column="1" selection-end-line="78" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Management/utils.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="11" selection-start-line="8" selection-start-column="11" selection-end-line="8" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#77#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/plugins/Leaflet.MultiOptionsPolyline.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VISTA/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2329">
-          <caret line="137" column="44" selection-start-line="137" selection-start-column="44" selection-end-line="137" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VISTA/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#1#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/static/js/plugins/full-layer-control.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="114" selection-start-line="18" selection-start-column="114" selection-end-line="18" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/trajectory_player.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/plugins/play-trajectory-control.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2227">
-          <caret line="131" column="27" selection-start-line="131" selection-start-column="27" selection-end-line="131" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -746,115 +605,257 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/upload_semantic_layers.html">
+    <entry file="file://$PROJECT_DIR$/static/js/trajectory_player.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="30" column="81" selection-start-line="30" selection-start-column="81" selection-end-line="30" selection-end-column="81" />
+        <state relative-caret-position="34">
+          <caret line="2" column="28" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/charts.js">
+    <entry file="file://$USER_HOME$/Downloads/Connect to MySQL.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
+        <state relative-caret-position="101">
+          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/database_management.html">
+    <entry file="file://$PROJECT_DIR$/VISTA/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="18" column="44" lean-forward="true" selection-start-line="18" selection-start-column="44" selection-end-line="18" selection-end-column="44" />
-          <folding>
-            <element signature="e#1022#1044#0#HTML" expanded="true" />
-            <element signature="e#1148#1169#0#HTML" expanded="true" />
-          </folding>
+        <state relative-caret-position="714">
+          <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/main_structure.html">
+    <entry file="file://$PROJECT_DIR$/VISTA/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="21" column="58" selection-start-line="21" selection-start-column="58" selection-end-line="21" selection-end-column="58" />
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/segmentationPage.html">
+    <entry file="file://$PROJECT_DIR$/Segmentation/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="34" column="58" selection-start-line="34" selection-start-column="58" selection-end-line="34" selection-end-column="58" />
+        <state relative-caret-position="204">
+          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Segmentation/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="64" lean-forward="true" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="119">
+          <caret line="7" column="95" selection-start-line="7" selection-start-column="95" selection-end-line="7" selection-end-column="95" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Management/models.py">
+    <entry file="file://$PROJECT_DIR$/Segmentation/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="43" column="18" lean-forward="true" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="102">
+          <caret line="6" column="10" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/trajectory_table.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="42" column="17" lean-forward="true" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="13" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/semantic_layer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="30" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/plugins/play-trajectory-control.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2227">
+          <caret line="131" column="27" selection-start-line="131" selection-start-column="27" selection-end-line="131" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Management/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="17" column="20" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Management/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" column="47" selection-start-line="12" selection-start-column="47" selection-end-line="12" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/plugins/RotatedMarker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-408" />
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="15919" column="12" selection-start-line="15919" selection-start-column="12" selection-end-line="15919" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/upload_semantic_layers.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/invite_users.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="57" selection-start-line="8" selection-start-column="57" selection-end-line="8" selection-end-column="57" />
+        <state relative-caret-position="153">
+          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/select_database.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="19" selection-start-line="15" selection-start-column="19" selection-end-line="15" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Management/utils.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7">
+          <caret line="38" column="53" selection-start-line="38" selection-start-column="53" selection-end-line="38" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/exception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="124" selection-start-line="124" selection-end-line="124" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/map_visualization.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1240">
+          <caret line="62" column="56" selection-start-line="62" selection-start-column="56" selection-end-line="62" selection-end-column="56" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Segmentation/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Management/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="85" column="71" selection-start-line="85" selection-start-column="56" selection-end-line="85" selection-end-column="71" />
+        <state relative-caret-position="100">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/semantic_layer.js">
+    <entry file="file://$PROJECT_DIR$/Management/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+        <state relative-caret-position="680">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="e#68#74#0" expanded="true" />
+            <element signature="e#0#45#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/static/js/map_visualization.js">
+    <entry file="file://$PROJECT_DIR$/static/js/segmentation/segmentation_creation.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="91" column="9" lean-forward="true" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
+        <state relative-caret-position="160">
+          <caret line="8" column="21" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/plugins/decorator-legend.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="29" column="6" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/database_management.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="26" column="10" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/management_select.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/pick_database.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="18" column="10" selection-start-line="18" selection-start-column="10" selection-end-line="18" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/create_session.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/main_structure.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="44" selection-start-line="44" selection-end-line="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/segmentation_page.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="66" column="26" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/charts.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="1" column="13" selection-start-line="1" selection-end-line="1" selection-end-column="13" />
+          <folding>
+            <element signature="n#!!block;n#setStats#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/segmentation/segmentation_setup.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/static/js/plugins/Segmentation-Control/segmentation_control.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="541">
+          <caret line="321" column="8" selection-start-line="321" selection-start-column="8" selection-end-line="321" selection-end-column="8" />
+          <folding>
+            <element signature="n#style#0;n#svg#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
