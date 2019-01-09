@@ -2,29 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a89ee4b-0f2e-4856-8c71-d954f9e53985" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/media/method-draw-image.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/loadCharts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/authentication.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/main_page.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/session_information.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Login/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Login/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Login/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Login/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Management/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Management/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Segmentation/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Segmentation/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Segmentation/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Segmentation/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Segmentation/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Segmentation/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VISTA/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/VISTA/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/media/marker.svg" beforeDir="false" afterPath="$PROJECT_DIR$/media/marker.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/charts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/charts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/map_visualization.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/map_visualization.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/plugins/Segmentation-Control/segmentation_control.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/plugins/Segmentation-Control/segmentation_control.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/segmentation/segmentation_setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/segmentation/segmentation_setup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/semantic_layer.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/semantic_layer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/segmentation_control.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/segmentation_control.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/main_structure.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/main_structure.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/segmentation_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/segmentation_page.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,7 +23,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Segmentation/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1260">
+            <state relative-caret-position="1386">
               <caret line="69" selection-start-line="69" selection-end-line="69" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
@@ -56,7 +35,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Management/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2340">
+            <state relative-caret-position="2574">
               <caret line="123" column="16" selection-start-line="123" selection-start-column="16" selection-end-line="123" selection-end-column="16" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
@@ -77,7 +56,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Login/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
+            <state relative-caret-position="1056">
               <caret line="50" selection-start-line="50" selection-end-line="50" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
@@ -89,7 +68,7 @@
       <file leaf-file-name="main_structure.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/main_structure.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="920">
+            <state relative-caret-position="1012">
               <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
             </state>
           </provider>
@@ -98,17 +77,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/VISTA/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
+            <state relative-caret-position="924">
               <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/VISTA/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -116,7 +86,7 @@
       <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Login/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
+            <state relative-caret-position="132">
               <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
@@ -125,11 +95,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="session_information.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="session_information.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/session_information.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
+            <state relative-caret-position="374">
               <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <caret column="5" selection-start-column="5" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -137,7 +116,7 @@
       <file leaf-file-name="authentication.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/authentication.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="640">
+            <state relative-caret-position="704">
               <caret line="32" column="48" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
             </state>
           </provider>
@@ -197,7 +176,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Ajax/urls.py" />
         <option value="$PROJECT_DIR$/Ajax/views.py" />
         <option value="$PROJECT_DIR$/static/js/database_management/trajectory_upload.js" />
         <option value="$PROJECT_DIR$/trajectory_library/TrajectoryFeatures.py" />
@@ -248,6 +226,7 @@
         <option value="$PROJECT_DIR$/Login/views.py" />
         <option value="$PROJECT_DIR$/templates/main_structure.html" />
         <option value="$PROJECT_DIR$/templates/session_information.html" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -435,7 +414,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="PlantUML" order="5" />
@@ -445,8 +424,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49932885" weight="0.32905984" />
       <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49597314" weight="0.511396" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49731544" weight="0.3267974" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16308725" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49731544" visible="true" weight="0.3267974" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16471216" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -494,13 +473,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/conf/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python36-32/Lib/importlib/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="148">
@@ -784,21 +756,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/VISTA/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
+        <state relative-caret-position="110">
           <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/VISTA/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
+        <state relative-caret-position="924">
           <caret line="42" column="17" selection-start-line="42" selection-start-column="17" selection-end-line="42" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Management/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2340">
+        <state relative-caret-position="2574">
           <caret line="123" column="16" selection-start-line="123" selection-start-column="16" selection-end-line="123" selection-end-column="16" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
@@ -808,7 +780,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Segmentation/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1260">
+        <state relative-caret-position="1386">
           <caret line="69" selection-start-line="69" selection-end-line="69" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
@@ -818,7 +790,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Login/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
+        <state relative-caret-position="132">
           <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
@@ -828,14 +800,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/authentication.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="640">
+        <state relative-caret-position="704">
           <caret line="32" column="48" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="48" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Login/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
+        <state relative-caret-position="1056">
           <caret line="50" selection-start-line="50" selection-end-line="50" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
@@ -852,15 +824,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/main_structure.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="920">
+        <state relative-caret-position="1012">
           <caret line="46" column="19" selection-start-line="46" selection-start-column="19" selection-end-line="46" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/session_information.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
+        <state relative-caret-position="374">
           <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="5" selection-start-column="5" selection-end-column="5" />
         </state>
       </provider>
     </entry>
