@@ -1,0 +1,50 @@
+{% extends 'main_structure.html' %}
+{% load static %}
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'style.css' %}"/>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center center-div">
+            <div class="col-md-4">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item tab-50">
+                        <a class="nav-link active" data-toggle="tab" href="#login" role="tab" aria-selected="true">Login</a>
+                    </li>
+                    <li class="nav-item tab-50">
+                        <a class="nav-link" data-toggle="tab" href="#register" role="tab" aria-selected="false">Register</a>
+                    </li>
+
+                </ul>
+                <div class="tab-content">
+                    <div id="login" class="tab-pane fade in active show" role="tabpanel">
+                        <form action="/login/" method="post" class="bordered">
+                            {% csrf_token %}
+                            <label class="font-weight-bold">Username</label>
+                            <input name="username" type="text" class="form-control" required/>
+
+                            <label class="font-weight-bold">Password</label>
+                            <input name="password" type="password" class="form-control" required>
+                            <br>
+                            <input type="submit" class="btn btn-lg btn-primary" value="Login"/>
+                        </form>
+                    </div>
+                    <div id="register" class="tab-pane fade in" role="tabpanel">
+                        <form action="/register/" method="post" class="bordered">
+                            {% csrf_token %}
+                            <label class="font-weight-bold">Username</label>
+                            <input name="username" type="text" class="form-control" required/>
+                            <label class="font-weight-bold">Email</label>
+                            <input name="email" type="email" class="form-control" required/>
+                            <label class="font-weight-bold">Password</label>
+                            <input name="password" type="password" class="form-control" required>
+                            <label class="font-weight-bold">Confirm Password</label>
+                            <input name="confirm-password" type="password" class="form-control" required>
+                            <br>
+                            <input type="submit" class="btn btn-lg btn-primary" value="Register"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

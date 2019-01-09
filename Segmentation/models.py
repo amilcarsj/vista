@@ -6,5 +6,5 @@ from django.contrib.auth.models import User
 class TrajectorySegmentation(models.Model):
     _id = models.ObjectIdField(primary_key=True)
     trajectory = models.ForeignKey(to=management_models.Trajectory, on_delete=models.DO_NOTHING)
-    segmentation = models.DictField()
+    segmentation = models.ListField()
     user = models.ForeignKey(to=User, on_delete=models.DO_NOTHING)

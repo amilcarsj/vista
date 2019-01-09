@@ -29,7 +29,7 @@ function addSemanticLayerToMap(geojson, layer_name) {
             layer.bindPopup(html);
         }
 
-    }).addTo(map);
+    });
 
     var semantic_layer_group = L.featureGroup([semantic_layer_geojson]);
     semantic_layer_group.name = layer_name;

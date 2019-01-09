@@ -1,0 +1,67 @@
+{% extends 'main_structure.html' %}
+{% load static %}
+
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+    <script src="{% static 'loadCharts.js' %}"></script>
+    <script>
+        $(function () {
+            let fishing = [0.06363,0.06063,0.055,0.0673,0.0613];
+            let notfishing = [-0.014,-0.017,-0.011,-0.01581,-0.021];
+            let fishing_speed = [3.16504,4.76504,3.66504,2.16504,5.16504];
+            let notfishing_speed = [13.75256,14.25256,15.356,16.75256,14.332];
+            let fishing_sum=0,notfishing_sum=0, fishing_speed_sum=0, notfishing_speed_sum=0;
+            for (let i=0;i<fishing.length;i++){
+                fishing_sum+=fishing[i];
+                notfishing_sum += notfishing[i];
+                fishing_speed_sum+=fishing_speed[i];
+                notfishing_speed_sum+= notfishing_speed[i];
+            }
+            let f_avg = fishing_sum/5;
+            let nf_avg = notfishing_sum/5;
+            let f_speed_avg = fishing_speed_sum/5;
+            let nf_speed_avg = notfishing_speed_sum/5;
+
+            let labels = ['asoares@gmail.com','jordanrose@dal.ca','etemad@dal.ca','chiara.renso@isti.cnr.it','stan@dal.ca'];
+            let d = {'labels':labels,'datasets': [{'label':'Fishing Average', borderDash:[5,5],data:[f_avg,f_avg,f_avg,f_avg,f_avg],'borderColor': '#00ff00','type':'line','fill':'none'},{'label':'Not Fishing Average', borderDash:[5,5],data:[nf_avg,nf_avg,nf_avg,nf_avg,nf_avg],'borderColor': '#0000ff','type':'line','fill':'none'},{'label': 'Fishing', 'data': fishing, 'borderColor': '#00ff00', 'backgroundColor':'#00ff00'},{'label': 'Not Fishing', 'data': notfishing, 'borderColor': '#0000ff', 'backgroundColor':'#0000ff'}]};
+            let d2 = {'labels':labels,'datasets': [{'label':'Fishing Average', borderDash:[5,5],data:[f_speed_avg,f_speed_avg,f_speed_avg,f_speed_avg,f_speed_avg],'borderColor': '#00ff00','type':'line','fill':'none'},{'label':'Not Fishing Average', borderDash:[5,5],data:[nf_speed_avg,nf_speed_avg,nf_speed_avg,nf_speed_avg,nf_speed_avg],'borderColor': '#0000ff','type':'line','fill':'none'},{'label': 'Fishing', 'data': fishing_speed, 'borderColor': '#00ff00', 'backgroundColor':'#00ff00'},{'label': 'Not Fishing', 'data': notfishing_speed, 'borderColor': '#0000ff', 'backgroundColor':'#0000ff'}]};
+            loadBarChart("#pf-chart", "Point Feature Summary", d);
+            loadBarChart("#tf-chart", "Trajectory Feature Summary", d2);
+        });
+    </script>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <h2 class="text-center">Session Summary</h2>
+        <hr>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="row no-gutters">
+                    <div class="col-lg-3 align-self-end">
+                        <label class="font-weight-bold">Point Feature</label>
+                    </div>
+                    <div class="col-lg-9">
+                        <select class="form-control">
+                            <option>brate</option>
+                        </select>
+                    </div>
+                </div>
+
+                <canvas id="pf-chart"></canvas>
+            </div>
+            <div id="tf-charts" class="col-lg-6">
+                <div class="row no-gutters">
+                    <div class="col-lg-3 align-self-end">
+                        <label class="font-weight-bold">Segment Feature</label>
+                    </div>
+                    <div class="col-lg-9">
+                        <select class="form-control">
+                            <option>avg_speed_kmh</option>
+                        </select>
+                    </div>
+                </div>
+                <canvas id="tf-chart"></canvas>
+            </div>
+        </div>
+    </div>
+{% endblock %}

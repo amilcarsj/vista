@@ -20,30 +20,37 @@
     {% endblock %}
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <img class="navbar-brand mb-0 h1" src="/media/vista-logo.png" width="100px" height="50px"></img>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a href="/"><img class="navbar-brand mb-0 h1" src="/media/vista-logo.png" width="100px" height="50px"></img></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/management/select/database/">Create / Update Session</a>
+        {% if user.is_authenticated %}
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/management/select/database/">Create / Update Session</a>
 
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/management/visualize/">Visualize Session</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/segmentation/database/">Start / Resume Session</a>
-            </li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/management/visualize/">Visualize Session</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/segmentation/database/">Start / Resume Session</a>
+                </li>
 
-        </ul>
+            </ul>
+            <span class="navbar-text">
+            <!--
+                <a class="nav-link" href="/logout/">Logout</a>
+                -->
+            </span>
+        {% endif %}
     </div>
 </nav>
-    {% block content %}
-    {% endblock %}
+{% block content %}
+{% endblock %}
 
 </body>
 </html>

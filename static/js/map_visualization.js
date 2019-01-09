@@ -106,7 +106,7 @@ function addArrows(line_lat_lon_seq){
                 polygon: false,
                 pathOptions: {
                     stroke: true,
-                    color: '#000000',
+                    color: '#ff0000',
                     weight: 3
                 }
             })

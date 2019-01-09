@@ -14,7 +14,7 @@ $(function () {
     loadLineChart("#pf-chart", curr_pf.values);
     create_play_control();
     setup();
-    create_segmentation_control(['Walking', 'Driving', 'Train']);
+    create_segmentation_control(segmentation_labels);
     loadScatterPlot("#scatter-chart", []);
     segmentation_control.scatter_chart = scatter_chart;
     $("#ddl-xaxis").change(getXYValues);
@@ -51,50 +51,9 @@ function getXYValues(e) {
     let xaxis = $("#ddl-xaxis").val();
     let yaxis = $("#ddl-yaxis").val();
     $.get('/management/get/xy/' + xaxis + "/" + yaxis + "/", function (data) {
-
         segmentation_control.scatter_chart_x_data=data.xvals;
         segmentation_control.scatter_chart_y_data=data.yvals;
         segmentation_control.generateScatterChart();
-        /*
-        if (segmentation_control != null && segmentation_control.Point_Labels.length != 0) {
-            console.log("Updating");
-            let plabels = segmentation_control.Point_Labels;
-            let data_lists = {};
-            segmentation_control.labels.forEach(label => {
-                data_lists[label] = [];
-            });
-            data_lists[null] = [];
-            for (let i = 0; i < plabels.length; i++) {
-                data_lists[plabels[i]].push({x: data.xvals[i], y: data.yvals[i]});
-            }
-            for (let key in data_lists) {
-
-                let c = segmentation_control.findColor(key);
-                let label = key;
-                if (key.toString()=='null'){
-                    c='red';
-                    label = "unlabelled"
-                }
-                console.log(c);
-                datasets.push({'label':label,'data':data_lists[key],'borderColor':c});
-            }
-        }
-        else {
-            for (let i = 0; i < data.xvals.length; i++) {
-                coords.push({x: data.xvals[i], y: data.yvals[i]})
-            }
-            datasets.push({
-                'label': 'Scatter',
-                'data': coords,
-                'borderColor': 'red'
-            });
-        }
-
-
-        scatter_chart.data.datasets = datasets;
-        scatter_chart.update();
-        //loadScatterPlot("#scatter-line_chart", []);
-        */
     });
 }
 
@@ -110,7 +69,7 @@ function addArrows(line_lat_lon_seq) {
                 polygon: false,
                 pathOptions: {
                     stroke: true,
-                    color: '#000000',
+                    color: '#ff0000',
                     weight: 3
                 }
             })

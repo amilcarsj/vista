@@ -4,8 +4,10 @@ import Management.utils as utils
 from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required()
 def update_database(request, _id=""):
     if _id == '':
         return render(request, 'select_database.html')
@@ -36,6 +38,7 @@ def update_database(request, _id=""):
         users = list(User.objects.filter(email__in=taggers))
         for i in users:
             db.taggers.add(i)
+    db.labels = labels
     db.save()
     pois_rois = []
     for file in semantic_files:
@@ -47,7 +50,7 @@ def update_database(request, _id=""):
     return render(request, 'database_management.html')
 
 
-
+@login_required()
 def select_database(request):
     r = None
     if request.method == 'GET':
@@ -61,7 +64,7 @@ def select_database(request):
 
         return redirect('/management/edit/database/%s/' % str(dbid))
 
-
+@login_required()
 def create_database(request):
     if request.method == "GET":
         dbs = Database.objects.filter(tagging_session_manager=request.user)
@@ -77,14 +80,14 @@ def create_database(request):
         print(db._id)
         return redirect('/management/edit/database/%s/' % str(db._id))
 
-
+@login_required()
 def visualize(request):
     dbs = Database.objects.filter(tagging_session_manager=request.user)
     db = dbs.first()
     trajectories = Trajectory.objects.filter(db=db)
     return render(request, 'trajectory_table.html', {'databases': dbs, 'trajectories': trajectories})
 
-
+@login_required()
 def get_trajectories(request, db_id=""):
     trajectories = list(Trajectory.objects.filter(db_id=db_id).values('_id','total_points','total_distance_traveled','average_sampling'))
     for t in trajectories:
@@ -96,6 +99,8 @@ def get_trajectories(request, db_id=""):
     print(semantic_layers)
     return JsonResponse({'trajectories': trajectories, 'semantic_layers': semantic_layers})
 
+
+@login_required()
 def get_trajectory(request, oid=""):
     geojson = Trajectory.objects.get(_id=oid).geojson
     pfs = TrajectoryFeature.objects.filter(trajectory___id=oid)
@@ -108,7 +113,7 @@ def get_trajectory(request, oid=""):
     curr_pf_dict['trajectory'] = str(curr_pf_dict['trajectory'])
     return JsonResponse({'trajectory':geojson,'point_features':id_names, 'current_pf': curr_pf_dict})
 
-
+@login_required()
 def get_point_feature(request, oid=""):
     pf = TrajectoryFeature.objects.get(_id=oid)
     pf._id = str(pf._id)
@@ -116,7 +121,7 @@ def get_point_feature(request, oid=""):
     pf_dict['trajectory'] = str(pf_dict['trajectory'])
     return JsonResponse({'point_feature': pf_dict})
 
-
+@login_required()
 def get_xy(request,x="",y=""):
     xvals = TrajectoryFeature.objects.get(_id=x).values
     yvals = TrajectoryFeature.objects.get(_id=y).values

@@ -2,6 +2,8 @@ line_chart = null;
 scatter_chart = null;
 
 function loadLineChart(containerid, d) {
+    resizeCanvas($(containerid));
+
     console.log(containerid);
     line_chart = new Chart($(containerid), {
         type: 'line',
@@ -22,7 +24,7 @@ function loadLineChart(containerid, d) {
             scales: {
                 xAxes: [{
                     ticks: {
-                        display: false //this will remove only the label
+                        display: true //this will remove only the label
                     }
                 }]
             },
@@ -33,13 +35,15 @@ function loadLineChart(containerid, d) {
                 animationDuration: 0, // duration of animations when hovering an item
             },
             responsiveAnimationDuration: 0, // animation duration after a resize
-            responsive: true,
+            responsive: false,
             maintainAspectRatio: false
         }
     });
 }
 
 function loadScatterPlot(containerid, d) {
+    resizeCanvas($(containerid));
+
     console.log(containerid);
     scatter_chart = new Chart($(containerid), {
         type: 'scatter',
@@ -70,8 +74,8 @@ function loadScatterPlot(containerid, d) {
                 animationDuration: 0, // duration of animations when hovering an item
             },
             responsiveAnimationDuration: 0, // animation duration after a resize
-            responsive: true,
-            maintainAspectRatio: true
+            responsive: false,
+            maintainAspectRatio: false
         }
     });
 }
@@ -145,6 +149,8 @@ $(function () {
             btn.html("Display Line Chart");
             $("#line-graph").hide();
             $("#scatter-graph").show();
+            resizeCanvas($("#scatter-chart"));
+
         }
         else {
             btn.html("Display Scatter Plot");
@@ -153,8 +159,13 @@ $(function () {
             $("#scatter-graph").hide();
         }
     });
-});
 
+});
+    function resizeCanvas(canvas){
+        canvas.width($("#charts-section").innerWidth());
+        canvas.height($("#charts-section").height()-$("#xy-section").height()+ $("#pf-section").height()+$("#top-section"));
+        console.log("Width: " + canvas.width() + " Height: " + canvas.height());
+    }
 function createTrajectory(line_lat_lon_seq, feature_values) {
     let trajectory_red_colors = [{'color': '#ffe5e5'}, {'color': '#ffcccc'}, {'color': '#ffb2b2'}, {'color': '#ff9999'}, {'color': '#ff7f7f'},
         {'color': '#ff6666'}, {'color': '#ff4c4c'}, {'color': '#ff3232'}, {'color': '#ff1919'}, {'color': '#FF0000'}];
