@@ -9,9 +9,13 @@
         console.log(traj_original);
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"/>
-    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
-        <script src='{% static 'js/plugins/RotatedMarker.js' %}'></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
+          integrity="sha512-07I2e+7D8p6he1SIM+1twR5TIrhUQn9+I6yjqD53JQjFiMf8EtC93ty0/5vJTZGF8aAocvHYNEDJajGdNx1IsQ=="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"
+            integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
+            crossorigin=""></script>
+    <script src='{% static 'js/plugins/RotatedMarker.js' %}'></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'style.css' %}"/>
@@ -42,15 +46,19 @@
                         return;
                     }
                     if (values[i] != values[i - 1]) {
-                        markers.push([i-1,values[i-1]]);
+                        markers.push([i - 1, values[i - 1]]);
                     }
                 }
                 //markers.push(values.length - 1);
                 console.log(markers);
-                markers.push([values.length-1,values[values.length-1]]);
+                markers.push([values.length - 1, values[values.length - 1]]);
                 let token = $('[name="csrfmiddlewaretoken"]').val();
                 let id = $("#traj_pk").val();
-                $.post('/segmentation/submit/', {'id': id, 'csrfmiddlewaretoken': token, 'marker_locations[]': markers}, function (data) {
+                $.post('/segmentation/submit/', {
+                    'id': id,
+                    'csrfmiddlewaretoken': token,
+                    'marker_locations[]': markers
+                }, function (data) {
                     console.log(data);
                 });
             });
@@ -109,7 +117,10 @@
                         </div>
                     </div>
                     <p id="pf-title" class="font-weight-bold text-center">Point Feature Chart</p>
-                    <div class="text-center" id="legend"><div class="label-box"></div> unlabelled</div>
+                    <div class="text-center" id="legend">
+                        <div class="label-box"></div>
+                        unlabelled
+                    </div>
                     <canvas id="pf-chart"></canvas>
                     <!--
                     <div class="row">

@@ -11,7 +11,6 @@ function angleFromCoordinate(lat1, lon1, lat2, lon2) {
     var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(longDiff);
 
     var res = (toDegrees(Math.atan2(y, x)) + 360) % 360;
-    console.log(res);
     return res;
 }
 
@@ -43,6 +42,7 @@ function setMarkerIconWithDirection(p_lat_lon, angle) {
         iconSize: [20, 20], // size of the icon
         iconAnchor: [10, 10],// point of the icon which will correspond to marker's location
     });
+    console.log(p_lat_lon);
     point_selected_from_pf_chart = L.marker(p_lat_lon, {icon: myIcon, rotationAngle: angle});
     point_selected_from_pf_chart.addTo(map);
 };
@@ -109,7 +109,7 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
             l[0].addTo(map);
             all_layers.push(l[0]);
             var lat_lngs = l[0].getLatLngs();
-            angle = angleFromCoordinate(lat_lngs[0].lat, lat_lngs[0].lng, lat_lngs[1].lat, lat_lngs[1].lng);
+            let angle = angleFromCoordinate(lat_lngs[0].lat, lat_lngs[0].lng, lat_lngs[1].lat, lat_lngs[1].lng);
             setMarkerIconWithDirection(lat_lngs[1], angle);
 
 
