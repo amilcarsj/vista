@@ -1,4 +1,5 @@
 point_selected_from_pf_chart = null;
+
 function angleFromCoordinate(lat1, lon1, lat2, lon2) {
     lat1 = toRadians(lat1);
     lat2 = toRadians(lat2);
@@ -10,7 +11,6 @@ function angleFromCoordinate(lat1, lon1, lat2, lon2) {
     var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(longDiff);
 
     var res = (toDegrees(Math.atan2(y, x)) + 360) % 360;
-    console.log(res);
     return res;
 }
 
@@ -48,93 +48,88 @@ function setMarkerIconWithDirection(p_lat_lon, angle) {
 
 
 L.Control.PlayTrajectoryControl = L.Control.extend({
-    
+
     onAdd: function (map) {
         var controlDiv = L.DomUtil.create('div', 'leaflet-play-trajectory-control-custom');
         L.DomEvent
             .addListener(controlDiv, 'click', L.DomEvent.stopPropagation)
-            // .addListener(controlDiv, 'click', L.DomEvent.preventDefault)
+        // .addListener(controlDiv, 'click', L.DomEvent.preventDefault)
         // .addListener(controlDiv, 'click', function () {
         //     showPanel();
         // });
         this._controlDiv = controlDiv;
-            
+
         return controlDiv;
     },
 
-    initializeComponents: function(){
+    initializeComponents: function () {
         $('.leaflet-play-trajectory-control-custom').empty();
         $('.leaflet-play-trajectory-control-custom').append('<button id="leaflet-control-play-button" class="leaflet-control-button-custom"><img id="play-image" src="/media/play-icon.png" data-toggle="tooltip" title="Play the trajectory track on map." data-placement="right"></img></button>');
         $('.leaflet-play-trajectory-control-custom').append('<div class="leaflet-play-trajectory-control-custom-container"></div>');
-        $('#leaflet-control-play-button').click(function(){
-            if ($('.leaflet-play-trajectory-control-custom-container').css('display') == 'none'){
+        $('#leaflet-control-play-button').click(function () {
+            if ($('.leaflet-play-trajectory-control-custom-container').css('display') == 'none') {
                 $('.leaflet-play-trajectory-control-custom-container').css('display', 'block');
                 $('#leaflet-control-play-button').hide();
             }
         });
-        var html =  '<button id="btn-close-play-container" type="button" class="close-map-container" aria-label="Close"><span aria-hidden="true">&times;</span></button><br />';            
+        var html = '<button id="btn-close-play-container" type="button" class="close-map-container" aria-label="Close"><span aria-hidden="true">&times;</span></button><br />';
         $('.leaflet-play-trajectory-control-custom-container').append(html);
-        $('#btn-close-play-container').click(function(){
+        $('#btn-close-play-container').click(function () {
             $('.leaflet-play-trajectory-control-custom-container').hide();
             $('#leaflet-control-play-button').show();
         });
-        html =  '<div style="display:inline-flex; align-items: center; margin-bottom: 5px; margin-left: 5px">\n'+
-                '   <div style="font-weight: bolder">Total time(seconds):&nbsp;</div>\n'+
-                '   <input id="input-play-seconds" type="text" value="10"></input>\n'+
-                '   <div style="margin-left: 5px; margin-right: 5px">\n'+
-                '       <i id="play-trajectory-on-map-button" class="fa fa-play-circle fa-2x" aria-hidden="true" role="button" aria-haspopup="true" aria-expanded="false" style="color:orange;"></i>'
-                '   </div>\n'+
-                '</div>';
+        html = '<div style="display:inline-flex; align-items: center; margin-bottom: 5px; margin-left: 5px">\n' +
+            '   <div style="font-weight: bolder">Total time(seconds):&nbsp;</div>\n' +
+            '   <input id="input-play-seconds" type="text" value="10"></input>\n' +
+            '   <div style="margin-left: 5px; margin-right: 5px">\n' +
+            '       <i id="play-trajectory-on-map-button" class="fa fa-play-circle fa-2x" aria-hidden="true" role="button" aria-haspopup="true" aria-expanded="false" style="color:orange;"></i>'
+        '   </div>\n' +
+        '</div>';
 
         $('.leaflet-play-trajectory-control-custom-container').append(html);
         $('[data-toggle="tooltip"]').tooltip();
-        
+
     },
 
-    _addLayerAfterSometime: function (layers, timestep, callback){
-        
+    _addLayerAfterSometime: function (layers, timestep, callback) {
+
         var all_layers = [];
-        var myInterval = setInterval(function(){
-            
+        var myInterval = setInterval(function () {
+
             if (layers.length == 0) {
-               clearInterval(myInterval);
-               for (var index = 0; index < all_layers.length; index++){
-                    map.removeLayer(all_layers[index]);
+                clearInterval(myInterval);
+                for (var index = 0; index < all_layers.length; index++) {
+                    //map.removeLayer(all_layers[index]);
                 }
-                console.log("Callback time");
-               return callback();
+                return callback();
             }
 
-            var l = layers.splice(0,1);
-            //layers[0].getLatLngs();
-            console.log(l[0].getLatLngs());
+            var l = layers.splice(0, 1);
             l[0].addTo(map);
             all_layers.push(l[0]);
-            var angle = 0;
             var lat_lngs = l[0].getLatLngs();
             angle = angleFromCoordinate(lat_lngs[0].lat, lat_lngs[0].lng, lat_lngs[1].lat, lat_lngs[1].lng);
             setMarkerIconWithDirection(lat_lngs[1], angle);
-
-
 
 
         }, timestep);
 
     },
 
-    play: function(layer, time, callback){
-        
+    play: function (layer, time, callback) {
+
         var all_lat_lng = layer.getLatLngs();
-        var timestep = (time*1000.)/all_lat_lng.length;
+        var timestep = (time * 1000.) / all_lat_lng.length;
+        console.log(timestep);
         var inner_layers = layer.getLayers();
         console.log(layer);
         console.log(inner_layers);
         this._addLayerAfterSometime(inner_layers, timestep, callback);
-        
+
     }
 
 });
 
-L.control.PlayTrajectoryControl = function(options) {
+L.control.PlayTrajectoryControl = function (options) {
     return new L.Control.PlayTrajectoryControl(options);
 };

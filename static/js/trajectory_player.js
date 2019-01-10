@@ -7,7 +7,7 @@ function create_play_control() {
     $('#play-trajectory-on-map-button').click(function () {
         var secs = $('#input-play-seconds').val();
         playControl.play(trajectory, secs, function () {
-            $('#pf-dropdown').trigger('change');
+            $('#ddl-pf').trigger('change');
         });
     });
 }
