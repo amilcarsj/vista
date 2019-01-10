@@ -1,4 +1,3 @@
-var event = new Event('bind');
 check_labels = [];
 
 
@@ -61,10 +60,10 @@ L.Control.SegmentationControl = L.Control.extend({
             var color = control.findColor(e.target.getPopup().getContent());
             if (control.Bind_Markers && control.Trajectory_Layer != null) {
                 var minindex = 0, mindist = 0;
-                var c = control.Trajectory_Layer.getLayers()[0].getLatLngs();
+                var c = control.Trajectory_Layer.getLatLngs();
                 var latlng = e.target.getLatLng();
                 for (var i = 0; i < c.length; i++) {
-                    var dist = Math.abs(calculateDistance(c[i].lat, c[i].lng, latlng.lat, latlng.lng));
+                    var dist = Math.abs(calculateDistance(c[i][0], c[i][1], latlng.lat, latlng.lng));
                     if (dist < mindist || i == 0) {
                         minindex = i;
                         mindist = dist;
@@ -72,7 +71,7 @@ L.Control.SegmentationControl = L.Control.extend({
                 }
                 //this.dispatchEvent(event);
 
-                e.target.setLatLng({'lon': c[minindex].lng, 'lat': c[minindex].lat});
+                e.target.setLatLng({'lon': c[minindex][1], 'lat': c[minindex][0]});
                 control.generateSegmentation();
 
             }
@@ -313,7 +312,7 @@ L.Control.SegmentationControl = L.Control.extend({
                 control.labels.forEach(label => {
                     var layers = control.Marker_Groups[label].getLayers();
                     for (var i = 0; i < layers.length; i++) {
-                        if (layers[i].getLatLng().lat == point.lat && layers[i].getLatLng().lng == point.lng) {
+                        if (layers[i].getLatLng().lat == point[0] && layers[i].getLatLng().lng == point[1]) {
                             label_return = label;
                         }
                     }
@@ -328,7 +327,7 @@ L.Control.SegmentationControl = L.Control.extend({
                     for (var i = 0; i < layers.length; i++) {
                         //console.log(layers[i].getLatLng().lat +"==="+ point.lat);
                         //console.log("Latitude: " + (layers[i].getLatLng().lat == point.lat) + " Longitude: " + (layers[i].getLatLng().lng == point.lng));
-                        if ((layers[i].getLatLng().lat == point.lat) && (layers[i].getLatLng().lng == point.lng)) {
+                        if ((layers[i].getLatLng().lat == point[0]) && (layers[i].getLatLng().lng == point[1])) {
                             console.log("Return True");
                             found = true;
                         }
@@ -339,7 +338,13 @@ L.Control.SegmentationControl = L.Control.extend({
 
             console.log("Beginning Segmentation");
             this.Point_Labels = [];
-            let coords = this.Trajectory_Layer.getLayers()[0].getLatLngs();
+            let coords=[]
+            try{
+                coords = this.Trajectory_Layer.getLatLngs();
+            }
+            catch(err){
+              console.log(err);
+            }
             let marker_indexes = [];
             for (let i = 0; i < coords.length; i++) {
                 this.Point_Labels.push(null);
@@ -359,6 +364,8 @@ L.Control.SegmentationControl = L.Control.extend({
             for (let j = marker_indexes[marker_indexes.length - 1] - 1; j >= 0; j--) {
                 points.push(coords[j]);
                 if ((marker_indexes.includes(j) || j == 0) && points.length != 0) {
+                    console.log(label);
+                    console.log(points);
                     control.Segmentation_Groups[label].addLayer(addLine(points, label));
                     points = [coords[j]];
                 }

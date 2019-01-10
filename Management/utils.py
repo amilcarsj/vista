@@ -12,13 +12,18 @@ import json
 def save_trajectory(file, tid, lat, lon, time, delimiter,db, pois_rois):
 
     df = pd.read_csv(file, delimiter, parse_dates=[time], index_col=time)
-    print(df)
+    #df = pd.read_csv(file, delimiter, parse_dates=[time])
     print(df.columns.values)
     df.rename(columns={lat: "lat", lon: "lon"}, inplace=True)
+    print(df.columns.values)
+
     t = tr.Trajectory(mood='df', trajectory=df)
     t.get_features()
     df = t.return_row_data()
+    print(df.columns.values)
+    print(df)
     geometry = [Point(xy) for xy in zip(df['lon'], df['lat'])]
+    print(geometry)
     # crs = {'init': 'epsg:4326'}
     # gdf = gpd.GeoDataFrame(df, crs=crs, geometry=geometry)
     # print(gdf)
@@ -82,7 +87,6 @@ def find_shortest_distance(points, poi):
 
 def save_point_features(df, traj):
     feats = []
-    print(df.columns.values)
     for col in df.columns.values:
         feat = TrajectoryFeature()
         try:
@@ -103,6 +107,7 @@ def save_point_features(df, traj):
             feat.name=col
             feat.trajectory = traj
             feats.append(feat)
-        except Exception:
+        except Exception as e:
+            print(e)
             print("Column %s was not added" % col)
     TrajectoryFeature.objects.bulk_create(feats)

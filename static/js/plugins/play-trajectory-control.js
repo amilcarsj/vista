@@ -11,6 +11,7 @@ function angleFromCoordinate(lat1, lon1, lat2, lon2) {
     var x = Math.cos(lat1) * Math.sin(lat2) - Math.sin(lat1) * Math.cos(lat2) * Math.cos(longDiff);
 
     var res = (toDegrees(Math.atan2(y, x)) + 360) % 360;
+    console.log(res);
     return res;
 }
 
@@ -99,7 +100,7 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
             if (layers.length == 0) {
                 clearInterval(myInterval);
                 for (var index = 0; index < all_layers.length; index++) {
-                    //map.removeLayer(all_layers[index]);
+                    map.removeLayer(all_layers[index]);
                 }
                 return callback();
             }
