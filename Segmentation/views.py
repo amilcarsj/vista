@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from .models import TrajectorySegmentation
 import Segmentation.utils as utils
 from django.forms.models import model_to_dict
+from django.contrib.auth.decorators import login_required
 import json
 
 
@@ -22,7 +23,7 @@ def pick_set(request):
 
 
 
-
+@login_required()
 def load_segment_session(request, db_id=""):
     if db_id == "":
         return redirect('/segmentation/database/')
@@ -78,8 +79,6 @@ def submit_segmentation(request):
             for index in segments[l]:
                 count+=1
                 avg+=values[index]
-            #print(values)
-
             avg /= len(segments[l])
             print("%s: %.5f" % (l, avg))
     return JsonResponse({})

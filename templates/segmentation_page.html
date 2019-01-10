@@ -25,6 +25,7 @@
     <script src="{% static 'js/charts.js' %}"></script>
     <script src='{% static 'js/segmentation/segmentation_setup.js' %}'></script>
     <script src='{% static 'js/segmentation/segmentation_creation.js' %}'></script>
+    <script src="{% static 'js/plugins/notify.min.js' %}"></script>
     <script>
         $(function () {
             $("#traj_pk").val(traj_original._id);
@@ -34,6 +35,7 @@
                 let labels = [];
                 for (let i = 1; i < values.length; i++) {
                     if (values[i] == null) {
+                        $.notify("You must segment the whole trajectory before finishing", "error");
                         return;
                     }
                     if (values[i] != values[i - 1]) {
@@ -103,7 +105,7 @@
                             </div>
                         </div>
                     </div>
-                    <p class="font-weight-bold text-center">Point Feature Chart</p>
+                    <p id="pf-title" class="font-weight-bold text-center">Point Feature Chart</p>
                     <div class="text-center" id="legend"><div class="label-box"></div> unlabelled</div>
                     <canvas id="pf-chart"></canvas>
                     <!--

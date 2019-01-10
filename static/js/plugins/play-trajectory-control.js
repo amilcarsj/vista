@@ -104,22 +104,20 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
                 console.log("Callback time");
                return callback();
             }
-            /*var l = layers.splice(0,1);
+
+            var l = layers.splice(0,1);
+            //layers[0].getLatLngs();
+            console.log(l[0].getLatLngs());
             l[0].addTo(map);
             all_layers.push(l[0]);
             var angle = 0;
             var lat_lngs = l[0].getLatLngs();
             angle = angleFromCoordinate(lat_lngs[0].lat, lat_lngs[0].lng, lat_lngs[1].lat, lat_lngs[1].lng);
             setMarkerIconWithDirection(lat_lngs[1], angle);
-            */
-            /*
-            let c = layers.splice(0,1);
-            console.log(c);
-            let c1 = c[0];
-            let c2 = c[1];
-            angle = angleFromCoordinate(c1[0], c1[1], c2[0], c2[1]);
-            setMarkerIconWithDirection(lat_lngs[1], angle);
-            */
+
+
+
+
         }, timestep);
 
     },
@@ -130,7 +128,8 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
         var timestep = (time*1000.)/all_lat_lng.length;
         var inner_layers = layer.getLayers();
         console.log(layer);
-        this._addLayerAfterSometime(layer, timestep, callback);
+        console.log(inner_layers);
+        this._addLayerAfterSometime(inner_layers, timestep, callback);
         
     }
 
