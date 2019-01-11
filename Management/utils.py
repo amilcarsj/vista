@@ -1,8 +1,6 @@
 from Management.models import Trajectory, TrajectoryFeature,Database, POI_ROI
 import pandas as pd
-import geopandas as gpd
 from shapely.geometry import Point, shape, Polygon,MultiPolygon
-import numpy as np
 from .models import TrajectoryFeature, Trajectory
 from trajectory_library import Trajectory as tr
 from trajectory_library.TrajectoryDescriptorFeature import TrajectoryDescriptorFeature
@@ -86,6 +84,7 @@ def find_intersects(points, roi):
 
 
 def find_shortest_distance(points, poi):
+
     raise Exception("Not implemented yet")
 
 

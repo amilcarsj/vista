@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4a89ee4b-0f2e-4856-8c71-d954f9e53985" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/Management/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Management/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Segmentation/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Segmentation/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Segmentation/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Segmentation/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/chart-iterator.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/chart-iterator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/segmentation_page.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/segmentation_page.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -25,8 +22,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Segmentation/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+            <state relative-caret-position="206">
+              <caret line="56" column="4" selection-start-line="56" selection-start-column="4" selection-end-line="56" selection-end-column="4" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
               </folding>
@@ -79,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Management/utils.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="91" column="34" lean-forward="true" selection-start-line="91" selection-start-column="34" selection-end-line="91" selection-end-column="34" />
+            <state relative-caret-position="340">
+              <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
               <folding>
                 <element signature="e#0#77#0" expanded="true" />
               </folding>
@@ -192,8 +189,8 @@
         <option value="$PROJECT_DIR$/static/js/charts.js" />
         <option value="$PROJECT_DIR$/static/js/chart-iterator.js" />
         <option value="$PROJECT_DIR$/templates/segmentation_page.html" />
-        <option value="$PROJECT_DIR$/Management/utils.py" />
         <option value="$PROJECT_DIR$/Segmentation/models.py" />
+        <option value="$PROJECT_DIR$/Management/utils.py" />
         <option value="$PROJECT_DIR$/Segmentation/views.py" />
       </list>
     </option>
@@ -369,12 +366,12 @@
       <updated>1541212965444</updated>
       <workItem from="1547143395280" duration="4455000" />
       <workItem from="1547152963842" duration="6292000" />
-      <workItem from="1547213783230" duration="24790000" />
+      <workItem from="1547213783230" duration="26757000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35537000" />
+    <option name="totallyTimeSpent" value="37504000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -463,7 +460,6 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/static/js/database_management/navigation.js" />
     <entry file="file://$USER_HOME$/Downloads/Connect to MySQL.py" />
-    <entry file="file://$PROJECT_DIR$/Segmentation/utils.py" />
     <entry file="file://$PROJECT_DIR$/templates/trajectory_table.html" />
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts">
       <provider selected="true" editor-type-id="text-editor">
@@ -648,10 +644,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Segmentation/utils.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/Management/utils.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="91" column="34" lean-forward="true" selection-start-line="91" selection-start-column="34" selection-end-line="91" selection-end-column="34" />
+        <state relative-caret-position="340">
+          <caret line="86" lean-forward="true" selection-start-line="86" selection-end-line="86" />
           <folding>
             <element signature="e#0#77#0" expanded="true" />
           </folding>
@@ -660,8 +659,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Segmentation/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+        <state relative-caret-position="206">
+          <caret line="56" column="4" selection-start-line="56" selection-start-column="4" selection-end-line="56" selection-end-column="4" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>

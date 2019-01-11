@@ -31,7 +31,7 @@ def load_segment_session(request, db_id=""):
     for layer in layers:
         layer['_id']= str(layer['_id'])
         layer['db_id'] = str(layer['db_id'])
-    trajectory = utils.get_trajectory(request.user, db, None)
+    #trajectory = utils.get_trajectory(request.user, db_id, None)
     trajectories = Trajectory.objects.filter(db___id=db_id)
     traj = trajectories.values().first()
     traj['_id'] = str(traj['_id'])
@@ -51,6 +51,14 @@ def load_segment_session(request, db_id=""):
     return render(request, 'segmentation_page.html', {'layers': layers_json, 'trajectory': traj_json, 'curr_pf': curr_pf_json,'point_features':pfs,'labels':labels_json})
 
 
+@login_required()
+def get_trajectory(request,traj_id):
+    Trajectory.objects.get(_id=traj_id)
+    
+    return
+
+
+
 def submit_segmentation(request):
     markers = request.POST.get('marker_locations', [])
     id = request.POST.get('id', None)
@@ -64,9 +72,6 @@ def submit_segmentation(request):
     print(markers_list)
     if id is not None:
         traj = Trajectory.objects.get(_id=id)
-
-
-
 
     feats = TrajectoryFeature.objects.filter(trajectory___id=id)
     segment_list = []
@@ -96,8 +101,11 @@ def submit_segmentation(request):
         s.features = feat_list
         segment_list.append(s)
 
+    try:
+        segment = TrajectorySegmentation.objects.get(trajectory___id=id,user_id=request.user.id)
+    except:
+        segment = TrajectorySegmentation()
 
-    segment = TrajectorySegmentation()
     segment.trajectory = traj
     segment.segmentation = segment_list
     segment.user = request.user
