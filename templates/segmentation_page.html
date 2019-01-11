@@ -7,6 +7,7 @@
         curr_pf = JSON.parse('{{ curr_pf | escapejs }}');
         segmentation_labels = {{ labels | safe }};
         console.log(traj_original);
+        create_custom_slider();
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css"
@@ -16,10 +17,10 @@
             integrity="sha512-A7vV8IFfih/D732iSSKi20u/ooOfj/AGehOKq0f4vLT1Zr2Y+RX7C+w8A1gaSasGtRUZpF/NZgzSAu4/Gc41Lg=="
             crossorigin=""></script>
     <script src='{% static 'js/plugins/RotatedMarker.js' %}'></script>
-
+    <script src="{% static 'js/chart-iterator.js' %}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'style.css' %}"/>
-
+    <link rel="stylesheet" href="{% static 'customslider.css' %}"/>
     <link rel="stylesheet" href="{% static 'segmentation_control.css' %}"/>
     <script src="{% static 'js/plugins/decorator/leaflet.polylineDecorator.js' %}"></script>
     <script src="{% static 'js/plugins/decorator-legend.js' %}"></script>
@@ -34,6 +35,8 @@
     <script src='{% static 'js/segmentation/segmentation_creation.js' %}'></script>
     <script src="{% static 'js/plugins/notify.min.js' %}"></script>
     <script>
+            Chart.defaults.global.tooltips.enabled = false;
+
         $(function () {
             $("#traj_pk").val(traj_original._id);
             $("#btn-finish").click(function (e) {
@@ -122,6 +125,9 @@
                         unlabelled
                     </div>
                     <canvas id="pf-chart"></canvas>
+                    <div class="slidecontainer">
+                        <input type="range" min="0" max="100" value="50" class="slider" id="myRange">
+                    </div>
                     <!--
                     <div class="row">
                         <div class="col-md-6"><label class="font-weight-bold">Mean:</label> <span id="pf-mean"> </span>

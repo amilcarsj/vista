@@ -109,7 +109,7 @@ L.Control.SegmentationControl = L.Control.extend({
 
             var colour = this.parentNode.parentNode.childNodes[2].childNodes[0].value;
             var label = this.parentNode.parentNode.childNodes[1].innerHTML;
-            console.log(colour);
+            //console.log(colour);
             var marker = L.marker(map.getCenter(), {
                 draggable: true,
                 icon: getMarker(colour)
@@ -247,7 +247,7 @@ L.Control.SegmentationControl = L.Control.extend({
             let coords = [];
             let datasets = [];
             if (this.Point_Labels.length != 0) {
-                console.log("Updating");
+                //console.log("Updating");
                 let plabels = this.Point_Labels;
                 let data_lists = {};
                 this.labels.forEach(label => {
@@ -325,10 +325,10 @@ L.Control.SegmentationControl = L.Control.extend({
                 control.labels.forEach(label => {
                     var layers = control.Marker_Groups[label].getLayers();
                     for (var i = 0; i < layers.length; i++) {
-                        //console.log(layers[i].getLatLng().lat +"==="+ point.lat);
-                        //console.log("Latitude: " + (layers[i].getLatLng().lat == point.lat) + " Longitude: " + (layers[i].getLatLng().lng == point.lng));
+                        ////console.log(layers[i].getLatLng().lat +"==="+ point.lat);
+                        ////console.log("Latitude: " + (layers[i].getLatLng().lat == point.lat) + " Longitude: " + (layers[i].getLatLng().lng == point.lng));
                         if ((layers[i].getLatLng().lat == point[0]) && (layers[i].getLatLng().lng == point[1])) {
-                            console.log("Return True");
+                            //console.log("Return True");
                             found = true;
                         }
                     }
@@ -336,14 +336,14 @@ L.Control.SegmentationControl = L.Control.extend({
                 return found;
             }
 
-            console.log("Beginning Segmentation");
+            //console.log("Beginning Segmentation");
             this.Point_Labels = [];
             let coords=[]
             try{
                 coords = this.Trajectory_Layer.getLatLngs();
             }
             catch(err){
-              console.log(err);
+              //console.log(err);
             }
             let marker_indexes = [];
             for (let i = 0; i < coords.length; i++) {
@@ -355,17 +355,17 @@ L.Control.SegmentationControl = L.Control.extend({
             if (marker_indexes.length == 0) {
                 return;
             }
-            console.log(marker_indexes);
+            //console.log(marker_indexes);
             let points = [];
             let label = getLabel(coords[marker_indexes[marker_indexes.length - 1]]);
             points.push(coords[marker_indexes[marker_indexes.length - 1]]);
-            console.log(label);
+            //console.log(label);
             this.Point_Labels[marker_indexes[marker_indexes.length - 1]] = label;
             for (let j = marker_indexes[marker_indexes.length - 1] - 1; j >= 0; j--) {
                 points.push(coords[j]);
                 if ((marker_indexes.includes(j) || j == 0) && points.length != 0) {
-                    console.log(label);
-                    console.log(points);
+                    //console.log(label);
+                    //console.log(points);
                     control.Segmentation_Groups[label].addLayer(addLine(points, label));
                     points = [coords[j]];
                 }
@@ -374,7 +374,7 @@ L.Control.SegmentationControl = L.Control.extend({
                 }
                 this.Point_Labels[j] = label;
             }
-            console.log(this.Point_Labels);
+            //console.log(this.Point_Labels);
             control.generateLineChart();
             control.generateScatterChart();
         },
@@ -416,7 +416,7 @@ L.Control.SegmentationControl = L.Control.extend({
      * options: Specifies options for the points
      */
     L.control.SegmentationControl = function (options) {
-        //console.log(options.icon);
+        ////console.log(options.icon);
         //this.icon = options.icon.length!=0 ? options.icon: "/media/map_marker_font_awesome.png";
         Bind_Markers = true;
         Trajectory_Layer = null;
