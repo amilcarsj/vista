@@ -4,9 +4,7 @@ function trigger_chart_hover(idx) {
     let chart_points = [];
     let datasets = line_chart.data.datasets;
     for (let x = 0; x < datasets.length; x++) {
-        console.log(datasets[x].label);
         if (!datasets[x].label.includes('Average')) {
-
             chart_points = chart_points.concat(line_chart.getDatasetMeta(x).data);
         }
     }

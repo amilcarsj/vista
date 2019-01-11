@@ -50,6 +50,7 @@ def save_trajectory(file, tid, lat, lon, time, delimiter,db, pois_rois):
     df = df.drop(['lon','lat'],axis=1)
     save_point_features(df,traj)
 
+
 def save_poi_roi(file, name,db):
     layer = POI_ROI()
     file_contents = file.read()
@@ -65,6 +66,7 @@ def save_poi_roi(file, name,db):
     layer.save()
     print(data)
     return layer
+
 
 def find_intersects(points, roi):
     intersects_list = []
@@ -82,8 +84,10 @@ def find_intersects(points, roi):
 
     return intersects_list
 
+
 def find_shortest_distance(points, poi):
     raise Exception("Not implemented yet")
+
 
 def save_point_features(df, traj):
     feats = []
