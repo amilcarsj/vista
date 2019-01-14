@@ -42,6 +42,7 @@ function setMarkerIconWithDirection(p_lat_lon, angle) {
         iconSize: [20, 20], // size of the icon
         iconAnchor: [10, 10],// point of the icon which will correspond to marker's location
     });
+    //console.log(p_lat_lon);
     point_selected_from_pf_chart = L.marker(p_lat_lon, {icon: myIcon, rotationAngle: angle});
     point_selected_from_pf_chart.addTo(map);
 };
@@ -94,12 +95,17 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
     _addLayerAfterSometime: function (layers, timestep, callback) {
 
         var all_layers = [];
+        //console.log(line_chart);
+        let count = 0;
+
+
         var myInterval = setInterval(function () {
+            trigger_chart_hover(count++);
 
             if (layers.length == 0) {
                 clearInterval(myInterval);
                 for (var index = 0; index < all_layers.length; index++) {
-                    //map.removeLayer(all_layers[index]);
+                    map.removeLayer(all_layers[index]);
                 }
                 return callback();
             }
@@ -108,7 +114,7 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
             l[0].addTo(map);
             all_layers.push(l[0]);
             var lat_lngs = l[0].getLatLngs();
-            angle = angleFromCoordinate(lat_lngs[0].lat, lat_lngs[0].lng, lat_lngs[1].lat, lat_lngs[1].lng);
+            let angle = angleFromCoordinate(lat_lngs[0].lat, lat_lngs[0].lng, lat_lngs[1].lat, lat_lngs[1].lng);
             setMarkerIconWithDirection(lat_lngs[1], angle);
 
 
@@ -120,10 +126,10 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
 
         var all_lat_lng = layer.getLatLngs();
         var timestep = (time * 1000.) / all_lat_lng.length;
-        console.log(timestep);
+        //console.log(timestep);
         var inner_layers = layer.getLayers();
-        console.log(layer);
-        console.log(inner_layers);
+        //console.log(layer);
+        //console.log(inner_layers);
         this._addLayerAfterSometime(inner_layers, timestep, callback);
 
     }

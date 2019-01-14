@@ -1,12 +1,12 @@
 from django.shortcuts import render, redirect
 from Management.models import Database, Trajectory, POI_ROI, TrajectoryFeature
 from django.http import JsonResponse
-from .models import TrajectorySegmentation
+from .models import TrajectorySegmentation,SegmentFeature,Segment
 import Segmentation.utils as utils
-from django.forms.models import model_to_dict
 from django.contrib.auth.decorators import login_required
 import json
-
+from datetime import datetime
+from trajectory_library.TrajectoryDescriptorFeature import TrajectoryDescriptorFeature
 
 def pick_set(request):
     if request.method == 'GET':
@@ -31,7 +31,7 @@ def load_segment_session(request, db_id=""):
     for layer in layers:
         layer['_id']= str(layer['_id'])
         layer['db_id'] = str(layer['db_id'])
-    #trajectory = utils.get_trajectory(request.user, db, None)
+    #trajectory = utils.get_trajectory(request.user, db_id, None)
     trajectories = Trajectory.objects.filter(db___id=db_id)
     traj = trajectories.values().first()
     traj['_id'] = str(traj['_id'])
@@ -51,37 +51,69 @@ def load_segment_session(request, db_id=""):
     return render(request, 'segmentation_page.html', {'layers': layers_json, 'trajectory': traj_json, 'curr_pf': curr_pf_json,'point_features':pfs,'labels':labels_json})
 
 
+@login_required()
+def get_trajectory(request,traj_id):
+    Trajectory.objects.get(_id=traj_id)
+
+    return
+
+
+
 def submit_segmentation(request):
-    print(request.POST)
-    markers = request.POST.getlist('marker_locations[]', [])
+    markers = request.POST.get('marker_locations', [])
     id = request.POST.get('id', None)
+
+    print(request.POST)
     print(markers)
+
+    markers_list = json.loads(markers)
+    markers_list.sort(key = lambda  x: x['start_index'], reverse=False)
+
+    print(markers_list)
     if id is not None:
         traj = Trajectory.objects.get(_id=id)
 
-    last_index = 0
-    labels = traj.db.labels
-    segments = {}
-    for l in labels:
-        segments[l] = []
-    for marker in markers:
-        els = marker.split(',')
-        segments[els[1]]+=list(range(last_index,int(els[0])+1))
-        last_index = int(els[0])+1
-
     feats = TrajectoryFeature.objects.filter(trajectory___id=id)
-    for f in feats:
-        values = f.values
-        print("****************%s******************" % f.name)
-        for l in labels:
-            count = 0
-            avg = 0
-            for index in segments[l]:
-                count+=1
-                avg+=values[index]
-            avg /= len(segments[l])
-            print("%s: %.5f" % (l, avg))
+    segment_list = []
+    for segment in markers_list:
+        s = Segment()
+        s.start_index = segment['start_index']
+        s.end_index = segment['end_index']
+        s.label = segment['label']
+        feat_list = []
+        for f in feats:
+            sf = SegmentFeature()
+            values = f.values[segment['start_index']:segment['end_index']+1]
+            tdf = TrajectoryDescriptorFeature()
+            feat_stats = tdf.describe(values)
+            sf.min = feat_stats[0]
+            sf.max = feat_stats[1]
+            sf.mean = feat_stats[2]
+            sf.median = feat_stats[3]
+            sf.std = feat_stats[4]
+            sf.percentile_10 = feat_stats[5]
+            sf.percentile_25 = feat_stats[6]
+            sf.percentile_50 = feat_stats[7]
+            sf.percentile_75 = feat_stats[8]
+            sf.percentile_90 = feat_stats[9]
+            sf.name = f.name
+            feat_list.append(sf)
+        s.features = feat_list
+        segment_list.append(s)
+
+    try:
+        segment = TrajectorySegmentation.objects.get(trajectory___id=id,user_id=request.user.id)
+    except:
+        segment = TrajectorySegmentation()
+
+    segment.trajectory = traj
+    segment.segmentation = segment_list
+    segment.user = request.user
+    segment.start_time = datetime.strptime(request.POST.get('start_time', None), "%a, %d %b %Y %H:%M:%S %Z")
+    segment.end_time = datetime.strptime(request.POST.get('end_time', None), "%a, %d %b %Y %H:%M:%S %Z")
+    segment.save()
     return JsonResponse({})
 
 def review_session(request, session_id=""):
     return render(request,'session_information.html')
+1

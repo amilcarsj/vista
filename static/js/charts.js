@@ -19,7 +19,9 @@ function loadLineChart(containerid, d) {
                 text: 'Point Feature Chart'
             },
             elements: {
-                point: {radius: 0}
+                point: {
+                    radius: 2
+                }
             },
             scales: {
                 xAxes: [{
@@ -33,6 +35,7 @@ function loadLineChart(containerid, d) {
             },
             hover: {
                 animationDuration: 0, // duration of animations when hovering an item
+                mode:'nearest'
             },
             responsiveAnimationDuration: 0, // animation duration after a resize
             responsive: false,
@@ -44,7 +47,7 @@ function loadLineChart(containerid, d) {
 function loadScatterPlot(containerid, d) {
     resizeCanvas($(containerid));
 
-    console.log(containerid);
+    //console.log(containerid);
     scatter_chart = new Chart($(containerid), {
         type: 'scatter',
         data: {
@@ -82,22 +85,22 @@ function loadScatterPlot(containerid, d) {
 
 function update_point_feature(e) {
     var oid = e.target.value;
-    console.log(oid);
+    //console.log(oid);
     $.get("/management/get/point_feature/" + oid + "/", function (data) {
-        console.log(data);
+        //console.log(data);
         curr_pf = data.point_feature;
         var d = data.point_feature.values;
         segmentation_control.line_chart_data = d;
         setStats(data.point_feature);
         let new_traj = createTrajectory(trajectory._originalLatlngs, d);
 
-        console.log(trajectory);
+        //console.log(trajectory);
         if (trajectory != null) {
             let old_traj = trajectory;
             trajectory = null;
             map.removeLayer(old_traj);
         }
-        console.log(trajectory);
+        //console.log(trajectory);
         trajectory = new_traj;
         trajectory.addTo(map);
         addArrows(trajectory._originalLatlngs);
@@ -119,11 +122,11 @@ function update_point_feature(e) {
             };
 
         if (line_chart == null) {
-            console.log("New line_chart");
+            //console.log("New line_chart");
             loadLineChart("#pf-chart", chart_data);
         }
         else {
-            console.log("Update line_chart");
+            //console.log("Update line_chart");
             line_chart.data.datasets = chart_data.datasets;
             line_chart.data.labels = chart_data.labels;
             line_chart.update();
@@ -164,7 +167,7 @@ $(function () {
     function resizeCanvas(canvas){
         canvas.width($("#charts-section").innerWidth());
         canvas.height($("#charts-section").height()-$("#xy-section").height()+ $("#pf-section").height()+$("#top-section"));
-        console.log("Width: " + canvas.width() + " Height: " + canvas.height());
+        //console.log("Width: " + canvas.width() + " Height: " + canvas.height());
     }
 function createTrajectory(line_lat_lon_seq, feature_values) {
     let trajectory_red_colors = [{'color': '#ffe5e5'}, {'color': '#ffcccc'}, {'color': '#ffb2b2'}, {'color': '#ff9999'}, {'color': '#ff7f7f'},
@@ -183,8 +186,8 @@ function createTrajectory(line_lat_lon_seq, feature_values) {
         initial += increment;
         thresholds.push(initial);
     }
-    console.log(thresholds);
-    console.log(line_lat_lon_seq);
+    //console.log(thresholds);
+    //console.log(line_lat_lon_seq);
     var options = {position: 'bottomright'};
     let color_list = [];
     for (let i = 0; i < trajectory_red_colors.length; i++) {
@@ -194,7 +197,7 @@ function createTrajectory(line_lat_lon_seq, feature_values) {
         $('.leaflet-control-decorator-legend-custom').remove();
     }
     decorator_legend = new L.Control.DecoratorLegend(options).addTo(map);
-    console.log(feature_values);
+    //console.log(feature_values);
 
     decorator_legend.initializeComponents(color_list, thresholds);
     return L.multiOptionsPolyline(line_lat_lon_seq, {
