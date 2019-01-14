@@ -54,7 +54,7 @@ def load_segment_session(request, db_id=""):
 @login_required()
 def get_trajectory(request,traj_id):
     Trajectory.objects.get(_id=traj_id)
-    
+
     return
 
 
