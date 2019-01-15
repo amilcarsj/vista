@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4a89ee4b-0f2e-4856-8c71-d954f9e53985" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Segmentation/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Segmentation/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,14 +19,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Segmentation/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="56" selection-start-line="56" selection-end-line="56" />
+            <state relative-caret-position="-17">
+              <caret line="88" column="34" selection-start-line="88" selection-start-column="34" selection-end-line="88" selection-end-column="34" />
               <folding>
                 <element signature="e#0#45#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -176,7 +185,6 @@
         <option value="$PROJECT_DIR$/Login/views.py" />
         <option value="$PROJECT_DIR$/templates/session_information.html" />
         <option value="$PROJECT_DIR$/templates/main_structure.html" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/VISTA/settings.py" />
         <option value="$PROJECT_DIR$/static/js/plugins/Leaflet.MultiOptionsPolyline.min.js" />
         <option value="$PROJECT_DIR$/static/js/trajectory_player.js" />
@@ -192,6 +200,7 @@
         <option value="$PROJECT_DIR$/Segmentation/models.py" />
         <option value="$PROJECT_DIR$/Management/utils.py" />
         <option value="$PROJECT_DIR$/Segmentation/views.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -207,7 +216,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -234,6 +242,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -368,11 +377,13 @@
       <workItem from="1547152963842" duration="6292000" />
       <workItem from="1547213783230" duration="26877000" />
       <workItem from="1547473579728" duration="608000" />
+      <workItem from="1547498990052" duration="107000" />
+      <workItem from="1547559144191" duration="90000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38232000" />
+    <option name="totallyTimeSpent" value="38429000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -387,7 +398,7 @@
     <frame x="1365" y="-11" width="1922" height="1092" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18089648" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18516542" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -401,7 +412,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32868218" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49932885" weight="0.32905984" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49731544" weight="0.32457495" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49731544" visible="true" weight="0.32392895" />
       <window_info anchor="bottom" id="manage.py@Vista" order="12" sideWeight="0.4986577" weight="0.32905984" />
       <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.1885906" side_tool="true" weight="0.3048433" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -485,7 +496,6 @@
     <entry file="file://$PROJECT_DIR$/templates/main_page.html" />
     <entry file="file://$PROJECT_DIR$/Login/views.py" />
     <entry file="file://$PROJECT_DIR$/VISTA/settings.py" />
-    <entry file="file://$PROJECT_DIR$/.gitignore" />
     <entry file="file://$PROJECT_DIR$/static/js/semantic_layer.js" />
     <entry file="file://$PROJECT_DIR$/static/js/plugins/Leaflet.MultiOptionsPolyline.min.js" />
     <entry file="file://$PROJECT_DIR$/static/js/plugins/full-layer-control.js" />
@@ -616,8 +626,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Segmentation/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        <state relative-caret-position="-17">
+          <caret line="88" column="34" selection-start-line="88" selection-start-column="34" selection-end-line="88" selection-end-column="34" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
@@ -665,6 +675,13 @@
           <folding>
             <element signature="e#0#77#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="7" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
         </state>
       </provider>
     </entry>
