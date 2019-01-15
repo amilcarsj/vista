@@ -20,105 +20,64 @@
 
             $("#point-feat-dropdown").change(function (e) {
                 let value = e.target.value;
-                pf_chart.data.datasets = build_dataset('point_features',value);
+                pf_chart.data.datasets = build_dataset('point_features', value);
                 pf_chart.update();
             });
             $("#segment-feat-dropdown").change(function (e) {
                 let value = e.target.value;
-                sf_chart.data.datasets = build_dataset('segment_features',value);
+                sf_chart.data.datasets = build_dataset('segment_features', value);
                 sf_chart.update();
             });
-            function build_dataset(chart_type, feature){
+            $("#log-charts").click(function (e) {
+                console.log(pf_chart.data.datasets);
+                console.log(sf_chart.data.datasets);
+            })
+
+            function build_dataset(chart_type, feature) {
                 let dataset = [];
                 for (let j = 0; j < classes.length; j++) {
                     let data = [];
+                    let sum = 0;
+
+                    let avg_list = [];
                     for (let i = 0; i < user_emails.length; i++) {
                         let feat_val = user_data[user_emails[i]][chart_type][classes[j]][feature];
                         data.push(feat_val);
+                        sum += feat_val;
+                        avg_list.push(0);
                     }
+                    let avg = sum / user_emails.length;
+
+                    avg_list.fill(avg, 0, user_emails.length);
                     dataset.push({
                         'label': classes[j],
                         'data': data
                     });
+                    dataset.push({
+                        'label': classes[j] + " Average",
+                        'data': avg_list,
+                        borderDash: [5, 5],
+                        'type': 'line',
+                        'fill': 'none'
+
+                    });
+
                 }
+                console.log(dataset);
                 return dataset;
             }
 
             let d = {
                 'labels': user_emails,
-                'datasets': build_dataset('point_features',$('#point-feat-dropdown').val())
+                'datasets': build_dataset('point_features', $('#point-feat-dropdown').val())
             };
-            let d2 ={
+            let d2 = {
                 'labels': user_emails,
-                'datasets': build_dataset('segment_features',$('#segment-feat-dropdown').val())
+                'datasets': build_dataset('segment_features', $('#segment-feat-dropdown').val())
             }
 
             pf_chart = loadBarChart("#pf-chart", "Point Feature Summary", d);
-            sf_chart = loadBarChart("#tf-chart", "Trajectory Feature Summary", d);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            let fishing = [0.06363, 0.06063, 0.055, 0.0673, 0.0613];
-            let notfishing = [-0.014, -0.017, -0.011, -0.01581, -0.021];
-            let fishing_speed = [3.16504, 4.76504, 3.66504, 2.16504, 5.16504];
-            let notfishing_speed = [13.75256, 14.25256, 15.356, 16.75256, 14.332];
-            let fishing_sum = 0, notfishing_sum = 0, fishing_speed_sum = 0, notfishing_speed_sum = 0;
-            for (let i = 0; i < fishing.length; i++) {
-                fishing_sum += fishing[i];
-                notfishing_sum += notfishing[i];
-                fishing_speed_sum += fishing_speed[i];
-                notfishing_speed_sum += notfishing_speed[i];
-            }
-            let f_avg = fishing_sum / 5;
-            let nf_avg = notfishing_sum / 5;
-            let f_speed_avg = fishing_speed_sum / 5;
-            let nf_speed_avg = notfishing_speed_sum / 5;
-
-            let labels = ['asoares@gmail.com', 'jordanrose@dal.ca', 'etemad@dal.ca', 'chiara.renso@isti.cnr.it', 'stan@dal.ca'];
-            let d3 = {
-                'labels': labels,
-                'datasets': [{
-                    'label': 'Fishing Average',
-                    borderDash: [5, 5],
-                    data: [f_speed_avg, f_speed_avg, f_speed_avg, f_speed_avg, f_speed_avg],
-                    'borderColor': '#00ff00',
-                    'type': 'line',
-                    'fill': 'none'
-                }, {
-                    'label': 'Not Fishing Average',
-                    borderDash: [5, 5],
-                    data: [nf_speed_avg, nf_speed_avg, nf_speed_avg, nf_speed_avg, nf_speed_avg],
-                    'borderColor': '#0000ff',
-                    'type': 'line',
-                    'fill': 'none'
-                }, {
-                    'label': 'Fishing',
-                    'data': fishing_speed,
-                    'borderColor': '#00ff00',
-                    'backgroundColor': '#00ff00'
-                }, {
-                    'label': 'Not Fishing',
-                    'data': notfishing_speed,
-                    'borderColor': '#0000ff',
-                    'backgroundColor': '#0000ff'
-                }]
-            };
+            sf_chart = loadBarChart("#tf-chart", "Trajectory Feature Summary", d2);
 
         });
     </script>

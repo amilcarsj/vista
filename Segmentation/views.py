@@ -119,6 +119,15 @@ def submit_segmentation(request):
     return JsonResponse({})
 
 
+def select_session_review(request):
+    if request.method == 'GET':
+        dbs = Database.objects.filter(tagging_session_manager=request.user)
+        db_list = [(str(d._id),d.name) for d in dbs]
+        return render(request,'select_session_review.html', {'dbs':db_list})
+    else:
+        dbid = request.POST.get('database_select')
+        return redirect('/segmentation/review/%s/' % dbid)
+
 def review_session(request, session_id=""):
     db = Database.objects.get(_id=session_id)
 
@@ -133,13 +142,15 @@ def review_session(request, session_id=""):
     users_qs = User.objects.filter(id__in=db.taggers_id)
     users = []
     for user in users_qs:
+        traj_segmentation = TrajectorySegmentation.objects.filter(trajectory__db___id=session_id, user=user)
+        if not traj_segmentation.exists():
+            continue
         average_pf = {}
         average_sf = {}
         users.append(user.email)
         for l in labels:
             average_pf[l] = {}
             average_sf[l] = {}
-        traj_segmentation = TrajectorySegmentation.objects.filter(trajectory__db___id=session_id,user=user)
 
         for feat in features:
             for l in labels:
