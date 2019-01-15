@@ -150,11 +150,11 @@ def review_session(request, session_id=""):
         for s in traj_segmentation:
             for seg in s.segmentation:
                 l = seg.label
+                average_pf[l]['count'] += (seg.end_index - seg.start_index)
+                average_sf[l]['count'] += 1
                 for feat in seg.features:
                     average_pf[l][feat.name] += (feat.mean * (seg.end_index - seg.start_index))
-                    average_pf[l]['count']+=(seg.end_index - seg.start_index)
                     average_sf[l][feat.name]+= feat.mean
-                    average_sf[l]['count']+=1
         for feat in features:
             for l in labels:
                 print(l +" " + feat)

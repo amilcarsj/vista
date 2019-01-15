@@ -12,7 +12,7 @@
             let classes = {{ labels |safe }};
             let user_emails = {{ users | safe }};
             let features = {{ features | safe }};
-
+            console.log(user_data);
             for (let i = 0; i < features.length; i++) {
                 $("#point-feat-dropdown").append(`<option value="${features[i]}">${features[i]}</option>`);
                 $("#segment-feat-dropdown").append(`<option value="${features[i]}">${features[i]}</option>`);
