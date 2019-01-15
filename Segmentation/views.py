@@ -114,6 +114,53 @@ def submit_segmentation(request):
     segment.save()
     return JsonResponse({})
 
+
 def review_session(request, session_id=""):
-    return render(request,'session_information.html')
-1
+    db = Database.objects.get(_id=session_id)
+
+    labels = db.labels
+
+    average_pf = {}
+    average_sf = {}
+    for l in labels:
+        average_pf[l] = {}
+        average_sf[l] = {}
+
+    print(db.taggers_id)
+    user_data = {}
+    features_qs = TrajectorySegmentation.objects.filter(trajectory__db___id=session_id).first().segmentation[0].features
+    features = [f.name for f in features_qs]
+
+
+    for userid in db.taggers_id:
+        traj_segmentation = TrajectorySegmentation.objects.filter(trajectory__db___id=session_id,user__id=userid)
+
+        for feat in features:
+            for l in labels:
+                average_pf[l][feat] = 0
+                average_pf[l]['count'] = 0
+                average_sf[l][feat] = 0
+                average_sf[l]['count'] = 0
+        for s in traj_segmentation:
+            for seg in s.segmentation:
+                l = seg.label
+                for feat in seg.features:
+                    average_pf[l][feat.name] += (feat.mean * (seg.end_index - seg.start_index))
+                    average_pf[l]['count']+=(seg.end_index - seg.start_index)
+                    average_sf[l][feat.name]+= feat.mean
+                    average_sf[l]['count']+=1
+        for feat in features:
+            for l in labels:
+                print(l +" " + feat)
+                try:
+                    average_pf[l][feat]/=average_pf[l]['count']
+                    average_sf[l][feat]/=average_sf[l]['count']
+                except ZeroDivisionError:
+                    average_pf[l][feat] = 0
+                    average_sf[l][feat] = 0
+        user_data[userid] = {}
+        user_data[userid]['point_features'] = average_pf
+        user_data[userid]['segment_features'] = average_sf
+
+
+    return render(request,'session_information.html',{'user_data':user_data,'labels':labels,'features': features})

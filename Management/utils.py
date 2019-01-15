@@ -5,7 +5,7 @@ from .models import TrajectoryFeature, Trajectory
 from trajectory_library import Trajectory as tr
 from trajectory_library.TrajectoryDescriptorFeature import TrajectoryDescriptorFeature
 import json
-
+from math import radians, cos, sin, asin, sqrt
 
 def save_trajectory(file, tid, lat, lon, time, delimiter,db, pois_rois):
 
@@ -84,8 +84,16 @@ def find_intersects(points, roi):
 
 
 def find_shortest_distance(points, poi):
-
     raise Exception("Not implemented yet")
+    min_dist_list = []
+    for point in points:
+        min = 10000000
+        for p in poi:
+            hav_dist = haversine_distance(point.y,point.x,p.y,p.x) # ???
+            if hav_dist < min:
+                min = hav_dist
+        min_dist_list.append(min)
+    return min_dist_list
 
 
 def save_point_features(df, traj):
@@ -114,3 +122,10 @@ def save_point_features(df, traj):
             print(e)
             print("Column %s was not added" % col)
     TrajectoryFeature.objects.bulk_create(feats)
+
+#https://stackoverflow.com/questions/4913349/haversine-formula-in-python-bearing-and-distance-between-two-gps-points
+def haversine_distance(lat1,lon1,lat2,lon2):
+    lat1,lon1,lat2,lon2 = map(radians,[lat1,lon1,lat2,lon2])
+    a = sin(lat2-lat1/2)**2 + cos(lat2) * sin(lon2-lon1/2)**2
+    r = 6371
+    return (2 * asin(sqrt(a))) * r

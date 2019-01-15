@@ -9,6 +9,7 @@ function create_segmentation_control(labels){
     segmentation_control.labels = labels;
     segmentation_control.initializeComponents();
     //console.log(visible_trajectory.main.getLayers()[0].getLayers());
+    console.log(trajectory);
     segmentation_control.Trajectory_Layer = trajectory;
 
 }
