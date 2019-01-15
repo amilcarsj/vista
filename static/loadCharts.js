@@ -1,6 +1,6 @@
-function loadBarChart(containerid,t, d) {
-    console.log(d);
-    line_chart = new Chart($(containerid), {
+function loadBarChart(containerid, t, d) {
+
+    return new Chart($(containerid), {
         type: 'bar',
         data: d,
         options: {
@@ -12,9 +12,7 @@ function loadBarChart(containerid,t, d) {
                 text: t
             },
             responsive: true,
-            maintainAspectRatio: true,
-
-        },
-
+            maintainAspectRatio: true
+        }
     });
 }

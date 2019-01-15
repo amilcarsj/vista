@@ -3,10 +3,13 @@ from Management.models import Database, Trajectory, POI_ROI, TrajectoryFeature
 from django.http import JsonResponse
 from .models import TrajectorySegmentation,SegmentFeature,Segment
 import Segmentation.utils as utils
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import json
 from datetime import datetime
 from trajectory_library.TrajectoryDescriptorFeature import TrajectoryDescriptorFeature
+import numpy as np
+
 
 def pick_set(request):
     if request.method == 'GET':
@@ -48,7 +51,8 @@ def load_segment_session(request, db_id=""):
     curr_pf_json = json.dumps(curr_pf)
     labels = Database.objects.get(_id=db_id).labels
     labels_json = json.dumps(labels)
-    return render(request, 'segmentation_page.html', {'layers': layers_json, 'trajectory': traj_json, 'curr_pf': curr_pf_json,'point_features':pfs,'labels':labels_json})
+    return render(request, 'segmentation_page.html', {'layers': layers_json, 'trajectory': traj_json,
+                                                      'curr_pf': curr_pf_json,'point_features':pfs,'labels':labels_json})
 
 
 @login_required()
@@ -120,20 +124,22 @@ def review_session(request, session_id=""):
 
     labels = db.labels
 
-    average_pf = {}
-    average_sf = {}
-    for l in labels:
-        average_pf[l] = {}
-        average_sf[l] = {}
+
 
     print(db.taggers_id)
     user_data = {}
     features_qs = TrajectorySegmentation.objects.filter(trajectory__db___id=session_id).first().segmentation[0].features
     features = [f.name for f in features_qs]
-
-
-    for userid in db.taggers_id:
-        traj_segmentation = TrajectorySegmentation.objects.filter(trajectory__db___id=session_id,user__id=userid)
+    users_qs = User.objects.filter(id__in=db.taggers_id)
+    users = []
+    for user in users_qs:
+        average_pf = {}
+        average_sf = {}
+        users.append(user.email)
+        for l in labels:
+            average_pf[l] = {}
+            average_sf[l] = {}
+        traj_segmentation = TrajectorySegmentation.objects.filter(trajectory__db___id=session_id,user=user)
 
         for feat in features:
             for l in labels:
@@ -154,13 +160,17 @@ def review_session(request, session_id=""):
                 print(l +" " + feat)
                 try:
                     average_pf[l][feat]/=average_pf[l]['count']
+                    print(average_pf[l][feat])
                     average_sf[l][feat]/=average_sf[l]['count']
+                    average_pf[l][feat]
+                    print(average_sf[l][feat])
                 except ZeroDivisionError:
                     average_pf[l][feat] = 0
                     average_sf[l][feat] = 0
-        user_data[userid] = {}
-        user_data[userid]['point_features'] = average_pf
-        user_data[userid]['segment_features'] = average_sf
+        user_data[user.email] = {}
+        user_data[user.email]['point_features'] = average_pf
+        user_data[user.email]['segment_features'] = average_sf
 
-
-    return render(request,'session_information.html',{'user_data':user_data,'labels':labels,'features': features})
+    print(user_data)
+    print(users)
+    return render(request,'session_information.html',{'user_data':user_data,'labels':labels,'features': features,'users':users})
