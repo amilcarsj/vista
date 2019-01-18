@@ -11,3 +11,9 @@ function create_play_control() {
         });
     });
 }
+
+function create_button_control(prev,next) {
+    var options = {position: 'topright',next:next,prev:prev};
+    button_control = new L.Control.ButtonControl(options).addTo(map);
+    button_control.initializeComponents();
+}

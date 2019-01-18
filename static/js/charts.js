@@ -12,15 +12,15 @@ function loadLineChart(containerid, d) {
         options: {
 
             legend: {
-                display: true
+                display: false
             },
             title: {
-                display: true,
+                display: false,
                 text: 'Point Feature Chart'
             },
             elements: {
                 point: {
-                    radius: 2
+                    radius: 0
                 }
             },
             scales: {

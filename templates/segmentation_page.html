@@ -33,12 +33,28 @@
     <script src='{% static 'js/segmentation/segmentation_setup.js' %}'></script>
     <script src='{% static 'js/segmentation/segmentation_creation.js' %}'></script>
     <script src="{% static 'js/plugins/notify.min.js' %}"></script>
+    <script src="{% static 'js/plugins/buttons_control.js' %}"></script>
     <script>
-            Chart.defaults.global.tooltips.enabled = false;
+        Chart.defaults.global.tooltips.enabled = false;
 
         $(function () {
+            let segmentation = {{ segments|safe }};
+            console.log(segmentation);
             $("#traj_pk").val(traj_original._id);
+            add_starting_segmentation(segmentation);
+            let previous = null, next = null;
+
+            {% if previous != 'None' %}
+                previous = "/segmentation/database/{{ db }}/{{ previous }}/";
+            {% endif %}
+
+            {% if next != 'None' %}
+                next = "/segmentation/database/{{ db }}/{{ next }}/";
+            {% endif %}
+
+            create_button_control(previous, next);
             $("#btn-finish").click(function (e) {
+                console.log(segmentation_control);
                 let values = segmentation_control.Point_Labels;
                 let markers = [];
                 let labels = [];
@@ -49,13 +65,17 @@
                         return;
                     }
                     if (values[i] != values[i - 1]) {
-                        markers.push({'start_index':start_index,'end_index':i - 1, 'label':values[i - 1]});
+                        markers.push({'start_index': start_index, 'end_index': i - 1, 'label': values[i - 1]});
                         start_index = i;
                     }
                 }
                 //markers.push(values.length - 1);
                 console.log(markers);
-                markers.push({'start_index':start_index,'end_index':values.length - 1, 'label':values[values.length - 1]});
+                markers.push({
+                    'start_index': start_index,
+                    'end_index': values.length - 1,
+                    'label': values[values.length - 1]
+                });
                 let token = $('[name="csrfmiddlewaretoken"]').val();
                 let id = $("#traj_pk").val();
                 $.post('/segmentation/submit/', {
@@ -81,11 +101,7 @@
             <div class="col-lg-7" id="map-section">
                 <div id="map">
                 </div>
-                <div class="navigation float-right">
-                    <button class="btn btn-primary">Previous</button>
-                    <button class="btn btn-primary">Next</button>
-                    <button id="btn-finish" class="btn btn-success">Finish</button>
-                </div>
+
             </div>
             <div class="col-lg-5" id="charts-section" style="border:1px solid black;">
                 <div id="top-section">
@@ -128,29 +144,7 @@
                         unlabelled
                     </div>
                     <canvas id="pf-chart"></canvas>
-                    <!--
-                    <div class="row">
-                        <div class="col-md-6"><label class="font-weight-bold">Mean:</label> <span id="pf-mean"> </span>
-                        </div>
-                        <div class="col-md-6"><label class="font-weight-bold">Median:</label> <span id="pf-median"> </span></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6"><label class="font-weight-bold">Min:</label> <span id="pf-min"> </span></div>
-                        <div class="col-md-6"><label class="font-weight-bold">Max:</label> <span id="pf-max"> </span></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6"><label class="font-weight-bold">Std:</label> <span id="pf-std"> </span></div>
-                        <div class="col-md-6"><label class="font-weight-bold">10th Percentile:</label> <span id="pf-10p"> </span></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6"><label class="font-weight-bold">25th Percentile:</label> <span id="pf-25p"> </span></div>
-                        <div class="col-md-6"><label class="font-weight-bold">50th Percentile:</label> <span id="pf-50p"> </span></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6"><label class="font-weight-bold">75th Percentile:</label> <span id="pf-75p"> </span></div>
-                        <div class="col-md-6"><label class="font-weight-bold">90th Percentile:</label> <span id="pf-90p"> </span></div>
-                    </div>
-        -->
+
                 </div>
                 <div id="scatter-graph" style="display: none;">
                     <div id="xy-section">

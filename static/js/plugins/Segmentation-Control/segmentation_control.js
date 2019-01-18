@@ -169,6 +169,9 @@ L.Control.SegmentationControl = L.Control.extend({
         }
     },
     generateLineChart: function () {
+        if (this.line_chart_data == null){
+            return;
+        }
         let avg_data = {};
         this.labels.forEach(label => {
             avg_data[label] = {'sum': 0, 'count': 0};
@@ -222,213 +225,215 @@ L.Control.SegmentationControl = L.Control.extend({
         line_chart.data.datasets = chart_data.datasets;
         line_chart.data.labels = labels;
         line_chart.update();
+
         for (let i = 0; i < chart_data.datasets.length; i++) {
             let exists = false;
-            for (let j=0;j<legend_labels.length;j++){
-                if (chart_data.datasets[i].label==legend_labels[j][0]){
-                    exists= true;
+            for (let j = 0; j < legend_labels.length; j++) {
+                if (chart_data.datasets[i].label == legend_labels[j][0]) {
+                    exists = true;
                     break;
                 }
             }
-            if (!exists){
+            if (!exists && chart_data.datasets[i].label.indexOf('Average') == -1) {
                 legend_labels.push([chart_data.datasets[i].label, chart_data.datasets[i].borderColor]);
             }
         }
 
         $("#legend").html("");
 
-            for (let i=0;i<legend_labels.length;i++){
-                let borderType = legend_labels[i][0].indexOf('Average') !== -1 ? "dashed" : "solid";
-                $("#legend").append(`<div class="label-box" style="border:3px ${borderType} ${legend_labels[i][1]};"></div>${legend_labels[i][0]}`);
+        for (let i = 0; i < legend_labels.length; i++) {
+            let borderType = legend_labels[i][0].indexOf('Average') !== -1 ? "dashed" : "solid";
+            $("#legend").append(`<div class="label-box" style="border:3px ${borderType} ${legend_labels[i][1]};"></div>${legend_labels[i][0]}`);
 
-            }
-        },
-        generateScatterChart: function () {
-            let coords = [];
-            let datasets = [];
-            if (this.Point_Labels.length != 0) {
-                //console.log("Updating");
-                let plabels = this.Point_Labels;
-                let data_lists = {};
-                this.labels.forEach(label => {
-                    data_lists[label] = [];
+        }
+    },
+    generateScatterChart: function () {
+        if (this.scatter_chart_x_data ==null || this.scatter_chart_y_data==null){
+            return;
+        }
+        let coords = [];
+        let datasets = [];
+        if (this.Point_Labels.length != 0) {
+            //console.log("Updating");
+            let plabels = this.Point_Labels;
+            let data_lists = {};
+            this.labels.forEach(label => {
+                data_lists[label] = [];
+            });
+            data_lists[null] = [];
+            for (let i = 0; i < plabels.length; i++) {
+                data_lists[plabels[i]].push({
+                    x: this.scatter_chart_x_data[i],
+                    y: this.scatter_chart_y_data[i]
                 });
-                data_lists[null] = [];
-                for (let i = 0; i < plabels.length; i++) {
-                    data_lists[plabels[i]].push({
-                        x: this.scatter_chart_x_data[i],
-                        y: this.scatter_chart_y_data[i]
-                    });
-                }
-                for (let key in data_lists) {
+            }
+            for (let key in data_lists) {
 
-                    let c = this.findColor(key);
-                    let label = key;
-                    if (key.toString() == 'null') {
-                        c = 'red';
-                        label = "unlabelled"
+                let c = this.findColor(key);
+                let label = key;
+                if (key.toString() == 'null') {
+                    c = 'red';
+                    label = "unlabelled"
+                }
+                if (data_lists[key].length > 0) {
+                    datasets.push({'label': label, 'data': data_lists[key], 'borderColor': c});
+                }
+            }
+        } else {
+            for (let i = 0; i < this.scatter_chart_x_data.length; i++) {
+                coords.push({x: this.scatter_chart_x_data[i], y: this.scatter_chart_y_data[i]})
+            }
+            datasets.push({
+                'label': 'Scatter',
+                'data': coords,
+                'borderColor': 'red'
+            });
+        }
+        this.scatter_chart.data.datasets = datasets;
+        this.scatter_chart.update();
+    },
+    findColor: function (label) {
+        var table = document.getElementsByClassName("leaflet-segment-trajectory-control-custom-container")[0].childNodes[2];
+        for (var i = 0; i < table.childNodes.length; i++) {
+            if (table.childNodes[i].childNodes[1].innerHTML == label) {
+                return table.childNodes[i].childNodes[2].childNodes[0].value;
+            }
+        }
+        return null;
+    },
+    generateSegmentation: function () {
+        let control = this;
+
+        function addLine(points, label) {
+            let color = control.findColor(label);
+            return L.polyline(points, {
+                color: color,
+                weight: 10,
+                opacity: 1
+            });
+        }
+
+        function getLabel(point) {
+            let label_return = null;
+            control.labels.forEach(label => {
+                var layers = control.Marker_Groups[label].getLayers();
+                for (var i = 0; i < layers.length; i++) {
+                    if (layers[i].getLatLng().lat == point[0] && layers[i].getLatLng().lng == point[1]) {
+                        label_return = label;
                     }
-                    if (data_lists[key].length > 0) {
-                        datasets.push({'label': label, 'data': data_lists[key], 'borderColor': c});
+                }
+            });
+            return label_return;
+        }
+
+        function hasMarker(point) {
+            let found = false;
+            control.labels.forEach(label => {
+                var layers = control.Marker_Groups[label].getLayers();
+                for (var i = 0; i < layers.length; i++) {
+                    ////console.log(layers[i].getLatLng().lat +"==="+ point.lat);
+                    ////console.log("Latitude: " + (layers[i].getLatLng().lat == point.lat) + " Longitude: " + (layers[i].getLatLng().lng == point.lng));
+                    if ((layers[i].getLatLng().lat == point[0]) && (layers[i].getLatLng().lng == point[1])) {
+                        //console.log("Return True");
+                        found = true;
                     }
                 }
-            }
-            else {
-                for (let i = 0; i < this.scatter_chart_x_data.length; i++) {
-                    coords.push({x: this.scatter_chart_x_data[i], y: this.scatter_chart_y_data[i]})
-                }
-                datasets.push({
-                    'label': 'Scatter',
-                    'data': coords,
-                    'borderColor': 'red'
-                });
-            }
-            this.scatter_chart.data.datasets = datasets;
-            this.scatter_chart.update();
-        },
-        findColor: function (label) {
-            var table = document.getElementsByClassName("leaflet-segment-trajectory-control-custom-container")[0].childNodes[2];
-            for (var i = 0; i < table.childNodes.length; i++) {
-                if (table.childNodes[i].childNodes[1].innerHTML == label) {
-                    return table.childNodes[i].childNodes[2].childNodes[0].value;
-                }
-            }
-            return null;
-        },
-        generateSegmentation: function () {
-            let control = this;
+            });
+            return found;
+        }
 
-            function addLine(points, label) {
-                let color = control.findColor(label);
-                return L.polyline(points, {
-                    color: color,
-                    weight: 3,
-                    opacity: 1
-                });
+        //console.log("Beginning Segmentation");
+        this.Point_Labels = [];
+        let coords = []
+        try {
+            coords = this.Trajectory_Layer.getLatLngs();
+        } catch (err) {
+            //console.log(err);
+        }
+        let marker_indexes = [];
+        for (let i = 0; i < coords.length; i++) {
+            this.Point_Labels.push(null);
+            if (hasMarker(coords[i])) {
+                marker_indexes.push(i);
             }
-
-            function getLabel(point) {
-                let label_return = null;
-                control.labels.forEach(label => {
-                    var layers = control.Marker_Groups[label].getLayers();
-                    for (var i = 0; i < layers.length; i++) {
-                        if (layers[i].getLatLng().lat == point[0] && layers[i].getLatLng().lng == point[1]) {
-                            label_return = label;
-                        }
-                    }
-                });
-                return label_return;
+        }
+        if (marker_indexes.length == 0) {
+            return;
+        }
+        //console.log(marker_indexes);
+        let points = [];
+        let label = getLabel(coords[marker_indexes[marker_indexes.length - 1]]);
+        points.push(coords[marker_indexes[marker_indexes.length - 1]]);
+        //console.log(label);
+        this.Point_Labels[marker_indexes[marker_indexes.length - 1]] = label;
+        for (let j = marker_indexes[marker_indexes.length - 1] - 1; j >= 0; j--) {
+            points.push(coords[j]);
+            if ((marker_indexes.includes(j) || j == 0) && points.length != 0) {
+                //console.log(label);
+                //console.log(points);
+                control.Segmentation_Groups[label].addLayer(addLine(points, label));
+                points = [coords[j]];
             }
-
-            function hasMarker(point) {
-                let found = false;
-                control.labels.forEach(label => {
-                    var layers = control.Marker_Groups[label].getLayers();
-                    for (var i = 0; i < layers.length; i++) {
-                        ////console.log(layers[i].getLatLng().lat +"==="+ point.lat);
-                        ////console.log("Latitude: " + (layers[i].getLatLng().lat == point.lat) + " Longitude: " + (layers[i].getLatLng().lng == point.lng));
-                        if ((layers[i].getLatLng().lat == point[0]) && (layers[i].getLatLng().lng == point[1])) {
-                            //console.log("Return True");
-                            found = true;
-                        }
-                    }
-                });
-                return found;
+            if (marker_indexes.includes(j)) {
+                label = getLabel(coords[j]);
             }
-
-            //console.log("Beginning Segmentation");
-            this.Point_Labels = [];
-            let coords=[]
-            try{
-                coords = this.Trajectory_Layer.getLatLngs();
-            }
-            catch(err){
-              //console.log(err);
-            }
-            let marker_indexes = [];
-            for (let i = 0; i < coords.length; i++) {
-                this.Point_Labels.push(null);
-                if (hasMarker(coords[i])) {
-                    marker_indexes.push(i);
-                }
-            }
-            if (marker_indexes.length == 0) {
-                return;
-            }
-            //console.log(marker_indexes);
-            let points = [];
-            let label = getLabel(coords[marker_indexes[marker_indexes.length - 1]]);
-            points.push(coords[marker_indexes[marker_indexes.length - 1]]);
-            //console.log(label);
-            this.Point_Labels[marker_indexes[marker_indexes.length - 1]] = label;
-            for (let j = marker_indexes[marker_indexes.length - 1] - 1; j >= 0; j--) {
-                points.push(coords[j]);
-                if ((marker_indexes.includes(j) || j == 0) && points.length != 0) {
-                    //console.log(label);
-                    //console.log(points);
-                    control.Segmentation_Groups[label].addLayer(addLine(points, label));
-                    points = [coords[j]];
-                }
-                if (marker_indexes.includes(j)) {
-                    label = getLabel(coords[j]);
-                }
-                this.Point_Labels[j] = label;
-            }
-            //console.log(this.Point_Labels);
-            control.generateLineChart();
-            control.generateScatterChart();
-        },
-        /**
-         * Shows the control
-         */
-        show: function () {
-            var container = document.getElementsByClassName("leaflet-segment-trajectory-control-custom-container")[0];
-            container.style.display = 'block';
-            var btnopen = document.getElementById("btn-open-segment-control");
-            btnopen.style.display = 'none';
-        },
-        /**
-         * Hides the control
-         */
-        hide: function () {
-            var container = document.getElementsByClassName("leaflet-segment-trajectory-control-custom-container")[0];
-            container.style.display = 'none';
-            var btnopen = document.getElementById("btn-open-segment-control");
-            btnopen.style.display = 'block';
-        },
-        labels: [], //The labels
-        Marker_Groups: {},
-        Bind_Markers: true,//Determines whether markers are attached to the nearest point
-        Trajectory_Layer: null,//Trajectory layer
-        Segmentation_Groups: {},
-        icon: "",//Icon image
-        line_chart: null,
-        line_chart_data: null,
-        scatter_chart: null,
-        scatter_chart_x_data: null,
-        scatter_chart_y_data: null,
-        Segmentation_Points: {},
-        Point_Labels: []
-    });
+            this.Point_Labels[j] = label;
+        }
+        //console.log(this.Point_Labels);
+        control.generateLineChart();
+        control.generateScatterChart();
+    },
     /**
-     * Creates the Segmentation control instance
-     * icon: The image to use as an icon
-     * options: Specifies options for the points
+     * Shows the control
      */
-    L.control.SegmentationControl = function (options) {
-        ////console.log(options.icon);
-        //this.icon = options.icon.length!=0 ? options.icon: "/media/map_marker_font_awesome.png";
-        Bind_Markers = true;
-        Trajectory_Layer = null;
-        if (options["bind"] == false) {
-            Bind_Markers = false;
-        }
-        if (options['line_chart'] != null && options['line_chart'] != 'undefined') {
-            this.line_chart = options['line_chart'];
-        }
-        if (options['scatter_chart'] != null && options['scatter_chart'] != 'undefined') {
-            this.scatter_chart = options['scatter_chart'];
-        }
+    show: function () {
+        var container = document.getElementsByClassName("leaflet-segment-trajectory-control-custom-container")[0];
+        container.style.display = 'block';
+        var btnopen = document.getElementById("btn-open-segment-control");
+        btnopen.style.display = 'none';
+    },
+    /**
+     * Hides the control
+     */
+    hide: function () {
+        var container = document.getElementsByClassName("leaflet-segment-trajectory-control-custom-container")[0];
+        container.style.display = 'none';
+        var btnopen = document.getElementById("btn-open-segment-control");
+        btnopen.style.display = 'block';
+    },
+    labels: [], //The labels
+    Marker_Groups: {},
+    Bind_Markers: true,//Determines whether markers are attached to the nearest point
+    Trajectory_Layer: null,//Trajectory layer
+    Segmentation_Groups: {},
+    icon: "",//Icon image
+    line_chart: null,
+    line_chart_data: null,
+    scatter_chart: null,
+    scatter_chart_x_data: null,
+    scatter_chart_y_data: null,
+    Segmentation_Points: {},
+    Point_Labels: []
+});
+/**
+ * Creates the Segmentation control instance
+ * icon: The image to use as an icon
+ * options: Specifies options for the points
+ */
+L.control.SegmentationControl = function (options) {
+    ////console.log(options.icon);
+    //this.icon = options.icon.length!=0 ? options.icon: "/media/map_marker_font_awesome.png";
+    Bind_Markers = true;
+    Trajectory_Layer = null;
+    if (options["bind"] == false) {
+        Bind_Markers = false;
+    }
+    if (options['line_chart'] != null && options['line_chart'] != 'undefined') {
+        this.line_chart = options['line_chart'];
+    }
+    if (options['scatter_chart'] != null && options['scatter_chart'] != 'undefined') {
+        this.scatter_chart = options['scatter_chart'];
+    }
 
-        return new L.Control.SegmentationControl(options);
-    };
+    return new L.Control.SegmentationControl(options);
+};

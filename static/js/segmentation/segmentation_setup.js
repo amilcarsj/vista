@@ -51,8 +51,8 @@ function getXYValues(e) {
     let xaxis = $("#ddl-xaxis").val();
     let yaxis = $("#ddl-yaxis").val();
     $.get('/management/get/xy/' + xaxis + "/" + yaxis + "/", function (data) {
-        segmentation_control.scatter_chart_x_data=data.xvals;
-        segmentation_control.scatter_chart_y_data=data.yvals;
+        segmentation_control.scatter_chart_x_data = data.xvals;
+        segmentation_control.scatter_chart_y_data = data.yvals;
         segmentation_control.generateScatterChart();
     });
 }
@@ -78,5 +78,29 @@ function addArrows(line_lat_lon_seq) {
     selected_trajectory_arrows = decorator;
     decorator.addTo(map);
     trajectory.decorator = decorator;
+
+}
+
+
+function add_starting_segmentation(segmentation) {
+    let jquery_buttons = $(".leaflet-segment-trajectory-control-custom-container .btn-add");
+    let buttons = {};
+    for (let i = 0; i < jquery_buttons.length; i++) {
+        buttons[$(jquery_buttons[i]).attr('value')] = jquery_buttons[i];
+    }
+    console.log(segmentation_control);
+        console.log(segmentation_control.Marker_Groups);
+
+    let latlngs = segmentation_control.Trajectory_Layer.getLatLngs()
+    for (let i = 0; i < segmentation.length; i++) {
+        buttons[segmentation[i][0]].click();
+        console.log("Clicked");
+        let loc = latlngs[segmentation[i][1]];
+        console.log(loc);
+        var newLatLng = new L.LatLng(loc[0], loc[1]);
+        let mgroup = segmentation_control.Marker_Groups[segmentation[i][0]].getLayers();
+        mgroup[mgroup.length-1].setLatLng(newLatLng);
+    }
+    segmentation_control.generateSegmentation();
 
 }

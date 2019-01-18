@@ -11,6 +11,16 @@
     border-radius: 4px;
     display: none;
 }
+.container-fluid{
+    overflow: hidden;
+}
+
+@media only screen and (min-width: 992px) {
+ body{
+    overflow: hidden;
+}
+
+}
 
 .leaflet-custom-checkbox {
     margin-left: 3px !important;
@@ -79,11 +89,19 @@
 }
 
 #charts-section, #map-section {
-    height: 90.5vh;
+    height: 92vh;
 }
-
+.navbar{
+    height: 8vh!important;
+}
+#top-section,#pf-section{
+    padding: 10px!important;
+}
+a.btn-primary{
+    color:white!important;
+}
 #map {
-    height: 93%;
+    height: 100%;
     width: 100%;
 }
 

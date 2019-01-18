@@ -97,8 +97,12 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
         var all_layers = [];
         //console.log(line_chart);
         let count = 0;
+        console.log(layers);
+        for (let i = 0; layers < layers.length; i++) {
+            map.removeLayer(layers[i]);
 
-
+        }
+        map.removeLayer(trajectory.decorator);
         var myInterval = setInterval(function () {
             trigger_chart_hover(count++);
 
@@ -126,10 +130,10 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
 
         var all_lat_lng = layer.getLatLngs();
         var timestep = (time * 1000.) / all_lat_lng.length;
-        //console.log(timestep);
+        map.removeLayer(layer);
+        map.removeLayer(trajectory.decorator);
         var inner_layers = layer.getLayers();
-        //console.log(layer);
-        //console.log(inner_layers);
+
         this._addLayerAfterSometime(inner_layers, timestep, callback);
 
     }

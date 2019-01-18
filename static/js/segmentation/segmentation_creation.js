@@ -11,5 +11,5 @@ function create_segmentation_control(labels){
     //console.log(visible_trajectory.main.getLayers()[0].getLayers());
     console.log(trajectory);
     segmentation_control.Trajectory_Layer = trajectory;
-
+    add_starting_segmentation([]);
 }
