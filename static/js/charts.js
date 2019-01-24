@@ -40,14 +40,21 @@ function loadLineChart(containerid, d) {
                 mode: 'nearest',
                 intersect: false
             },
-            onClick: function(evt,points){
+            onClick: function (evt, points) {
                 let p = points[0];
                 console.log(p);
                 let coord_index = line_chart.data.datasets[p._datasetIndex].data[p._index].x;
                 let latlng = trajectory.getLatLngs()[coord_index];
-                let nextp = trajectory.getLatLngs()[coord_index+1];
+                let prevp = trajectory.getLatLngs()[coord_index - 1];
+                let angle = null;
+                if (prevp == null) {
+                    prevp = trajectory.getLatLngs()[coord_index+ 1];
+                    angle = angleFromCoordinate(latlng[0], latlng[1],prevp[0], prevp[1]);
+                } else {
+                    angle = angleFromCoordinate(prevp[0], prevp[1],latlng[0], latlng[1]);
+                }
                 console.log(latlng);
-                setMarkerIconWithDirection(latlng,angleFromCoordinate(latlng[0],latlng[1],nextp[0],nextp[1]));
+                setMarkerIconWithDirection(latlng,angle);
             },
             responsiveAnimationDuration: 0, // animation duration after a resize
             responsive: false,
