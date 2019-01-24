@@ -174,3 +174,7 @@ a.btn-primary{
     /* Non-prefixed version, currently
                                      supported by Chrome and Opera */
 }
+
+.leaflet-popup-content{
+    text-align: center!important;
+}

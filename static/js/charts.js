@@ -10,7 +10,6 @@ function loadLineChart(containerid, d) {
         title: "Point Feature Chart",
         data: d,
         options: {
-
             legend: {
                 display: false
             },
@@ -21,6 +20,9 @@ function loadLineChart(containerid, d) {
             elements: {
                 point: {
                     radius: 0
+                },
+                line: {
+                    tension: 0, // disables bezier curves
                 }
             },
             scales: {
@@ -35,13 +37,29 @@ function loadLineChart(containerid, d) {
             },
             hover: {
                 animationDuration: 0, // duration of animations when hovering an item
-                mode:'nearest'
+                mode: 'nearest',
+                intersect: false
+            },
+            onClick: function(evt,points){
+                let p = points[0];
+                console.log(p);
+                let coord_index = line_chart.data.datasets[p._datasetIndex].data[p._index].x;
+                let latlng = trajectory.getLatLngs()[coord_index];
+                let nextp = trajectory.getLatLngs()[coord_index+1];
+                console.log(latlng);
+                setMarkerIconWithDirection(latlng,angleFromCoordinate(latlng[0],latlng[1],nextp[0],nextp[1]));
             },
             responsiveAnimationDuration: 0, // animation duration after a resize
             responsive: false,
             maintainAspectRatio: false
         }
     });
+    /*
+    $(containerid).click(function (e) {
+        let elements = line_chart.getElementsAtEvent(e);
+        console.log(elements);
+    })
+    */
 }
 
 function loadScatterPlot(containerid, d) {
@@ -124,8 +142,7 @@ function update_point_feature(e) {
         if (line_chart == null) {
             //console.log("New line_chart");
             loadLineChart("#pf-chart", chart_data);
-        }
-        else {
+        } else {
             //console.log("Update line_chart");
             line_chart.data.datasets = chart_data.datasets;
             line_chart.data.labels = chart_data.labels;
@@ -154,8 +171,7 @@ $(function () {
             $("#scatter-graph").show();
             resizeCanvas($("#scatter-chart"));
 
-        }
-        else {
+        } else {
             btn.html("Display Scatter Plot");
             btn.val('scatter');
             $("#line-graph").show();
@@ -164,11 +180,13 @@ $(function () {
     });
 
 });
-    function resizeCanvas(canvas){
-        canvas.width($("#charts-section").innerWidth());
-        canvas.height($("#charts-section").height()-$("#xy-section").height()+ $("#pf-section").height()+$("#top-section"));
-        //console.log("Width: " + canvas.width() + " Height: " + canvas.height());
-    }
+
+function resizeCanvas(canvas) {
+    canvas.width($("#charts-section").innerWidth());
+    canvas.height($("#charts-section").height() - $("#xy-section").height() + $("#pf-section").height() + $("#top-section"));
+    //console.log("Width: " + canvas.width() + " Height: " + canvas.height());
+}
+
 function createTrajectory(line_lat_lon_seq, feature_values) {
     let trajectory_red_colors = [{'color': '#ffe5e5'}, {'color': '#ffcccc'}, {'color': '#ffb2b2'}, {'color': '#ff9999'}, {'color': '#ff7f7f'},
         {'color': '#ff6666'}, {'color': '#ff4c4c'}, {'color': '#ff3232'}, {'color': '#ff1919'}, {'color': '#FF0000'}];

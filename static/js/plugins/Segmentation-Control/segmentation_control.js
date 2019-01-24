@@ -1,5 +1,28 @@
 check_labels = [];
 
+function build_icon(color) {
+    let icon = '<svg width="91" height="91" xmlns="http://www.w3.org/2000/svg">\n' +
+        '\n' +
+        ' <g>\n' +
+        '  <title>background</title>\n' +
+        '  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>\n' +
+        ' </g>\n' +
+        ' <g>\n' +
+        '  <title>Layer 1</title>\n' +
+        '  <ellipse stroke="#000" ry="18.833295" rx="18.833296" id="svg_5" cy="34.479191" cx="46.499999" stroke-width="1.5" fill="#000000"/>\n' +
+        '  <rect stroke="#000" id="svg_6" height="24.333285" width="7.333319" y="52.645822" x="42.666672" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#000000"/>\n' +
+        '  <g id="svg_1">\n' +
+        '   <path fill="' + color + '" id="svg_2" d="m44.7,50.6l0,24.9l3.4,0l0,-24.9c8.2,-0.8 14.5,-7.8 14.5,-16.1c0,-8.9 -7.3,-16.2 -16.2,-16.2s-16.2,7.3 -16.2,16.2c0,8.3 6.4,15.2 14.5,16.1z"/>\n' +
+        '  </g>\n' +
+        ' </g>\n' +
+        '</svg>';
+    var svgURL = "data:image/svg+xml;base64," + btoa(icon);
+    return L.icon({
+        iconUrl: svgURL,
+        iconSize: [60, 60], // size of the icon
+        iconAnchor: [30, 50], // point of the icon which will correspond to marker's location
+    });
+}
 
 L.Control.SegmentationControl = L.Control.extend({
     //adds the Control to a map
@@ -81,38 +104,14 @@ L.Control.SegmentationControl = L.Control.extend({
          * GENERATES A GRAPH
          */
         function addMarker(e) {
-            let getMarker = function (color) {
-                //var icon = '<svg xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" version="1.0" width="700" height="700"><rect id="backgroundrect" width="100%" height="100%" x="0" y="0" fill="none" stroke="none"/><defs id="defs9"/><g class="currentLayer"><title>Layer 1</title><g id="g4" class="selected" transform="rotate(-89.93659973144531 350.3506469726563,349.46508789062506) " stroke="#000000" stroke-opacity="1" stroke-width="4" fill="#ffffff" fill-opacity="1"><path d="M44.7,50.6v24.9h3.4V50.6c8.2-0.8,14.5-7.8,14.5-16.1c0-8.9-7.3-16.2-16.2-16.2s-16.2,7.3-16.2,16.2   C30.2,42.8,36.6,49.7,44.7,50.6z" id="path6" style="" stroke="#000000" stroke-opacity="1" stroke-width="25" fill="' + color + '" fill-opacity="1"/></g></g></svg>';
-                var icon = '<svg width="91" height="91" xmlns="http://www.w3.org/2000/svg">\n' +
-                    '\n' +
-                    ' <g>\n' +
-                    '  <title>background</title>\n' +
-                    '  <rect fill="none" id="canvas_background" height="402" width="582" y="-1" x="-1"/>\n' +
-                    ' </g>\n' +
-                    ' <g>\n' +
-                    '  <title>Layer 1</title>\n' +
-                    '  <ellipse stroke="#000" ry="18.833295" rx="18.833296" id="svg_5" cy="34.479191" cx="46.499999" stroke-width="1.5" fill="#000000"/>\n' +
-                    '  <rect stroke="#000" id="svg_6" height="24.333285" width="7.333319" y="52.645822" x="42.666672" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#000000"/>\n' +
-                    '  <g id="svg_1">\n' +
-                    '   <path fill="' + color + '" id="svg_2" d="m44.7,50.6l0,24.9l3.4,0l0,-24.9c8.2,-0.8 14.5,-7.8 14.5,-16.1c0,-8.9 -7.3,-16.2 -16.2,-16.2s-16.2,7.3 -16.2,16.2c0,8.3 6.4,15.2 14.5,16.1z"/>\n' +
-                    '  </g>\n' +
-                    ' </g>\n' +
-                    '</svg>';
-                var svgURL = "data:image/svg+xml;base64," + btoa(icon);
-                var myIcon = L.icon({
-                    iconUrl: svgURL,
-                    iconSize: [60, 60], // size of the icon
-                    iconAnchor: [30, 50], // point of the icon which will correspond to marker's location
-                });
-                return myIcon;
-            };
+
 
             var colour = this.parentNode.parentNode.childNodes[2].childNodes[0].value;
             var label = this.parentNode.parentNode.childNodes[1].innerHTML;
             //console.log(colour);
             var marker = L.marker(map.getCenter(), {
                 draggable: true,
-                icon: getMarker(colour)
+                icon: build_icon(colour)
             });
             control.Marker_Groups[label].addLayer(marker);
             marker.bindPopup(label);
@@ -124,6 +123,13 @@ L.Control.SegmentationControl = L.Control.extend({
             var btn = this.parentNode.parentNode.childNodes[0].childNodes[0];
             var colour = this.value;
             btn.style.background = colour;
+            let layers = control.Marker_Groups[label].getLayers();
+            console.log(layers);
+
+            for (let i = 0; i < layers.length; i++) {
+                console.log(layers[i]);
+                layers[i].setIcon(build_icon(colour))
+            }
             clearSegmentation();
             control.generateSegmentation();
             control.generateLineChart();
@@ -169,7 +175,7 @@ L.Control.SegmentationControl = L.Control.extend({
         }
     },
     generateLineChart: function () {
-        if (this.line_chart_data == null){
+        if (this.line_chart_data == null) {
             return;
         }
         let avg_data = {};
@@ -185,9 +191,12 @@ L.Control.SegmentationControl = L.Control.extend({
         for (let i = 0; i < this.Point_Labels.length; i++) {
             labels.push(i);
             points.push({x: i, y: this.line_chart_data[i]});
+
             avg_data[this.Point_Labels[i]].sum += this.line_chart_data[i];
             avg_data[this.Point_Labels[i]].count++;
+
             if (i !== 0) {
+
                 if (this.Point_Labels[i] !== this.Point_Labels[i - 1]) {
                     chart_data['datasets'].push({
                         'data': points,
@@ -199,6 +208,7 @@ L.Control.SegmentationControl = L.Control.extend({
                 }
             }
         }
+
         if (points.length !== 0) {
             let last = this.Point_Labels[this.Point_Labels.length - 1];
             let l = 'unlabelled';
@@ -209,6 +219,7 @@ L.Control.SegmentationControl = L.Control.extend({
             }
             chart_data['datasets'].push({'data': points, 'label': l, 'borderColor': c, fill: false});
         }
+
         for (let key in avg_data) {
             if (avg_data[key].count > 0 && key.toString() != 'null') {
                 let avg = avg_data[key].sum / avg_data[key].count;
@@ -222,6 +233,7 @@ L.Control.SegmentationControl = L.Control.extend({
                 });
             }
         }
+
         line_chart.data.datasets = chart_data.datasets;
         line_chart.data.labels = labels;
         line_chart.update();
@@ -248,7 +260,7 @@ L.Control.SegmentationControl = L.Control.extend({
         }
     },
     generateScatterChart: function () {
-        if (this.scatter_chart_x_data ==null || this.scatter_chart_y_data==null){
+        if (this.scatter_chart_x_data == null || this.scatter_chart_y_data == null) {
             return;
         }
         let coords = [];

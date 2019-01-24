@@ -35,7 +35,6 @@
     <script src="{% static 'js/plugins/notify.min.js' %}"></script>
     <script src="{% static 'js/plugins/buttons_control.js' %}"></script>
     <script>
-        Chart.defaults.global.tooltips.enabled = false;
 
         $(function () {
             let segmentation = {{ segments|safe }};
@@ -174,7 +173,6 @@
                         </div>
                     </div>
                     <canvas id="scatter-chart"></canvas>
-
                 </div>
             </div>
         </div>

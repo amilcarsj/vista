@@ -96,13 +96,20 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
 
         var all_layers = [];
         //console.log(line_chart);
-        let count = 0;
+        let count = 1;
+        set_chart_points();
+
+
         console.log(layers);
         for (let i = 0; layers < layers.length; i++) {
             map.removeLayer(layers[i]);
 
         }
+        console.log(trajectory.decorator);
         map.removeLayer(trajectory.decorator);
+        line_chart.options.tooltips.enabled = false;
+        line_chart.update();
+        let control = this;
         var myInterval = setInterval(function () {
             trigger_chart_hover(count++);
 
@@ -111,7 +118,13 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
                 for (var index = 0; index < all_layers.length; index++) {
                     map.removeLayer(all_layers[index]);
                 }
+                console.log(control);
+                control.playing = false;
+                unset_chart_points();
+                line_chart.options.tooltips.enabled = true;
+                line_chart.update();
                 return callback();
+
             }
 
             var l = layers.splice(0, 1);
@@ -127,16 +140,20 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
     },
 
     play: function (layer, time, callback) {
-
+        console.log(this.playing);
+        if (this.playing) {
+            return;
+        }
         var all_lat_lng = layer.getLatLngs();
         var timestep = (time * 1000.) / all_lat_lng.length;
         map.removeLayer(layer);
         map.removeLayer(trajectory.decorator);
         var inner_layers = layer.getLayers();
-
+        this.playing = true;
         this._addLayerAfterSometime(inner_layers, timestep, callback);
 
-    }
+    },
+    playing: false
 
 });
 

@@ -75,7 +75,7 @@ function addArrows(line_lat_lon_seq) {
             })
         }]
     });
-    selected_trajectory_arrows = decorator;
+    //selected_trajectory_arrows = decorator;
     decorator.addTo(map);
     trajectory.decorator = decorator;
 
