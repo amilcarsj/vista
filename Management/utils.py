@@ -83,8 +83,9 @@ def find_intersects(points_geoseries, roi):
             else:
                 raise Exception("What is wrong")
         crs = {'init': 'epsg:4326'}
-
-        polygons_geoseries = GeoSeries(polygons,crs=crs)
+    mpolygon = MultiPolygon(polygons)
+    multipolygons = [mpolygon]*len(points_geoseries)
+    polygons_geoseries = GeoSeries(multipolygons,crs=crs)
     intersection = points_geoseries.within(polygons_geoseries)*1
     return intersection
 
