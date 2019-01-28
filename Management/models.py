@@ -14,6 +14,7 @@ class Database(models.Model):
 class Trajectory(models.Model):
     _id = models.ObjectIdField(primary_key=True)
     geojson = models.DictField()
+    times = models.ListField()
     total_points = models.IntegerField()
     average_sampling = models.FloatField()
     db = models.ForeignKey(Database, on_delete=models.CASCADE)

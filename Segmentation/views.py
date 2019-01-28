@@ -2,14 +2,15 @@ from django.shortcuts import render, redirect
 from Management.models import Database, Trajectory, POI_ROI, TrajectoryFeature
 from django.http import JsonResponse
 from .models import TrajectorySegmentation, SegmentFeature, Segment
-import Segmentation.utils as utils
-from django.core.exceptions import ObjectDoesNotExist
+
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 import json
 from datetime import datetime
 from trajectory_library.TrajectoryDescriptorFeature import TrajectoryDescriptorFeature
-import numpy as np
+import pandas as pd
+from trajectory_library import Trajectory as tr
+from trajectory_library.TrajectoryDescriptorFeature import TrajectoryDescriptorFeature
 
 
 def pick_set(request):
@@ -45,7 +46,10 @@ def load_segment_session(request, db_id="", tid=None):
         prev = None
         traj = next(values)
 
-        n = str(next(values)['_id'])
+        try:
+            n = next(values)['_id']
+        except StopIteration:
+            pass
     else:
         traj = next(values)
         while str(traj['_id']) != tid:
@@ -76,6 +80,7 @@ def load_segment_session(request, db_id="", tid=None):
     curr_pf['_id'] = str(curr_pf['_id'])
     curr_pf['trajectory_id'] = str(curr_pf['trajectory_id'])
     layers_json = json.dumps(layers)
+    traj['times'] = []
     traj_json = json.dumps(traj)
     curr_pf_json = json.dumps(curr_pf)
     labels = Database.objects.get(_id=db_id).labels
@@ -218,3 +223,70 @@ def review_session(request, session_id=""):
     print(users)
     return render(request, 'session_information.html',
                   {'user_data': user_data, 'labels': labels, 'features': features, 'users': users})
+
+
+
+def submit_segmentation2(request):
+
+    markers = request.POST.get('marker_locations', [])
+    id = request.POST.get('id', None)
+    trajectory_segmentation = TrajectorySegmentation()
+
+    markers_list = json.loads(markers)
+    markers_list.sort(key=lambda x: x['start_index'], reverse=False)
+
+    feats = TrajectoryFeature.objects.filter(trajectory___id=id)
+    traj = Trajectory.objects.get(_id=id)
+    latlon = traj.geojson['geometry']['coordinates']
+    lat, lon = zip(*latlon)
+    trajectory_segmentation.trajectory = traj
+    df = pd.DataFrame(index=pd.to_datetime(traj.times))
+    df['lat'] = lat
+    df['lon'] = lon
+
+    for f in feats:
+        df[f.name] = f.values
+    segmentation = []
+    for m in markers_list:
+        seg = Segment()
+        seg.start_index = m['start_index']
+        seg.end_index = m['end_index']
+        seg.label = m['label']
+        recomputed_df = df[m['start_index']:m['end_index']+1]
+        t = tr.Trajectory(mood='df', trajectory=recomputed_df)
+        t.get_features()
+        recomputed_df = t.return_row_data()
+        feats = []
+        recomputed_df.drop(['lat', 'lon'],axis=1, inplace=True)
+        print(recomputed_df)
+        for col in recomputed_df.columns.values:
+            feat = SegmentFeature()
+            try:
+                l = recomputed_df[col].tolist()
+                tdf = TrajectoryDescriptorFeature()
+                feat_stats = tdf.describe(l)
+                feat.name = col
+                feat.min = feat_stats[0]
+                feat.max = feat_stats[1]
+                feat.mean = feat_stats[2]
+                feat.median = feat_stats[3]
+                feat.std = feat_stats[4]
+                feat.percentile_10 = feat_stats[5]
+                feat.percentile_25 = feat_stats[6]
+                feat.percentile_50 = feat_stats[7]
+                feat.percentile_75 = feat_stats[8]
+                feat.percentile_90 = feat_stats[9]
+                feat.name = col
+                feat.trajectory = traj
+                feats.append(feat)
+            except Exception as e:
+                print(e)
+                print("Column %s was not added" % col)
+        seg.features = feats
+        segmentation.append(seg)
+    trajectory_segmentation.segmentation = segmentation
+    trajectory_segmentation.user = request.user
+    trajectory_segmentation.start_time = datetime.strptime(request.POST.get('start_time', None), "%a, %d %b %Y %H:%M:%S %Z")
+    trajectory_segmentation.end_time = datetime.strptime(request.POST.get('end_time', None), "%a, %d %b %Y %H:%M:%S %Z")
+    trajectory_segmentation.save()
+    return JsonResponse({"status":"Good"})

@@ -23,7 +23,7 @@ L.Control.ControlLayers = L.Control.extend({
                 $('#leaflet-control-layers-button').hide();
             }
         });
-        var html =  '<button id="btn-close-layers-container" type="button" class="close-map-container" aria-label="Close"><span aria-hidden="true">&times;</span></button>';            
+        var html =  '<button id="btn-close-layers-container" type="button" class="close-map-container" aria-label="Close">&times;</button>';
         $('.leaflet-control-layers-custom-container').append(html);
         $('#btn-close-layers-container').click(function(){
             $('.leaflet-control-layers-custom-container').hide();
@@ -78,12 +78,7 @@ L.Control.ControlLayers = L.Control.extend({
 
         $('.leaflet-control-layers-custom-container').append(html);
         $('#checkbox-'+name).click(function(){
-            
-            // if (!map.hasLayer(layer)){
-            //     layer.addTo(map);
-            // }else{
-            //     map.removeLayer(layer);
-            // }
+
             if ($('#checkbox-'+name).is(':checked')){
                 if (!map.hasLayer(layer)){
                     layer.addTo(map);
@@ -110,7 +105,7 @@ L.Control.ControlLayers = L.Control.extend({
             var new_opacity = $(this).val();
             layer.setStyle({fillOpacity: new_opacity})    
         });
-        
+        console.log(layer);
         var leaflet_layer = layer.addTo(map);
         this.layers.push(layer);
     },

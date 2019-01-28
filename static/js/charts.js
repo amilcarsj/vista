@@ -61,12 +61,7 @@ function loadLineChart(containerid, d) {
             maintainAspectRatio: false
         }
     });
-    /*
-    $(containerid).click(function (e) {
-        let elements = line_chart.getElementsAtEvent(e);
-        console.log(elements);
-    })
-    */
+
 }
 
 function loadScatterPlot(containerid, d) {
@@ -79,8 +74,7 @@ function loadScatterPlot(containerid, d) {
             datasets: d,
         },
         options: {
-            //responsive: true,
-            //maintainAspectRatio: false,
+
             legend: {
                 display: true
             },

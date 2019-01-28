@@ -80,12 +80,14 @@ def create_database(request):
         print(db._id)
         return redirect('/management/edit/database/%s/' % str(db._id))
 
+
 @login_required()
 def visualize(request):
     dbs = Database.objects.filter(tagging_session_manager=request.user)
     db = dbs.first()
     trajectories = Trajectory.objects.filter(db=db)
     return render(request, 'trajectory_table.html', {'databases': dbs, 'trajectories': trajectories})
+
 
 @login_required()
 def get_trajectories(request, db_id=""):
@@ -113,6 +115,7 @@ def get_trajectory(request, oid=""):
     curr_pf_dict['trajectory'] = str(curr_pf_dict['trajectory'])
     return JsonResponse({'trajectory':geojson,'point_features':id_names, 'current_pf': curr_pf_dict})
 
+
 @login_required()
 def get_point_feature(request, oid=""):
     pf = TrajectoryFeature.objects.get(_id=oid)
@@ -120,6 +123,7 @@ def get_point_feature(request, oid=""):
     pf_dict = model_to_dict(pf)
     pf_dict['trajectory'] = str(pf_dict['trajectory'])
     return JsonResponse({'point_feature': pf_dict})
+
 
 @login_required()
 def get_xy(request,x="",y=""):

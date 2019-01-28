@@ -110,8 +110,8 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
         line_chart.options.tooltips.enabled = false;
         line_chart.update();
         let control = this;
+        //condolr.log(layers);
         var myInterval = setInterval(function () {
-            trigger_chart_hover(count++);
 
             if (layers.length == 0) {
                 clearInterval(myInterval);
@@ -124,8 +124,8 @@ L.Control.PlayTrajectoryControl = L.Control.extend({
                 line_chart.options.tooltips.enabled = true;
                 line_chart.update();
                 return callback();
-
             }
+            trigger_chart_hover(count++);
 
             var l = layers.splice(0, 1);
             l[0].addTo(map);

@@ -29,7 +29,7 @@ function unset_chart_points(){
 }
 function trigger_chart_hover(idx) {
     var point = chart_points[idx];
-    console.log(point);
+    console.log(idx);
     var evt = new MouseEvent('mousemove', {
             clientX: rect.left + point.x,
             clientY: rect.top + point.y
