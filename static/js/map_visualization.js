@@ -113,4 +113,5 @@ function addArrows(line_lat_lon_seq){
             })
         }]
     });
+    trajectory.decorator = decorator;
 }
