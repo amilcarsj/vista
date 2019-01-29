@@ -84,9 +84,13 @@ def find_intersects(points_geoseries, roi):
             elif type(s) == MultiPolygon:
                 polygons += list(s)
             else:
+
+
                 raise Exception("Layer contains more than polygons and MultiPolygons")
-        polygons_geoseries = GeoSeries(polygons)
-        polygons_geoseries.crs = fiona.crs.from_epsg(4326)
+    mpolygon = MultiPolygon(polygons)
+    multipolygons = [mpolygon]*len(points_geoseries)
+    polygons_geoseries = GeoSeries(multipolygons)
+    polygons_geoseries.crs = fiona.crs.from_epsg(4326)
     intersection = points_geoseries.within(polygons_geoseries)*1
     return intersection
 
