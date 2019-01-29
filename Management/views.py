@@ -5,6 +5,7 @@ from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+import datetime
 # Create your views here.
 
 @login_required()
@@ -41,12 +42,23 @@ def update_database(request, _id=""):
     db.labels = labels
     db.save()
     pois_rois = []
+    start = datetime.datetime.now()
+    print(start)
     for file in semantic_files:
         name = request.POST.get("name_"+file.name,file.name)
         layer = utils.save_poi_roi(file, name,db)
         pois_rois.append(layer)
+    count = 1
     for file in trajectory_files:
-        utils.save_trajectory(file,tid,lat,lon,time,delimiter,db,pois_rois)
+        print("%d of %d" %(count,len(trajectory_files)))
+        count+=1
+        iteration_time = datetime.datetime.now()
+        print(file.name)
+        utils.save_trajectory(file, tid, lat, lon, time, delimiter, db, pois_rois)
+        print(str(datetime.datetime.now() - iteration_time))
+    end = datetime.datetime.now()
+    print(end)
+    print("Time Difference " + str(end-start))
     return render(request, 'database_management.html')
 
 

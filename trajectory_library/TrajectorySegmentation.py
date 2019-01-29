@@ -184,6 +184,7 @@ class TrajectorySegmentation:
             if (t[i] != t[i + 1]):
                 segments.append([start, i + 1])
                 start = i + 1
+        segments.append([start, len(t)])
 
         trajectorySegments = {}
         i = 0

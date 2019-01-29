@@ -1,10 +1,11 @@
 from Management.models import Trajectory, TrajectoryFeature,Database, POI_ROI
 import pandas as pd
-from shapely.geometry import Point, shape, Polygon,MultiPolygon,MultiPoint
+from shapely.geometry import Point, shape, Polygon,MultiPolygon,MultiPoint,LineString,MultiLineString
 from .models import TrajectoryFeature, Trajectory
 from trajectory_library import Trajectory as tr
 from trajectory_library.TrajectoryDescriptorFeature import TrajectoryDescriptorFeature
-import json,geojson
+from trajectory_library.TrajectorySegmentation import TrajectorySegmentation
+import json,geojson,fiona
 from math import radians, cos, sin, asin, sqrt
 from geopandas import GeoDataFrame,overlay,GeoSeries
 import numpy as np
@@ -14,43 +15,45 @@ def save_trajectory(file, tid, lat, lon, time, delimiter,db, pois_rois):
 
     df = pd.read_csv(file, delimiter, parse_dates=[time], index_col=time)
     #df = pd.read_csv(file, delimiter, parse_dates=[time])
-    print(df.columns.values)
     df.rename(columns={lat: "lat", lon: "lon"}, inplace=True)
-    print(df.columns.values)
-    linestring = [Point(xy) for xy in zip(df['lon'], df['lat'])]
-
-    #gdf = df.drop(['lon', 'lat'], axis=1)
-    crs = {'init': 'epsg:4326'}
-    points_geoseries = GeoSeries(linestring, crs=crs)
-
-    t = tr.Trajectory(mood='df', trajectory=df)
-    t.get_features()
-    df = t.return_row_data()
-    points = [[p.y,p.x] for p in linestring]
-    traj = Trajectory()
-    traj.total_points = len(points)
-    traj.average_sampling = df['td'].mean()
-    traj.total_distance_traveled = df['distance'].sum()
-    traj.geojson = {'geometry': {'type': 'LineString', 'coordinates': points}}
-    traj.db = db
-    ns = 1e-9
-    traj.times = [datetime.utcfromtimestamp(dt.astype(int) * ns) for dt in df.index.values]
-    traj.save()
-    for layer in pois_rois:
-        name = layer.name
-        if layer.type == POI_ROI.ROI:
-            name += "_intersects"
-            new_col = find_intersects(points_geoseries,layer)
-        else:
-            name += "_shortest_distance"
-            new_col = find_shortest_distance(points_geoseries,layer)
-        new_col = list(new_col)
-        print(new_col)
-        df[name] = new_col
-        print(df[name])
-
-    df = df.drop(['lon','lat'],axis=1)
-    save_point_features(df,traj)
+    print("Trajectory Size: %d" % len(df))
+    if tid != 'None':
+        ts = TrajectorySegmentation()
+        ts.load_dataframe(df)
+        segment_indices, segments = ts.segmentByLabel(label=tid)
+    else:
+        segments = {0:df}
+    for index, df in segments.items():
+        #gdf = df.drop(['lon', 'lat'], axis=1)
+        #crs = {'init': 'epsg:4326'}
+        linestring = [Point(xy) for xy in zip(df['lon'], df['lat'])]
+        points_geoseries = GeoSeries(linestring)
+        points_geoseries.crs = fiona.crs.from_epsg(4326)
+        t = tr.Trajectory(mood='df', trajectory=df)
+        t.get_features()
+        df = t.return_row_data()
+        points = [[p.y,p.x] for p in linestring]
+        traj = Trajectory()
+        traj.total_points = len(points)
+        traj.average_sampling = df['td'].mean()
+        traj.total_distance_traveled = df['distance'].sum()
+        traj.geojson = {'geometry': {'type': 'LineString', 'coordinates': points}}
+        traj.db = db
+        ns = 1e-9
+        traj.times = [datetime.utcfromtimestamp(dt.astype(int) * ns) for dt in df.index.values]
+        traj.save()
+        for layer in pois_rois:
+            name = layer.name
+            if layer.type == POI_ROI.ROI:
+                name += "_intersects"
+                new_col = find_intersects(points_geoseries, layer)
+            else:
+                name += "_shortest_distance"
+                new_col = find_shortest_distance(points_geoseries, layer)
+            new_col = list(new_col)
+            df[name] = new_col
+        df = df.drop(['lon','lat'],axis=1)
+        save_point_features(df,traj)
 
 
 def save_poi_roi(file, name,db):
@@ -81,10 +84,9 @@ def find_intersects(points_geoseries, roi):
             elif type(s) == MultiPolygon:
                 polygons += list(s)
             else:
-                raise Exception("What is wrong")
-        crs = {'init': 'epsg:4326'}
-
-        polygons_geoseries = GeoSeries(polygons,crs=crs)
+                raise Exception("Layer contains more than polygons and MultiPolygons")
+        polygons_geoseries = GeoSeries(polygons)
+        polygons_geoseries.crs = fiona.crs.from_epsg(4326)
     intersection = points_geoseries.within(polygons_geoseries)*1
     return intersection
 
@@ -98,14 +100,16 @@ def find_shortest_distance(points, poi):
     if type(geo) is geojson.FeatureCollection:
         for feature in geo.features:
             s = shape(feature.geometry)
-            if type(s) == Point:
+            if type(s) == Point or type(s) == LineString:
                 points_interest.append(s)
-            elif type(s) == MultiPoint:
+            elif type(s) == MultiPoint or type(s) == MultiLineString:
                 points_interest += list(s)
+
             else:
-                raise Exception("What is wrong")
-        crs = {'init': 'epsg:4326'}
-        points_interest_geoseries = GeoSeries(points_interest,crs=crs)
+                raise Exception("Layer contains more than points, MultiPoints, LineString, and MultiLineString")
+        points_interest_geoseries = GeoSeries(points_interest)
+        points_interest_geoseries.crs = fiona.crs.from_epsg(4326)
+
     return [min_dist(p,points_interest_geoseries) for p in points]
     """
     for point in points:
@@ -117,8 +121,8 @@ def find_shortest_distance(points, poi):
         min_dist_list.append(min)
     return min_dist_list
     """
-
 def min_dist(point_to_check,points):
+    #print(point_to_check)
     return points.distance(point_to_check).min()
 
 
@@ -153,6 +157,7 @@ def save_point_features(df, traj):
             feat.trajectory = traj
             feats.append(feat)
         except Exception as e:
-            print(e)
-            print("Column %s was not added" % col)
+            pass
+            #print(e)
+            #print("Column %s was not added" % col)
     TrajectoryFeature.objects.bulk_create(feats)
