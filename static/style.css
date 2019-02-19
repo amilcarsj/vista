@@ -60,7 +60,7 @@
 }
 
 #decorator-legend-custom-container {
-    display: inline-flex;
+    /*display: inline-flex;*/
     background-color: white;
     text-align: center;
     font-weight: bold;
@@ -69,13 +69,13 @@
 }
 
 .decorator-legend-color-value {
-    width: 10vh;
+    width: 8vh;
     color: black;
     text-align: center;
     font-weight: bold;
     color: white;
-    padding-bottom: 1vh;
-    padding-top: 1vh;
+    padding-bottom: 2px;
+    padding-top: 2px;
     border: 1px solid lightgray;
 }
 

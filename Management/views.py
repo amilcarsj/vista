@@ -21,9 +21,9 @@ def update_database(request, _id=""):
     lon = request.POST.get('trajLon',None)
     time = request.POST.get('trajTime',None)
     delimiter = request.POST.get('delimiter', None)
-
     taggers = request.POST.get('taggers', '').split(';')
     labels = request.POST.get('labels', '').split(';')
+
     for label in labels:
         label = label.strip()
         if label == '':

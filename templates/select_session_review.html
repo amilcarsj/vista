@@ -1,17 +1,19 @@
 {% extends 'main_structure.html' %}
 {% block content %}
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form method="post" action="/segmentation/review/">
-                {% csrf_token %}
-                <label for="database_select">Session Name</label>
-                <select name="database_select" class="form-control">
-                    {% for db in dbs %}
-                        <option value="{{ db.0 }}">{{ db.1 }}</option>
-                    {% endfor %}
-                </select>
-                <input type="submit" value="Select" class="btn btn-primary float-right"/>
-            </form>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form method="post" action="/segmentation/review/">
+                    {% csrf_token %}
+                    <label for="database_select">Session Name</label>
+                    <select name="database_select" class="form-control">
+                        {% for db in dbs %}
+                            <option value="{{ db.0 }}">{{ db.1 }}</option>
+                        {% endfor %}
+                    </select>
+                    <input type="submit" value="Select" class="btn btn-primary float-right"/>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

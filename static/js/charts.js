@@ -105,7 +105,7 @@ function loadScatterPlot(containerid, d) {
 function update_point_feature(e) {
     var oid = e.target.value;
     //console.log(oid);
-    $.get("/management/get/point_feature/" + oid + "/", function (data) {
+    $.get("/management/get/point_feature/" + oid + "/").done(function (data) {
         //console.log(data);
         curr_pf = data.point_feature;
         var d = data.point_feature.values;
@@ -158,6 +158,9 @@ function update_point_feature(e) {
             }
         }
 
+    }).fail(function(jqXHR,textStatus,errorThrown){
+        alert("An error occured when trying to load the point features. Attempting to load again.");
+        update_point_feature(e);
     });
 }
 

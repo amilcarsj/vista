@@ -15,7 +15,7 @@ L.Control.ButtonControl = L.Control.extend({
             $(".leaflet-button-control-custom").append(`<a href="${this.options.next}" class="btn btn-primary">>></a>`);
 
         }
-        $(".leaflet-button-control-custom").append(`<button id="btn-finish" class="btn btn-success">Finish</button>`);
+        //$(".leaflet-button-control-custom").append(`<button id="btn-finish" class="btn btn-success">Finish</button>`);
     },
     next_url: null,
     prev_url: null
