@@ -9,10 +9,10 @@ L.Control.ButtonControl = L.Control.extend({
         console.log(this);
         $(".leaflet-button-control-custom").empty();
         if(this.options.prev!=null){
-            $(".leaflet-button-control-custom").append(`<a href="${this.options.prev}" class="btn btn-primary"><<</a>`);
+            $(".leaflet-button-control-custom").append(`<a id="btn-previous" href="${this.options.prev}" class="btn btn-primary"><<</a>`);
         }
         if(this.options.next!=null){
-            $(".leaflet-button-control-custom").append(`<a href="${this.options.next}" class="btn btn-primary">>></a>`);
+            $(".leaflet-button-control-custom").append(`<a id="btn-next" href="${this.options.next}" class="btn btn-primary">>></a>`);
 
         }
         //$(".leaflet-button-control-custom").append(`<button id="btn-finish" class="btn btn-success">Finish</button>`);

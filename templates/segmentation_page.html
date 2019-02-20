@@ -35,7 +35,7 @@
     <script src="{% static 'js/plugins/notify.min.js' %}"></script>
     <script src="{% static 'js/plugins/buttons_control.js' %}"></script>
     <script>
-
+        changed = false;
         $(function () {
             let segmentation = {{ segments|safe }};
             console.log(segmentation);
@@ -52,7 +52,8 @@
             {% endif %}
 
             create_button_control(previous, next);
-            $("#btn-finish").click(function (e) {
+            $("#btn-next").click(function (e) {
+                e.preventDefault();
                 console.log(segmentation_control);
                 let values = segmentation_control.Point_Labels;
                 let markers = [];
@@ -67,6 +68,10 @@
                         markers.push({'start_index': start_index, 'end_index': i - 1, 'label': values[i - 1]});
                         start_index = i;
                     }
+                }
+
+                if (!changed) {
+                    window.location.href = e.target.href;
                 }
                 //markers.push(values.length - 1);
                 console.log(markers);
@@ -85,6 +90,7 @@
                     'end_time': (new Date()).toUTCString()
                 }, function (data) {
                     console.log(data);
+                    window.location.href = e.target.href;
                 });
             });
         });

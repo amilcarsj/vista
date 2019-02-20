@@ -110,7 +110,6 @@ def get_trajectories(request, db_id=""):
     for s in semantic_layers:
         s['_id'] = str(s['_id'])
         s['db_id'] = str(s['db_id'])
-    print(semantic_layers)
     return JsonResponse({'trajectories': trajectories, 'semantic_layers': semantic_layers})
 
 

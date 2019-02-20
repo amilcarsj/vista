@@ -315,7 +315,7 @@ L.Control.SegmentationControl = L.Control.extend({
     },
     generateSegmentation: function () {
         let control = this;
-
+        changed=true;
         function addLine(points, label) {
             let color = control.findColor(label);
             return L.polyline(points, {
