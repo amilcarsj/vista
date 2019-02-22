@@ -12,7 +12,12 @@ L.Control.ButtonControl = L.Control.extend({
             $(".leaflet-button-control-custom").append(`<a id="btn-previous" href="${this.options.prev}" class="btn btn-primary"><<</a>`);
         }
         if(this.options.next!=null){
-            $(".leaflet-button-control-custom").append(`<a id="btn-next" href="${this.options.next}" class="btn btn-primary">>></a>`);
+            let text = ">>";
+            console.log(this.options.next);
+            if ('/' == this.options.next){
+                text = "Finish";
+            }
+            $(".leaflet-button-control-custom").append(`<a id="btn-next" href="${this.options.next}" class="btn btn-primary">${text}</a>`);
 
         }
         //$(".leaflet-button-control-custom").append(`<button id="btn-finish" class="btn btn-success">Finish</button>`);

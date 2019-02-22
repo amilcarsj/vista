@@ -2,7 +2,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <label for="invite_users" class="font-weight-bold">Labels (Enter labels seperated by semi-colons)</label>
-        <input type="test" class="form-control" name="labels">
+        <input type="test" class="form-control" name="labels" value="{% for l in labels %}{{ l }};{% endfor %}">
     </div>
 </div>
 <hr>
@@ -10,13 +10,13 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <label for="invite_users" class="font-weight-bold">Emails (Enter emails seperated by semi-colons)</label>
-        <input type="text" class="form-control" name="taggers">
+        <input type="text" class="form-control" name="taggers" value="{% for t in taggers %}{{ t.email }};{% endfor %}">
     </div>
 </div>
 <hr>
 <div class="row">
     <div class="col align-self-start">
-        <button id="btn-previous2" class="btn btn-primary">Previous</button>
+        <button type="button" id="btn-previous2" class="btn btn-primary">Previous</button>
     </div>
     <div class="col align-self-end">
         <button type="submit" class="btn btn-primary float-right btn-next">Submit</button>

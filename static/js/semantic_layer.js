@@ -29,7 +29,7 @@ function addSemanticLayerToMap(geojson, layer_name) {
             layer.bindPopup(html);
         },
         pointToLayer: function (feature, latlng) {
-            L.marker(latlng).addTo(map);
+            //L.marker(latlng).addTo(map);
 
             return L.marker(latlng,{icon:build_circle_icon(color)});
         }
@@ -52,8 +52,8 @@ function build_circle_icon(color) {
     var svgURL = "data:image/svg+xml;base64," + btoa(icon);
     return L.icon({
         iconUrl: svgURL,
-        iconSize: [15, 15], // size of the icon
-        iconAnchor: [7.5, 7.5], // point of the icon which will correspond to marker's location
+        iconSize: [30, 30], // size of the icon
+        iconAnchor: [15, 15], // point of the icon which will correspond to marker's location
     });
 }
 

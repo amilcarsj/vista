@@ -22,33 +22,34 @@
         </table>
     </div>
 </div>
-
-<hr>
-<div class="row">
-    <div class="col align-self-start">
-        <button id="btn-previous" class="btn btn-primary">Previous</button>
-    </div>
-    <div class="col align-self-end">
-        <button id="btn-next2" class="btn btn-primary float-right btn-next">Next</button>
-    </div>
-</div>
-{% if pois_rois|length > 0 %}
+{% if layers|length > 0 %}
     <table class="table">
         <thead>
         <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Type</th>
             <th>Delete</th>
         </tr>
         </thead>
         <tbody>
-        {% for s in pois_rois %}
+        {% for s in layers %}
             <tr>
                 <td>{{ s.id }}</td>
                 <td>{{ s.name }}</td>
-                <td><a href="/management/delete/poi_roi/{{ t.id }}/" class="btn btn-danger btn-delete">Delete</a></td>
+                <td>{{ s.type }}</td>
+                <td><a href="/management/delete/layer/{{ s.id }}/" class="btn btn-danger btn-delete">Delete</a></td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 {% endif %}
+<hr>
+<div class="row">
+    <div class="col align-self-start">
+        <button type="button" id="btn-previous" class="btn btn-primary">Previous</button>
+    </div>
+    <div class="col align-self-end">
+        <button type="button" id="btn-next2" class="btn btn-primary float-right btn-next">Next</button>
+    </div>
+</div>
