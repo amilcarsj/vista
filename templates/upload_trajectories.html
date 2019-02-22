@@ -40,8 +40,49 @@
     </div>
 </div>
 <hr>
+{% if trajectories|length > 0 %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Number of Points</th>
+            <th>Total Distance Travelled</th>
+            <th>Average Sampling Rate(Seconds)</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for t in trajectories %}
+            <tr>
+                <td>{{ t.id }}</td>
+                <td>{{ t.total_points }}</td>
+                <td>{{ t.distance }}</td>
+                <td>{{ t.sampling }}</td>
+                <td><a href="/management/delete/trajectory/{{ t.id }}/" class="btn btn-danger btn-delete">Delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
 <div class="row justify-content-end">
     <div class="col">
         <button id="btn-next" class="btn btn-primary float-right">Next</button>
     </div>
 </div>
+<script>
+    $(function () {
+        $(".btn-delete").click(function (e) {
+            e.preventDefault();
+            $.get(e.target.href).done(function (data) {
+                console.log("Success");
+                $(e.target).parent().parent().remove();
+                $.notify("Trajectory removed successfully.", "success");
+
+            }).fail(function (jqXHR, textStatus, error) {
+                console.log("Error");
+                $.notify("Error while deleting trajectory", "error");
+
+            });
+        });
+    });
+</script>

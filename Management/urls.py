@@ -10,5 +10,6 @@ urlpatterns = [
     path('get/trajectories/<str:db_id>/',views.get_trajectories),
     path('get/trajectory/<str:oid>/', views.get_trajectory),
     path('get/point_feature/<str:oid>/',views.get_point_feature),
-    path('get/xy/<str:x>/<str:y>/',views.get_xy)
+    path('get/xy/<str:x>/<str:y>/',views.get_xy),
+    path('delete/trajectory/<str:tid>/',views.delete_traj)
 ]

@@ -10,10 +10,18 @@ import datetime
 
 @login_required()
 def update_database(request, _id=""):
+
     if _id == '':
         return render(request, 'select_database.html')
+    trajectories = Trajectory.objects.filter(db___id=_id)
+    print(trajectories)
+    traj_list = []
+    for t in trajectories:
+        traj_list.append({'id': t._id, 'total_points': t.total_points, 'distance': t.total_distance_traveled,
+                          'sampling': t.average_sampling})
+
     if request.method == 'GET':
-        return render(request, 'database_management.html')
+        return render(request, 'database_management.html',{'trajectories':traj_list})
     trajectory_files = request.FILES.getlist('trajectory-files[]')
     semantic_files = request.FILES.getlist('semantic-files')
     tid = request.POST.get('trajID',None)
@@ -23,7 +31,6 @@ def update_database(request, _id=""):
     delimiter = request.POST.get('delimiter', None)
     taggers = request.POST.get('taggers', '').split(';')
     labels = request.POST.get('labels', '').split(';')
-
     for label in labels:
         label = label.strip()
         if label == '':
@@ -98,7 +105,7 @@ def visualize(request):
     dbs = Database.objects.filter(tagging_session_manager=request.user)
     db = dbs.first()
     trajectories = Trajectory.objects.filter(db=db)
-    return render(request, 'trajectory_table.html', {'databases': dbs, 'trajectories': trajectories})
+    return render(request, 'visualize_session.html', {'databases': dbs, 'trajectories': trajectories})
 
 
 @login_required()
@@ -141,3 +148,8 @@ def get_xy(request,x="",y=""):
     xvals = TrajectoryFeature.objects.get(_id=x).values
     yvals = TrajectoryFeature.objects.get(_id=y).values
     return JsonResponse({'xvals':xvals,'yvals':yvals})
+
+@login_required()
+def delete_traj(request,tid=""):
+    Trajectory.objects.get(_id=tid).delete()
+    return JsonResponse({})

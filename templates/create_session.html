@@ -2,25 +2,25 @@
 {% load static %}
 {% block scripts %}
 
-{%  endblock %}
-{%  block content %}
+{% endblock %}
+{% block content %}
     <div class="container-fluid"><!--Add p-0 to class to remove the padding on the left and right-->
 
-    <div id="database-selection">
+        <div id="database-selection">
 
-    </div>
-    <div id="trajectory-selection" style="display: none;">
-        {% include 'trajectory_table.html' %}
-    </div>
-    <div id="semantic-selection" style="display: none;">
+        </div>
+        <div id="trajectory-selection" style="display: none;">
+            {% include 'visualize_session.html' %}
+        </div>
+        <div id="semantic-selection" style="display: none;">
 
-    </div>
-    <div id="feature-selection" style="display: none;">
-        {% include 'feature_selection.html' %}
-    </div>
+        </div>
+        <div id="feature-selection" style="display: none;">
+            {% include 'feature_selection.html' %}
+        </div>
 
-    <div id="invite-taggers" style="display: none;">
-        {% include 'invite_users.html' %}
-    </div>
+        <div id="invite-taggers" style="display: none;">
+            {% include 'invite_users.html' %}
+        </div>
     </div>
 {% endblock %}

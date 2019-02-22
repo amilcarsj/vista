@@ -1,0 +1,150 @@
+{% extends 'main_structure.html' %}
+{% load static %}
+{% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}"/>
+    <script src="{% static 'js/plugins/full-layer-control.js' %}"></script>
+    <script src="{% static 'js/plugins/play-trajectory-control.js' %}"></script>
+    <script src="{% static 'js/plugins/Leaflet.MultiOptionsPolyline.min.js' %}"></script>
+
+    <script src="{% static 'js/semantic_layer.js' %}"></script>
+    <script src="{% static 'js/trajectory_player.js' %}"></script>
+    <script src="{% static 'js/charts.js' %}"></script>
+    <script src="{% static "js/map_visualization.js" %}"></script>
+
+    <link rel="stylesheet" href="{% static 'segmentation_control.css' %}"/>
+    <script src="{% static 'js/plugins/Segmentation-Control/segmentation_control.js' %}"></script>
+    <script src='{% static 'js/segmentation/segmentation_setup.js' %}'></script>
+    <script src='{% static 'js/segmentation/segmentation_creation.js' %}'></script>
+
+    <style>
+        body {
+            overflow: auto;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="font-weight-bold">Select Database</label>
+                    <select id="ddlDatabase" class="form-control">
+                        {% for db in databases %}
+                            <option value="{{ db.pk }}">{{ db.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7">
+                <div id="map" style="height: 500px; width: 100%">
+                </div>
+            </div>
+            <div class="col-lg-5" id="charts-section" style="border:1px solid black;">
+                <div id="top-section">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!--<p><span class="font-weight-bold">ID:</span> <span id="traj-id"> </span></p>-->
+                            <p><span class="font-weight-bold">Number of Points:</span> <span id="traj-tp"></span></p>
+                            <p><span class="font-weight-bold">Total Distance Travelled:</span> <span
+                                    id="traj-td"></span> meters
+                            </p>
+                            <p><span class="font-weight-bold">Average Sampling Rate:</span> <span id="traj-as"></span>
+                                seconds
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <button id="btn-swap" class="btn btn-success" value="scatter">Display Scatter Plot</button>
+                    </div>
+                    <br>
+                    <!-- <div id="charts"></div>-->
+                </div>
+                <div id="line-graph">
+                    <div id="pf-section">
+                        <div class="row no-gutters">
+                            <div class="col-md-3 align-self-center">
+                                <span class="font-weight-bold"> Point Feature:</span>
+                            </div>
+                            <div class="col-md-9">
+                                <select id="ddl-pf" class="form-control">
+                                    {% for pf in point_features %}
+                                        <option value="{{ pf.id }}">{{ pf.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="pf-title" class="font-weight-bold text-center">Point Feature Chart</p>
+                    <div class="text-center" id="legend">
+                        <div class="label-box"></div>
+                        unlabelled
+                    </div>
+                    <canvas id="pf-chart"></canvas>
+
+                </div>
+                <div id="scatter-graph" style="display: none;">
+                    <div id="xy-section">
+                        <div class="row">
+                            <div class="col-md-2 align-self-center">
+                                <span class="font-weight-bold">X-Axis:</span>
+                            </div>
+                            <div class="col-md-10">
+                                <select id="ddl-xaxis" class="form-control input-sm">
+                                    {% for pf in point_features %}
+                                        <option value="{{ pf.id }}">{{ pf.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2 align-self-center">
+                                <span class="font-weight-bold">Y-Axis:</span>
+                            </div>
+                            <div class="col-md-10">
+                                <select id="ddl-yaxis" class="form-control">
+                                    {% for pf in point_features %}
+                                        <option value="{{ pf.id }}">{{ pf.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <canvas id="scatter-chart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <table id="tblTrajectories" class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Total Points</th>
+                    <th>Average Sampling Rate</th>
+                    <th>Total Distance Travelled</th>
+                    <th>View</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for t in trajectories %}
+                    <tr>
+                        <td>{{ t.pk }}</td>
+                        <td>{{ t.total_points }}</td>
+                        <td>{{ t.average_sampling }}</td>
+                        <td>{{ t.total_distance_traveled }}</td>
+                        <td>
+                            <button value="{{ t.pk }}" class="btn btn-success btn-view">Select</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

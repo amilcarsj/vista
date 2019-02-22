@@ -172,10 +172,9 @@ def select_session_review(request):
 def review_session(request, session_id=""):
     db = Database.objects.get(_id=session_id)
     labels = db.labels
-    print(db.taggers_id)
     user_data = {}
-    features_qs = TrajectorySegmentation.objects.filter(trajectory__db___id=session_id).first().segmentation[0].features
-    features = [f.name for f in features_qs]
+    features_qs = TrajectoryFeature.objects.filter(trajectory__db___id=session_id)
+    features = list(set([f.name for f in features_qs]))
     users_qs = User.objects.filter(id__in=db.taggers_id)
     users = []
     for user in users_qs:
@@ -219,8 +218,6 @@ def review_session(request, session_id=""):
         user_data[user.email]['point_features'] = average_pf
         user_data[user.email]['segment_features'] = average_sf
 
-    print(user_data)
-    print(users)
     return render(request, 'session_information.html',
                   {'user_data': user_data, 'labels': labels, 'features': features, 'users': users})
 

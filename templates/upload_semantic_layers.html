@@ -11,10 +11,7 @@
             <label for="semantic-file-list" class="font-weight-bold">Files to Upload (geojson files only)</label>
             <select id="semantic-file-list" name="semantic-file-list" class="form-control" multiple></select>
         </div>
-        <div class="form-group">
-            <label class="font-weight-bold">EPSG Code</label>
-            <input type="text" name="epsg-code" class="form-control" placeholder="EPSG Code to project to"/>
-        </div>
+
     </div>
     <div class="col-md-6">
         <table id="semantic-tables" class="table">
@@ -35,3 +32,23 @@
         <button id="btn-next2" class="btn btn-primary float-right btn-next">Next</button>
     </div>
 </div>
+{% if pois_rois|length > 0 %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for s in pois_rois %}
+            <tr>
+                <td>{{ s.id }}</td>
+                <td>{{ s.name }}</td>
+                <td><a href="/management/delete/poi_roi/{{ t.id }}/" class="btn btn-danger btn-delete">Delete</a></td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
