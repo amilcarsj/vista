@@ -26,7 +26,7 @@ SECRET_KEY = 'k&vaja+t-szya&_tii^e@u-gy%wzx2k+b&j^vx1v)6c-xv5h_8'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-DATABASE_NAME = 'VISTA3'
+DATABASE_NAME = 'VISTA'
 PORT_NUMBER = 27017
 
 # Application definition
