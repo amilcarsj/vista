@@ -88,6 +88,7 @@ L.Control.ControlLayers = L.Control.extend({
         obj.value = '#FFFFFF';
         obj.defaultValue = color;
         obj.value = obj.defaultValue;
+        obj.style.color = color;
         console.log(obj);
         $('#checkbox-' + name).click(function () {
 
@@ -100,7 +101,7 @@ L.Control.ControlLayers = L.Control.extend({
             }
 
         });
-        $('#color-' + name).on('input', function () {
+        $('#color-' + name).on('change', function () {
             var new_color = $(this).val();
             $(this).addClass('changed');
             // console.log(new_color);
@@ -123,7 +124,8 @@ L.Control.ControlLayers = L.Control.extend({
         console.log(layer);
         var leaflet_layer = layer.addTo(map);
         this.layers.push(layer);
-    },
+        $('#color-' + name).trigger('input');
+        },
 
     // clearControlLayers: function (map){
     //     console.log(this.layers);

@@ -2,6 +2,16 @@
 {% load static %}
 {% block scripts %}
     <link rel="stylesheet" href="{% static 'style.css' %}"/>
+    <script>
+        $("#registration-form").submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                type:'post',
+                url:'/confirm/',
+
+            })
+        });
+    </script>
 {% endblock %}
 {% block content %}
     <div class="container-fluid">
@@ -30,7 +40,7 @@
                         </form>
                     </div>
                     <div id="register" class="tab-pane fade in" role="tabpanel">
-                        <form action="/register/" method="post" class="bordered">
+                        <form id="registration-form" action="/register/" method="post" class="bordered">
                             {% csrf_token %}
                             <label class="font-weight-bold">Username</label>
                             <input name="username" type="text" class="form-control" required/>

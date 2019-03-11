@@ -34,7 +34,7 @@ def save_trajectory(file, tid, lat, lon, time, delimiter, db, pois_rois):
         epsg = convert_wgs_to_utm(center.x, center.y)
         print(epsg)
         points_geoseries.crs = fiona.crs.from_epsg(4326)
-        points_geoseries.to_crs(epsg=epsg)
+        points_geoseries=points_geoseries.to_crs(epsg=epsg)
         #points_geoseries = points_geoseries.to_crs(epsg=epsg)
         t = tr.Trajectory(mood='df', trajectory=df)
         t.get_features()
@@ -98,7 +98,7 @@ def find_intersects(points_geoseries, roi,epsg):
 
     polygons_geoseries = GeoSeries(polygons)
     polygons_geoseries.crs = fiona.crs.from_epsg(4326)
-    polygons_geoseries.to_crs(epsg=epsg)
+    polygons_geoseries=polygons_geoseries.to_crs(epsg=epsg)
     intersection = points_geoseries.within(polygons_geoseries.unary_union) * 1
     return intersection
 
@@ -121,7 +121,7 @@ def find_shortest_distance(points, poi, starting_radius,epsg):
                 raise Exception("Layer contains more than points, MultiPoints, LineString, and MultiLineString")
         points_interest_geoseries = GeoSeries(points_interest)
         points_interest_geoseries.crs = fiona.crs.from_epsg(4326)
-        points_interest_geoseries.to_crs(epsg=epsg)
+        points_interest_geoseries=points_interest_geoseries.to_crs(epsg=epsg)
         #epsg = convert_wgs_to_utm(points[0].x, points[0].y)
         #points_interest_geoseries = points_interest_geoseries.to_crs(epsg=epsg)
         min_dists = []
@@ -159,7 +159,7 @@ def save_point_features(df, traj):
     feats = []
     if 'distance' in df.columns:
         c = df['distance']
-        c_log = np.log10(c)
+        c_log = np.log10(c,out=np.zeros_like(c),where=(c!=0))
         c_log[len(c_log)-1] = 0
         df['distance_log'] = c_log
     for col in df.columns.values:

@@ -63,7 +63,7 @@
                 let start_index = 0;
                 for (let i = 1; i < values.length; i++) {
                     if (values[i] == null) {
-                        $.notify("You must segment the whole trajectory before finishing", "error");
+                        $.notify("You must segment the whole trajectory before continuing", "error");
                         return;
                     }
                     if (values[i] != values[i - 1]) {
@@ -114,7 +114,7 @@
                 <div id="top-section">
                     <div class="row">
                         <div class="col-md-12">
-                            <h5 class="text-center">Trajectory Details (#x of #y)</h5>
+                            <h5 class="text-center">Trajectory Details ({{ curr_index }} of {{ size }})</h5>
                             <!--<p><span class="font-weight-bold">ID:</span> <span id="traj-id"> </span></p>-->
                             <p><span class="font-weight-bold">Number of Points:</span> <span id="traj-tp"></span></p>
                             <p><span class="font-weight-bold">Total Distance Travelled:</span> <span

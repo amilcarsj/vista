@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 import json,datetime,pymongo,bson
 from VISTA.settings import PORT_NUMBER,DATABASE_NAME
 from bson.json_util import loads,RELAXED_JSON_OPTIONS
-
+from django.core.mail import send_mail
 # Create your views here.
 
 
@@ -84,3 +84,16 @@ def logout(request):
 @login_required()
 def index(request):
     return render(request,'main_page.html')
+
+
+def send_confirmation_email(request):
+    email = request.POST.get('email',None)
+    if email is not None:
+        client = pymongo.MongoClient(port=PORT_NUMBER)
+        db = getattr(client,DATABASE_NAME)
+        inserted = db.user_confirmation.insert_one({'email':email,'timestamp':datetime.datetime.now()})
+        send_mail('Confirmation Code VISTA',
+                  'This is your registration confirmation code: ' + str(inserted.inserted_id),
+                  'info@odsi.co',
+                  [email],
+                  fail_silently=False)

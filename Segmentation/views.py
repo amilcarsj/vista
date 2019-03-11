@@ -41,7 +41,7 @@ def load_segment_session(request, db_id="", tid=None):
     trajectories = Trajectory.objects.filter(db___id=db_id)
 
     values = trajectories.values().iterator()
-
+    curr_index=1
     if tid is None:
         prev = None
         traj = next(values)
@@ -53,8 +53,8 @@ def load_segment_session(request, db_id="", tid=None):
     else:
         traj = next(values)
         while str(traj['_id']) != tid:
+            curr_index+=1
             prev = traj['_id']
-
             traj = next(values)
         try:
             n = next(values)['_id']
@@ -93,7 +93,8 @@ def load_segment_session(request, db_id="", tid=None):
     print(segs)
     return render(request, 'segmentation_page.html', {'layers': layers_json, 'trajectory': traj_json,
                                                       'curr_pf': curr_pf_json, 'point_features': pfs,
-                                                      'labels': labels_json, 'next': n, 'previous': prev, 'db': db_id,'segments':segs})
+                                                      'labels': labels_json, 'next': n, 'previous': prev, 'db': db_id,'segments':segs,
+                                                      'curr_index':curr_index,'size':len(trajectories)})
 
 
 @login_required()

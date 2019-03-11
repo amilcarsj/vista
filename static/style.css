@@ -11,14 +11,15 @@
     border-radius: 4px;
     display: none;
 }
-.container-fluid{
+
+.container-fluid {
     overflow: hidden;
 }
 
 @media only screen and (min-width: 992px) {
- body{
-    overflow: hidden;
-}
+    body {
+        overflow: hidden;
+    }
 
 }
 
@@ -91,15 +92,19 @@
 #charts-section, #map-section {
     height: 92vh;
 }
-.navbar{
-    height: 8vh!important;
+
+.navbar {
+    height: 8vh !important;
 }
-#top-section,#pf-section{
-    padding: 10px!important;
+
+#top-section, #pf-section {
+    padding: 10px !important;
 }
-a.btn-primary{
-    color:white!important;
+
+a.btn-primary {
+    color: white !important;
 }
+
 #map {
     height: 100%;
     width: 100%;
@@ -175,6 +180,12 @@ a.btn-primary{
                                      supported by Chrome and Opera */
 }
 
-.leaflet-popup-content{
-    text-align: center!important;
+.leaflet-popup-content {
+    text-align: center !important;
+}
+
+.decorator-legend-color-value {
+    color: black;
+    text-shadow:1px 1px #fff;
+    display: block;
 }

@@ -21,7 +21,7 @@ L.Control.DecoratorLegend = L.Control.extend({
 		$('#decorator-legend-custom-container').append(html);
 		for (var i = 0; i < colors.length-1; i++){
 			var v = Math.round(values[i]*1)/1;
-			html = '<div class="decorator-legend-color-value" style="background-color: '+colors[i]+'; color: black; display: block;">\>&nbsp;'+v+'</div>\n';
+			html = '<div class="decorator-legend-color-value" style="background-color: '+colors[i]+';">\>&nbsp;'+v+'</div>\n';
 			$('#decorator-legend-custom-container').append(html);
 		}
 	},
