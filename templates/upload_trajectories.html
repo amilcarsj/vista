@@ -43,6 +43,7 @@
     <table class="table">
         <thead>
         <tr>
+            <th></th>
             <th>ID</th>
             <th>Number of Points</th>
             <th>Total Distance Travelled</th>
@@ -53,6 +54,7 @@
         <tbody>
         {% for t in trajectories %}
             <tr>
+                <td>{{ forloop.counter }}</td>
                 <td>{{ t.id }}</td>
                 <td>{{ t.total_points }}</td>
                 <td>{{ t.distance }}</td>

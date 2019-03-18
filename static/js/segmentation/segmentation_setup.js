@@ -89,8 +89,8 @@ function add_starting_segmentation(segmentation) {
         buttons[$(jquery_buttons[i]).attr('value')] = jquery_buttons[i];
     }
     console.log(segmentation_control);
-        console.log(segmentation_control.Marker_Groups);
-
+    console.log(segmentation_control.Marker_Groups);
+    console.log(buttons);
     let latlngs = segmentation_control.Trajectory_Layer.getLatLngs()
     for (let i = 0; i < segmentation.length; i++) {
         buttons[segmentation[i][0]].click();
@@ -99,7 +99,7 @@ function add_starting_segmentation(segmentation) {
         console.log(loc);
         var newLatLng = new L.LatLng(loc[0], loc[1]);
         let mgroup = segmentation_control.Marker_Groups[segmentation[i][0]].getLayers();
-        mgroup[mgroup.length-1].setLatLng(newLatLng);
+        mgroup[mgroup.length - 1].setLatLng(newLatLng);
     }
     segmentation_control.generateSegmentation();
 

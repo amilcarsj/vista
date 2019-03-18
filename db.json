@@ -1,1 +1,1 @@
-{"tagging_session_manager_id": 27, "name": "geolife", "taggers_id": [26], "labels": ["a", "b", "c"]}
+{"tagging_session_manager_id": 27, "name": "geolife", "taggers_id": [26], "labels": ["walking","train", "bike", "bus","car"]}

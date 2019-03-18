@@ -48,13 +48,13 @@ function loadLineChart(containerid, d) {
                 let prevp = trajectory.getLatLngs()[coord_index - 1];
                 let angle = null;
                 if (prevp == null) {
-                    prevp = trajectory.getLatLngs()[coord_index+ 1];
-                    angle = angleFromCoordinate(latlng[0], latlng[1],prevp[0], prevp[1]);
+                    prevp = trajectory.getLatLngs()[coord_index + 1];
+                    angle = angleFromCoordinate(latlng[0], latlng[1], prevp[0], prevp[1]);
                 } else {
-                    angle = angleFromCoordinate(prevp[0], prevp[1],latlng[0], latlng[1]);
+                    angle = angleFromCoordinate(prevp[0], prevp[1], latlng[0], latlng[1]);
                 }
                 console.log(latlng);
-                setMarkerIconWithDirection(latlng,angle);
+                setMarkerIconWithDirection(latlng, angle);
             },
             responsiveAnimationDuration: 0, // animation duration after a resize
             responsive: false,
@@ -87,6 +87,10 @@ function loadScatterPlot(containerid, d) {
                     ticks: {
                         display: true //this will remove only the label
                     }
+                }],
+                yAxes: [{
+                    display: true,
+                    type: 'logarithmic'
                 }]
             },
             animation: {
@@ -158,7 +162,7 @@ function update_point_feature(e) {
             }
         }
 
-    }).fail(function(jqXHR,textStatus,errorThrown){
+    }).fail(function (jqXHR, textStatus, errorThrown) {
         alert("An error occured when trying to load the point features. Attempting to load again.");
         update_point_feature(e);
     });
@@ -181,6 +185,38 @@ $(function () {
             $("#line-graph").show();
             $("#scatter-graph").hide();
         }
+    });
+    $("#btn-log-normal").click(function (e) {
+        let btn = $(e.target);
+        if (btn.val() == 'log') {
+            let log = {
+                yAxes: [{
+                    display: true,
+                    type: 'logarithmic'
+                }]
+            };
+            btn.val('linear');
+            btn.html("Display Linear Scale");
+            line_chart.options.scales = log;
+            scatter_chart.options.scales = log;
+            line_chart.update();
+
+        }
+        else{
+            btn.val('log')
+            btn.html("Display Log Scale");
+            let linear = {
+                yAxes: [{
+                    display: true,
+                    type: 'linear'
+                }]
+            };
+            line_chart.options.scales = linear;
+            scatter_chart.options.scales = linear;
+            line_chart.update();
+
+        }
+        console.log("Clicked");
     });
 
 });

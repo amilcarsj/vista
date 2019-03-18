@@ -25,6 +25,8 @@ def save_trajectory(file, tid, lat, lon, time, delimiter, db, pois_rois):
     else:
         segments = {0: df}
     for index, df in segments.items():
+        if tid !='None':
+            df.drop([tid],axis=1,inplace=True)
         # gdf = df.drop(['lon', 'lat'], axis=1)
         # crs = {'init': 'epsg:4326'}
         linestring = [Point(xy) for xy in zip(df['lon'], df['lat'])]
@@ -32,7 +34,6 @@ def save_trajectory(file, tid, lat, lon, time, delimiter, db, pois_rois):
         coords = sum(map(list, (p.coords for p in linestring)), [])
         center = Polygon(coords).centroid
         epsg = convert_wgs_to_utm(center.x, center.y)
-        print(epsg)
         points_geoseries.crs = fiona.crs.from_epsg(4326)
         points_geoseries=points_geoseries.to_crs(epsg=epsg)
         #points_geoseries = points_geoseries.to_crs(epsg=epsg)

@@ -41,9 +41,10 @@ L.Control.SegmentationControl = L.Control.extend({
 
         var table = document.createElement('table');
         this.labels.forEach(label => {
+            console.log(label);
             var tr = document.createElement('tr');
             var addtd = document.createElement('td');
-            addtd.innerHTML = "<button value=" + label + " class='btn-add'>+</button>";
+            addtd.innerHTML = "<button value='" + label + "' class='btn-add'>+</button>";
             var labeltd = document.createElement('td');
             labeltd.innerHTML = label;
             var colorpickertd = document.createElement('td');
