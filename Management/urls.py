@@ -12,5 +12,6 @@ urlpatterns = [
     path('get/point_feature/<str:oid>/',views.get_point_feature),
     path('get/xy/<str:x>/<str:y>/',views.get_xy),
     path('delete/trajectory/<str:tid>/',views.delete_traj),
-    path('delete/layer/<str:lid>/',views.delete_layer)
+    path('delete/layer/<str:lid>/',views.delete_layer),
+    path('info/',views.info)
 ]

@@ -1,0 +1,129 @@
+{% extends 'main_structure.html' %}
+{% block scripts %}
+    <style>
+        .info-image {
+            width: 100%;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <h1 class="text-center">General Information</h1>
+        <div class="row" id="upload-trajectory">
+            <div class="col-md-6">
+                <h3>Uploading Trajectories</h3>
+                <p>When uploading trajectories it is important to remember:</p>
+                <ol>
+                    <li>The current accepted format for trajectories is csv. Supported delimiters are (comma,
+                        semi-colon, tab, and pipe)
+                    </li>
+                    <li>If uploading multiple files, ensure that all csv files have the same column structure.</li>
+                    <li>If there are multiple trajectories in one file, specify the ID field to split into multiple
+                        trajectories based on that field.
+                    </li>
+                    <li>Latitude and Longitude values should be should be in WGS84 format</li>
+                    <li>The time field should in date time format.</li>
+                    <li>After submitting on the last screen you will be able to see your trajectories below.</li>
+                </ol>
+                <a href="/media/geolife-sample.csv" class="btn btn-primary">Download Trajectory Sample</a>
+            </div>
+            <div class="col-md-6">
+                <img class="info-image" src="/media/upload-trajectories.png" alt="Upload Trajectories Page">
+            </div>
+        </div>
+        <hr>
+        <div class="row" id="upload-semantics">
+            <div class="col-md-6">
+                <h3>Uploading POIs and ROIs</h3>
+                <p>When uploading POIs and ROIs it is important to remember:</p>
+                <ol>
+                    <li>The current accepted format is geoJSON FeatureCollection's (Even if you are only uploading one
+                        feature)
+                    </li>
+                    <li>POIs acceptable types LineStrings, MultiLineStrings, Points, MultiPoints.</li>
+                    <li>ROIs acceptable types are Polygons and MultiPolygons</li>
+                    <li>After uploading the layer please provide a name in the right column.</li>
+                </ol>
+                <a href="/media/poi-sample-railways.geojson" class="btn btn-primary">Download POI Sample</a>
+            </div>
+            <div class="col-md-6">
+                <img class="info-image" src="/media/upload-semantics.png" alt="Upload Semantics Page">
+            </div>
+        </div>
+        <hr>
+        <div class="row" id="labels-emails">
+            <div class="col-md-6">
+                <h3>Creating Labels and Inviting Users</h3>
+                <p>When Creating Labels and Inviting Users it is important to remember:</p>
+                <ol>
+                    <li>Labels should be created using semi-colons(;) to separate the different labels.</li>
+                    <li>User's should be identified by their email and separated using semi-colons(;)</li>
+                    <li>All user emails should already be registered in the system.</li>
+                </ol>
+            </div>
+            <div class="col-md-6">
+                <img class="info-image" src="/media/labels-emails.png" alt="Create Labels and Taggers Page">
+            </div>
+        </div>
+        <hr>
+        <div class="row" id="tagging-session">
+            <div class="col-md-6">
+                <h3>Starting a Tagging Session</h3>
+                <p>When starting a tagging session it is important to remember:</p>
+                <ol>
+                    <li>You must be invited to at least one session, otherwise the dropdown menu will be empty.</li>
+                    <li>Select the tagging session you wish to open, and click Select Session.</li>
+                    <li>The tagging session will open and you should see something similar to the picture on the right.</li>
+                    <li>There are 3 controls under the zoom control in the top left. They will be explained in more detail below</li>
+                    <li>The legend in the bottom right of the map indicates the colour of the trajectory in correspondence to the value of its point feature.</li>
+                    <li>The arrow in the top right is to go to the next trajectory. To be able to proceed you must finish segmenting the current trajectory</li>
+                    <li>The Display Scatter Plot will toggle a scatter plot where you can select a point feature for the X axis and for the Y axis.</li>
+                    <li>The dropdown with the Point Feature label will allow you toggle what point feature you are looking at in the line chart below.</li>
+                </ol>
+            </div>
+            <div class="col-md-6">
+                <img class="info-image" src="/media/segmentation-page.png" alt="Create Labels and Taggers Page">
+            </div>
+        </div>
+        <hr>
+        <div class="row" id="tagging-session-controls">
+            <div class="col-md-6">
+                <h3>Map Controls</h3>
+                <p>The tools below are meant to improve the segmentation process</p>
+                <ol>
+                    <li>The layer control (shown first) is used to toggle POI and ROI layers using the checkbox.
+                    The first dropdown is used for changing the line density of the layer.
+                        The second drop down the line opacity.
+                        The third dropdown is the fill opacity.
+                    Finally, the color picker allows you to change the color of the layer on the map.</li>
+                    <li>The play control (shown second) is used to animate the trajectory over time. You can specify the number of seconds in the textbox then press play.</li>
+                    <li>The segmentation control (shown third) is used to create the segmentation. Clicking one of the circular + buttons will place a marker on the map. The marker is draggable and will bind to the nearest point of the trajectory.</li>
+                </ol>
+            </div>
+            <div class="col-md-1">
+                <img class="info-image" src="/media/controls-closed.png" alt="Create Labels and Taggers Page">
+            </div>
+            <div class="col-md-5">
+                <img class="info-image" src="/media/controls-opened.png" alt="Create Labels and Taggers Page">
+            </div>
+        </div>
+    <hr>
+        <div class="row" id="review-session">
+            <div class="col-md-6">
+                <h3>Review Session</h3>
+                <p>When reviewing a session it is important to remember</p>
+                <ol>
+                    <li>You must be the tagging session manager of at least one session to be able to see a session summary</li>
+                    <li>You will select the session you want to review from the dropdown menu and press select</li>
+                    <li>Then the window on the right should be shown with point feature averages on the left, and segment feature averages on the right. Broken down by user.</li>
+                </ol>
+            </div>
+            <div class="col-md-6">
+                <img class="info-image" src="/media/users-comparison.png" alt="Create Labels and Taggers Page">
+            </div>
+
+        </div>
+    <hr>
+
+    </div>
+{% endblock %}

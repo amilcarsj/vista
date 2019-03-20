@@ -90,7 +90,7 @@ function loadScatterPlot(containerid, d) {
                 }],
                 yAxes: [{
                     display: true,
-                    type: 'logarithmic'
+                    type: 'linear'
                 }]
             },
             animation: {

@@ -48,6 +48,7 @@ def save_trajectory(file, tid, lat, lon, time, delimiter, db, pois_rois):
         traj.geojson = {'geometry': {'type': 'LineString', 'coordinates': points}}
         traj.db = db
         ns = 1e-9
+        print(df.index.values)
         traj.times = [datetime.utcfromtimestamp(dt.astype(int) * ns) for dt in df.index.values]
         traj.save()
         for layer in pois_rois:

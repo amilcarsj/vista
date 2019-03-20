@@ -190,3 +190,7 @@ def delete_layer(request,lid=""):
     TrajectoryFeature.objects.filter(name=layer_name).filter(trajectory__in=trajs).delete()
     obj.delete()
     return JsonResponse({})
+
+
+def info(request):
+    return render(request,'info_page.html')
