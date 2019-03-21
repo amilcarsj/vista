@@ -42,7 +42,7 @@ def register(request):
     if user is not None:
         auth.login(request, user)
         client = pymongo.MongoClient(port=PORT_NUMBER)
-        db = getattr(client, DATABASE_NAME)
+        mongodb = getattr(client, DATABASE_NAME)
         with open('db.json') as f:
             dbs = loads(f.read(), json_options=RELAXED_JSON_OPTIONS)
         with open('features.json') as f:
@@ -52,26 +52,34 @@ def register(request):
         with open('trajectories.json') as f:
             # layers = json.load(f)
             trajectories = loads(f.read(), json_options=RELAXED_JSON_OPTIONS)
-        dbs['tagging_session_manager_id'] = user.id
-        dbs['taggers_id'].append(user.id)
-        result = db.Management_database.insert_one(dbs)
-        db_id = result.inserted_id
-        layers['db_id'] = db_id
-        db.Management_poi_roi.insert_one(layers)
 
-        print(len(features))
-        for t in trajectories:
-            feature_list = []
-            for f in features:
-                if t['_id'] == f['trajectory_id']:
-                    feature_list.append(f)
-            t.pop('_id')
-            t['db_id'] = db_id
-            traj = db.Management_trajectory.insert_one(t)
-            for f in feature_list:
-                f['trajectory_id'] = traj.inserted_id
-                db.Management_trajectoryfeature.insert_one(f)
-        print(db_id)
+        for db in dbs:
+            db['tagging_session_manager_id'] = user.id
+            db['taggers_id'] = [user.id]
+            db_id = str(db['_id'])
+            print(db_id)
+            db.pop('_id')
+            result = mongodb.Management_database.insert(db)
+            print(len(features))
+            for t in trajectories:
+                print(str(t['db_id'])+ '!='+ str(db_id)+str(str(t['db_id']) != str(db_id)))
+                if str(t['db_id']) != str(db_id):
+                    continue
+                t['db_id'] = db['_id']
+                feature_list = []
+                for f in features:
+                    if t['_id'] == f['trajectory_id']:
+                        feature_list.append(f)
+                t.pop('_id')
+                traj = mongodb.Management_trajectory.insert_one(t)
+                for f in feature_list:
+                    f['trajectory_id'] = traj.inserted_id
+                    mongodb.Management_trajectoryfeature.insert_one(f)
+
+        db_id = dbs[1]['_id']
+        layers['db_id'] = db_id
+        mongodb.Management_poi_roi.insert_one(layers)
+
         return render(request,'main_page.html')
     return render(request, 'authentication.html')
 

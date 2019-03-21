@@ -193,4 +193,7 @@ def delete_layer(request,lid=""):
 
 
 def info(request):
+    print(request.user.username)
+    print(request.user.email)
+    print(request.user.username)
     return render(request,'info_page.html')

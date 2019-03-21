@@ -1,1 +1,1 @@
-{"tagging_session_manager_id": 27, "name": "geolife", "taggers_id": [26], "labels": ["walking","train", "bike", "bus","car"]}
+[{"_id": {"$oid": "5c93b595b686921c7fb3b623"}, "tagging_session_manager_id": 40, "name": "geolife", "taggers_id": [], "labels": ["walking", "bike", "train", "bus", "car"]}, {"_id": {"$oid": "5c93c162b686921c7fb3b719"}, "tagging_session_manager_id": 40, "name": "Fishing", "taggers_id": [40], "labels": ["Fishing", "Not Fishing"]}]
