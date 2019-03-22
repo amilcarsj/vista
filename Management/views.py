@@ -5,11 +5,13 @@ from django.http import JsonResponse
 from django.forms.models import model_to_dict
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-import datetime
+import datetime,ssl,smtplib
 from geopandas import GeoSeries
 import pandas as pd
 from djongo.sql2mongo import SQLDecodeError
 from shapely.geometry import Point
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 # Create your views here.
 
 @login_required()
@@ -191,9 +193,35 @@ def delete_layer(request,lid=""):
     obj.delete()
     return JsonResponse({})
 
-
+@login_required()
 def info(request):
     print(request.user.username)
     print(request.user.email)
     print(request.user.username)
+    return render(request,'info_page.html')
+
+
+def send_mail(request):
+    smtp_server = "mail.odsi.co"
+    port = 465  # For starttls
+    sender_email = "info@odsi.co"
+    password = 'mEw.WNS&(j?!'
+    to_emails = ['jordan@odsi.co']
+    content = request.POST.get('content',None)
+    print(content)
+    if content is not None:
+        print("Arrived here")
+        content = 'Email Sent From: %s\n' % (request.user.email) + content
+
+        # Create a secure SSL context
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+            msg = MIMEMultipart('alternative')
+            msg['Subject'] = "VISTA Feedback"
+            msg['From'] = sender_email
+            msg['To'] = ', '.join(to_emails)
+            msg.attach(MIMEText(content,'plain'))
+            server.login(sender_email, password)
+            server.sendmail(sender_email,to_emails,msg.as_string())
+            server.close()
     return render(request,'info_page.html')

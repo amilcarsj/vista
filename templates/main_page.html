@@ -1,1 +1,16 @@
 {% extends 'main_structure.html' %}
+{% block content %}
+    <div class="container-fluid">
+    <br><br>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="/management/send_mail/" method="post">
+                    {% csrf_token %}
+                    <h4 class="text-center">Please send us your feedback on VISTA!</h4>
+                    <textarea name="content" class="form-control" rows="10"></textarea>
+                    <button type="submit" class="btn btn-primary float-right">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
