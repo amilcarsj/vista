@@ -1,5 +1,15 @@
 check_labels = [];
 
+function makeid(length) {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for (var i = 0; i < length; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+    return text;
+}
+
 function build_icon(color) {
     let icon = '<svg width="91" height="91" xmlns="http://www.w3.org/2000/svg">\n' +
         '\n' +
@@ -115,9 +125,26 @@ L.Control.SegmentationControl = L.Control.extend({
                 icon: build_icon(colour)
             });
             control.Marker_Groups[label].addLayer(marker);
-            marker.bindPopup(label);
+            let mid = makeid(10);
+            marker.bindPopup("<b style='font-size:16px'>"+label + "<b/><br><button id='" + mid + "'  class='btn btn-danger btn-sm'>Remove</button>")
+                .on('click', function () {
+                    function remove_marker() {
+                        clearSegmentation();
+                        control.Marker_Groups[label].removeLayer(marker);
+                        control.generateSegmentation();
+                        control.generateLineChart();
+                        control.generateScatterChart();
+                    }
+
+                    let el = document.getElementById(mid);
+                    console.log(el);
+                    el.addEventListener('click', remove_marker, false);
+
+                });
             marker.on('dragend', bindMarker);
+
         }
+
 
         function changeColour(e) {
             var label = this.parentNode.parentNode.childNodes[1].innerHTML;
@@ -137,10 +164,10 @@ L.Control.SegmentationControl = L.Control.extend({
             control.generateScatterChart();
         }
 
-        //Gets the colour for a segmentation control
+//Gets the colour for a segmentation control
 
 
-        //Calculate the distance between two points
+//Calculate the distance between two points
         function calculateDistance(lat1, lng1, lat2, lng2) {
             var lat1 = toRadian(lat1);
             var lat2 = toRadian(lat2);
@@ -259,7 +286,8 @@ L.Control.SegmentationControl = L.Control.extend({
             $("#legend").append(`<div class="label-box" style="border:3px ${borderType} ${legend_labels[i][1]};"></div>${legend_labels[i][0]}`);
 
         }
-    },
+    }
+    ,
     generateScatterChart: function () {
         if (this.scatter_chart_x_data == null || this.scatter_chart_y_data == null) {
             return;
@@ -304,7 +332,8 @@ L.Control.SegmentationControl = L.Control.extend({
         }
         this.scatter_chart.data.datasets = datasets;
         this.scatter_chart.update();
-    },
+    }
+    ,
     findColor: function (label) {
         var table = document.getElementsByClassName("leaflet-segment-trajectory-control-custom-container")[0].childNodes[2];
         for (var i = 0; i < table.childNodes.length; i++) {
@@ -313,10 +342,12 @@ L.Control.SegmentationControl = L.Control.extend({
             }
         }
         return null;
-    },
+    }
+    ,
     generateSegmentation: function () {
         let control = this;
-        changed=true;
+        changed = true;
+
         function addLine(points, label) {
             let color = control.findColor(label);
             return L.polyline(points, {
@@ -395,7 +426,8 @@ L.Control.SegmentationControl = L.Control.extend({
         //console.log(this.Point_Labels);
         control.generateLineChart();
         control.generateScatterChart();
-    },
+    }
+    ,
     /**
      * Shows the control
      */
@@ -404,7 +436,8 @@ L.Control.SegmentationControl = L.Control.extend({
         container.style.display = 'block';
         var btnopen = document.getElementById("btn-open-segment-control");
         btnopen.style.display = 'none';
-    },
+    }
+    ,
     /**
      * Hides the control
      */
@@ -413,21 +446,35 @@ L.Control.SegmentationControl = L.Control.extend({
         container.style.display = 'none';
         var btnopen = document.getElementById("btn-open-segment-control");
         btnopen.style.display = 'block';
-    },
+    }
+    ,
     labels: [], //The labels
-    Marker_Groups: {},
+    Marker_Groups:
+        {}
+    ,
     Bind_Markers: true,//Determines whether markers are attached to the nearest point
-    Trajectory_Layer: null,//Trajectory layer
-    Segmentation_Groups: {},
+    Trajectory_Layer:
+        null,//Trajectory layer
+    Segmentation_Groups:
+        {}
+    ,
     icon: "",//Icon image
-    line_chart: null,
-    line_chart_data: null,
-    scatter_chart: null,
-    scatter_chart_x_data: null,
-    scatter_chart_y_data: null,
-    Segmentation_Points: {},
+    line_chart:
+        null,
+    line_chart_data:
+        null,
+    scatter_chart:
+        null,
+    scatter_chart_x_data:
+        null,
+    scatter_chart_y_data:
+        null,
+    Segmentation_Points:
+        {}
+    ,
     Point_Labels: []
-});
+})
+;
 /**
  * Creates the Segmentation control instance
  * icon: The image to use as an icon
