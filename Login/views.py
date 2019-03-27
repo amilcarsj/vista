@@ -76,7 +76,7 @@ def register(request):
                     f['trajectory_id'] = traj.inserted_id
                     mongodb.Management_trajectoryfeature.insert_one(f)
 
-        db_id = dbs[1]['_id']
+        db_id = dbs[0]['_id']
         layers['db_id'] = db_id
         mongodb.Management_poi_roi.insert_one(layers)
 
