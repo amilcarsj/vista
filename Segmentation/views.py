@@ -12,6 +12,7 @@ import pandas as pd
 from trajectory_library import Trajectory as tr
 from trajectory_library.TrajectoryDescriptorFeature import TrajectoryDescriptorFeature
 
+import requests
 
 def pick_set(request):
     if request.method == 'GET':
@@ -39,8 +40,13 @@ def load_segment_session(request, db_id="", tid=None):
         layer['db_id'] = str(layer['db_id'])
     # trajectory = utils.get_trajectory(request.user, db_id, None)
     trajectories = Trajectory.objects.filter(db___id=db_id)
-
+    print("print the value of trajectories")
+    print(40*"-")
+    print(trajectories)
     values = trajectories.values().iterator()
+
+    # print("print the value of values")
+    # print(values)
     curr_index=1
     if tid is None:
         prev = None
@@ -90,12 +96,41 @@ def load_segment_session(request, db_id="", tid=None):
     print("Previous: " + prev)
     print("Current: " + traj['_id'])
     print("Next: " + n)
+    print("Value of label json")
+    print(labels_json)
     print(segs)
+    if len(prev) != 4:
+        point_features = TrajectoryFeature.objects.filter(trajectory___id=traj['_id']).values()
+        curr_pf = point_features.first()
+        feats = TrajectoryFeature.objects.filter(trajectory___id=traj['_id'])
+        traj = Trajectory.objects.get(_id=traj['_id'])
+        latlon = traj.geojson['geometry']['coordinates']
+        lat, lon = zip(*latlon)
+        df = pd.DataFrame(index=pd.to_datetime(traj.times))
+        df['lat'] = lat
+        df['lon'] = lon
+        for f in feats:
+            df[f.name] = f.values
+        
+        # print("Value of df from load segmentation function")
+        # print(df)
+        df = df.reset_index()
+        df.rename({'index': 'time'}, axis=1, inplace=True)
+        df.to_csv('test_data.csv') 
+        # url_response = call_endpoint(request)
+        # print("value of url response")
+        # print(url_response)
     return render(request, 'segmentation_page.html', {'layers': layers_json, 'trajectory': traj_json,
                                                       'curr_pf': curr_pf_json, 'point_features': pfs,
                                                       'labels': labels_json, 'next': n, 'previous': prev, 'db': db_id,'segments':segs,
                                                       'curr_index':curr_index,'size':len(trajectories)})
 
+
+def call_endpoint(request):
+    url = 'http://0.0.0.0:80/output'
+    # payload = {'Token':'My_Secret_Token','product':'product_select_in_form','price':'price_selected_in_form'}
+    response = requests.get(url)
+    return response
 
 @login_required()
 def get_trajectory(request, traj_id):
@@ -108,13 +143,12 @@ def submit_segmentation(request):
     markers = request.POST.get('marker_locations', [])
     id = request.POST.get('id', None)
 
-    print(request.POST)
-    print(markers)
+
 
     markers_list = json.loads(markers)
     markers_list.sort(key=lambda x: x['start_index'], reverse=False)
 
-    print(markers_list)
+    #print(markers_list)
     if id is not None:
         traj = Trajectory.objects.get(_id=id)
 
@@ -227,23 +261,52 @@ def review_session(request, session_id=""):
 def submit_segmentation2(request):
 
     markers = request.POST.get('marker_locations', [])
+    
     id = request.POST.get('id', None)
     trajectory_segmentation = TrajectorySegmentation()
 
     markers_list = json.loads(markers)
+    
     markers_list.sort(key=lambda x: x['start_index'], reverse=False)
-
+    print("Value of markers_list")
+    print(markers_list)
     feats = TrajectoryFeature.objects.filter(trajectory___id=id)
+    
     traj = Trajectory.objects.get(_id=id)
+    
     latlon = traj.geojson['geometry']['coordinates']
+    
     lat, lon = zip(*latlon)
+    
     trajectory_segmentation.trajectory = traj
+    
     df = pd.DataFrame(index=pd.to_datetime(traj.times))
     df['lat'] = lat
     df['lon'] = lon
-
+    
     for f in feats:
         df[f.name] = f.values
+    
+    temp_df = pd.DataFrame()
+    for m in markers_list:
+        
+        temp = df[m['start_index']:m['end_index']+1] 
+        temp.insert(loc=1, column='label', value = m['label'])
+        if m['label'] == 'bike':
+            temp.insert(loc=1, column='sid', value = 0)
+        elif m['label'] == 'car':
+            temp.insert(loc=1, column='sid', value = 1)
+        elif m['label'] == 'walk':
+            temp.insert(loc=1, column='sid', value = 2)
+        else :
+            temp.insert(loc=1, column='sid', value = 3)
+        temp_df = pd.concat([temp_df,temp])
+       
+    temp_df = temp_df.reset_index()
+    temp_df.rename({'index': 'time'}, axis=1, inplace=True)
+    temp_df.to_csv('train_data.csv') 
+        
+           
     segmentation = []
     for m in markers_list:
         seg = Segment()
@@ -251,12 +314,16 @@ def submit_segmentation2(request):
         seg.end_index = m['end_index']
         seg.label = m['label']
         recomputed_df = df[m['start_index']:m['end_index']+1]
+        recomputed_df.insert(loc=1, column='label', value = m['label'])
         t = tr.Trajectory(mood='df', trajectory=recomputed_df)
         t.get_features()
         recomputed_df = t.return_row_data()
+            
+        
+
         feats = []
         recomputed_df.drop(['lat', 'lon'],axis=1, inplace=True)
-        print(recomputed_df)
+        
         for col in recomputed_df.columns.values:
             feat = SegmentFeature()
             try:
@@ -281,10 +348,14 @@ def submit_segmentation2(request):
                 print(e)
                 print("Column %s was not added" % col)
         seg.features = feats
+       
         segmentation.append(seg)
+        # print("value of segmentation")
+        # print(segmentation)
     trajectory_segmentation.segmentation = segmentation
     trajectory_segmentation.user = request.user
     trajectory_segmentation.start_time = datetime.strptime(request.POST.get('start_time', None), "%a, %d %b %Y %H:%M:%S %Z")
     trajectory_segmentation.end_time = datetime.strptime(request.POST.get('end_time', None), "%a, %d %b %Y %H:%M:%S %Z")
     trajectory_segmentation.save()
+    
     return JsonResponse({"status":"Good"})
