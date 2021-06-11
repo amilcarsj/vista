@@ -132,8 +132,9 @@ def call_endpoint(request):
     url = 'http://0.0.0.0:80/output'
     files = {'train': open('train_data.csv', 'rb'),'test': open('test_data.csv', 'rb')}
    
-    response = requests.post(url, files=files)
-    return response
+    response = requests.get(url, files=files)
+
+    return response.json()
 
 @login_required()
 def get_trajectory(request, traj_id):
