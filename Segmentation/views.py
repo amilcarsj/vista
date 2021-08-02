@@ -99,21 +99,33 @@ def load_segment_session(request, db_id="", tid=None):
     print("Value of label json")
     print(labels_json)
     print(segs)
-    if len(prev) != 4:
+    print("Length of next traj")
+    print(len(n))
+    if (len(prev) != 4 and len(segs) == 0):
+        print("Value of trajectory Id")
+        print(traj['_id'])
         point_features = TrajectoryFeature.objects.filter(trajectory___id=traj['_id']).values()
+        
         curr_pf = point_features.first()
+        
         feats = TrajectoryFeature.objects.filter(trajectory___id=traj['_id'])
         traj = Trajectory.objects.get(_id=traj['_id'])
+        print(traj)
         latlon = traj.geojson['geometry']['coordinates']
+
         lat, lon = zip(*latlon)
+        print("Value of lat")
+        print(len(lat))
+        
         df = pd.DataFrame(index=pd.to_datetime(traj.times))
+        
         df['lat'] = lat
         df['lon'] = lon
         for f in feats:
             df[f.name] = f.values
-        
-        # print("Value of df from load segmentation function")
-        # print(df)
+        print("Value of DF")
+        print(df)
+       
         df = df.reset_index()
         df.rename({'index': 'time'}, axis=1, inplace=True)
         # test_json = df.to_json(orient = 'columns')
@@ -122,6 +134,8 @@ def load_segment_session(request, db_id="", tid=None):
         url_response = call_endpoint(request)
         print("value of url response")
         print(url_response)
+
+        segs = url_response
     return render(request, 'segmentation_page.html', {'layers': layers_json, 'trajectory': traj_json,
                                                       'curr_pf': curr_pf_json, 'point_features': pfs,
                                                       'labels': labels_json, 'next': n, 'previous': prev, 'db': db_id,'segments':segs,
@@ -131,7 +145,6 @@ def load_segment_session(request, db_id="", tid=None):
 def call_endpoint(request):
     url = 'http://0.0.0.0:80/output'
     files = {'train': open('train_data.csv', 'rb'),'test': open('test_data.csv', 'rb')}
-   
     response = requests.get(url, files=files)
 
     return response.json()
@@ -296,14 +309,14 @@ def submit_segmentation2(request):
         
         temp = df[m['start_index']:m['end_index']+1] 
         temp.insert(loc=1, column='label', value = m['label'])
-        if m['label'] == 'bike':
-            temp.insert(loc=1, column='sid', value = 0)
-        elif m['label'] == 'car':
-            temp.insert(loc=1, column='sid', value = 1)
-        elif m['label'] == 'walk':
-            temp.insert(loc=1, column='sid', value = 2)
-        else :
-            temp.insert(loc=1, column='sid', value = 3)
+        # if m['label'] == 'bike':
+        #     temp.insert(loc=1, column='sid', value = 0)
+        # elif m['label'] == 'car':
+        #     temp.insert(loc=1, column='sid', value = 1)
+        # elif m['label'] == 'walk':
+        #     temp.insert(loc=1, column='sid', value = 2)
+        # else :
+        #     temp.insert(loc=1, column='sid', value = 3)
         temp_df = pd.concat([temp_df,temp])
        
     temp_df = temp_df.reset_index()
